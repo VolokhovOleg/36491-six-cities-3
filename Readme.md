@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Олег Волохов](https://up.htmlacademy.ru/react/3/user/36491).
-* Наставник: `Неизвестно`.
+* Наставник: [Евгений Фаллер](https://up.htmlacademy.ru/react/3/user/505933).
 
 ---
 
