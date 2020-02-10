@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Main from '../main/main.jsx';
+
 const placesToStay = 312;
 
 const App = ({placeCards}) => {

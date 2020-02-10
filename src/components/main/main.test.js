@@ -1,10 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import PlaceCard from '../place-card/place-card.jsx';
+import renderer from 'react-test-renderer';
+import PlaceCard from "../place-card/place-card";
 
-const Main = ({placeCards, placesToStay}) => {
-  return <>
-    <div className="page page--gray page--main">
+const placeCards = [
+  `Wood at great location`,
+  `Wood location place`,
+  `Nice, big location apartment`,
+];
+
+const placesToStay = 312;
+
+it(`<Main /> snapshot`, () => {
+  const tree = renderer
+    .create(<div className="page page--gray page--main">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -95,13 +103,8 @@ const Main = ({placeCards, placesToStay}) => {
           </div>
         </div>
       </main>
-    </div>
-  </>;
-};
+    </div>)
+    .toJSON();
 
-Main.propTypes = {
-  placeCards: PropTypes.arrayOf(PropTypes.string.isRequired),
-  placesToStay: PropTypes.number.isRequired,
-};
-
-export default Main;
+  expect(tree).toMatchSnapshot();
+});
