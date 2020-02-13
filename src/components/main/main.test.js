@@ -1,12 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import PlaceCard from '../place-card/place-card.jsx';
+import renderer from 'react-test-renderer';
+import PlaceCard from "../place-card/place-card";
 
-const titleClickHandler = () => {};
+const placeCards = [
+  `Wood at great location`,
+  `Wood location place`,
+  `Nice, big location apartment`,
+];
 
-const Main = ({placeCards, placesToStay}) => {
-  return <>
-    <div className="page page--gray page--main">
+const placesToStay = 312;
+
+it(`<Main /> snapshot`, () => {
+  const tree = renderer
+    .create(<div className="page page--gray page--main">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -88,7 +94,7 @@ const Main = ({placeCards, placesToStay}) => {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {placeCards.map((item, index) => <PlaceCard onTitleClick={titleClickHandler} placesTitle={item} key={index + item}/>)}
+                {placeCards.map((item, index) => <PlaceCard placesTitle = {item} key={index + item}/>)}
               </div>
             </section>
             <div className="cities__right-section">
@@ -97,13 +103,8 @@ const Main = ({placeCards, placesToStay}) => {
           </div>
         </div>
       </main>
-    </div>
-  </>;
-};
+    </div>)
+    .toJSON();
 
-Main.propTypes = {
-  placeCards: PropTypes.arrayOf(PropTypes.string.isRequired),
-  placesToStay: PropTypes.number.isRequired,
-};
-
-export default Main;
+  expect(tree).toMatchSnapshot();
+});

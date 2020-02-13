@@ -1,9 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import renderer from 'react-test-renderer';
 
-const PlaceCard = ({onTitleClick, placesTitle}) => {
-  return <>
-    <article className="cities__place-card place-card">
+const placeTitle = `Wood at great location`;
+
+it(`<PlaceCard /> snapshot`, () => {
+  const tree = renderer
+    .create(<article className="cities__place-card place-card">
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
@@ -32,17 +34,12 @@ const PlaceCard = ({onTitleClick, placesTitle}) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a onClick={onTitleClick} href="#">{placesTitle}</a>
+          <a href="#">{placeTitle}</a>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>
-    </article>
-  </>;
-};
+    </article>)
+    .toJSON();
 
-PlaceCard.propTypes = {
-  placesTitle: PropTypes.string.isRequired,
-  onTitleClick: PropTypes.func.isRequired,
-};
-
-export default PlaceCard;
+  expect(tree).toMatchSnapshot();
+});
