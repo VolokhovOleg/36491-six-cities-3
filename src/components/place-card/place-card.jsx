@@ -32,7 +32,7 @@ const PlaceCard = ({onTitleClick, placesTitle}) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a onClick = {onTitleClick} href="#">{placesTitle}</a>
+          <a onClick={onTitleClick} href="#">{placesTitle}</a>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>

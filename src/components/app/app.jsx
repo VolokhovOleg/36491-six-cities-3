@@ -9,14 +9,12 @@ const placeCards = [
   `Canal View Prinsengracht`,
   `Nice, cozy, warm big bed apartment`,
 ];
-const titleClickHandler = () => {};
 
 const App = () => {
   return <>
     <Main
       placesToStay = {placesToStay}
       placeCards = {placeCards}
-      onTitleClick = {titleClickHandler}
     />
   </>;
 };
