@@ -1,7 +1,4 @@
-import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import Main from './main.jsx';
+import Main from './main';
 
 const placeCards = [
   `Beautiful & luxurious apartment at great location`,
@@ -9,10 +6,6 @@ const placeCards = [
   `Canal View Prinsengracht`,
   `Nice, cozy, warm big bed apartment`,
 ];
-
-Enzyme.configure({
-  adapter: new Adapter(),
-});
 
 it(`Should title be pressed`, () => {
   const onTitleClick = jest.fn();

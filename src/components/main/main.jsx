@@ -1,6 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import PlaceCard from '../place-card/place-card.jsx';
+import PlaceCard from '../place-card/place-card';
 
 const titleClickHandler = () => {};
 
@@ -88,7 +86,7 @@ const Main = ({placeCards, placesToStay}) => {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {placeCards.map((item, index) => <PlaceCard onTitleClick={titleClickHandler} placesTitle={item} key={index + item}/>)}
+                {placeCards.map((item, index) => <PlaceCard placesTitle={item} key={index + item} onTitleClick={titleClickHandler}/>)}
               </div>
             </section>
             <div className="cities__right-section">

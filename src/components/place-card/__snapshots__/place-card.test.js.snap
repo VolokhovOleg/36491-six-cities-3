@@ -91,6 +91,7 @@ exports[`<PlaceCard /> snapshot 1`] = `
     >
       <a
         href="#"
+        onClick={[Function]}
       >
         Wood at great location
       </a>

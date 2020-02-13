@@ -1,11 +1,4 @@
-import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import PlaceCard from './place-card.jsx';
-
-Enzyme.configure({
-  adapter: new Adapter(),
-});
+import PlaceCard from './place-card';
 
 it(`Should title be pressed`, () => {
   const placeCardTitle = `Beautiful & luxurious apartment at great location`;

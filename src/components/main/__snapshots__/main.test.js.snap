@@ -314,6 +314,7 @@ exports[`<Main /> snapshot 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[Function]}
                   >
                     Wood at great location
                   </a>
@@ -415,6 +416,7 @@ exports[`<Main /> snapshot 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[Function]}
                   >
                     Wood location place
                   </a>
@@ -516,6 +518,7 @@ exports[`<Main /> snapshot 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[Function]}
                   >
                     Nice, big location apartment
                   </a>
