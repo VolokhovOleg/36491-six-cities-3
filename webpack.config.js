@@ -30,7 +30,8 @@ module.exports = {
   plugins: [
     new webpack.ProvidePlugin({
       'React': `react`,
-      'PropTypes': `prop-types`
+      'PropTypes': `prop-types`,
+      'PureComponent': [`react`, `PureComponent`],
     })
   ],
 };

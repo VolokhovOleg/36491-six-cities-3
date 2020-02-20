@@ -1,4 +1,4 @@
-import App from './app';
+import PlaceList from './place-list';
 
 const placeCards = [
   {
@@ -35,9 +35,9 @@ const placeCards = [
   },
 ];
 
-it(`<App /> snapshot`, () => {
+it(`<PlaceList /> snapshot`, () => {
   const tree = renderer
-    .create(<App
+    .create(<PlaceList
       placeCards = {placeCards}
     />)
     .toJSON();

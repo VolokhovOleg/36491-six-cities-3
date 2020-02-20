@@ -226,6 +226,8 @@ exports[`<App /> snapshot 1`] = `
           >
             <article
               className="cities__place-card place-card"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -238,10 +240,10 @@ exports[`<App /> snapshot 1`] = `
                 className="cities__image-wrapper place-card__image-wrapper"
               >
                 <a
-                  href="#"
+                  href="/"
                 >
                   <img
-                    alt="Place image"
+                    alt="Nice, cozy, warm big bed apartment"
                     className="place-card__image"
                     height={200}
                     src="img/apartment-01.jpg"
@@ -313,10 +315,10 @@ exports[`<App /> snapshot 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="#"
+                    href="/"
                     onClick={[Function]}
                   >
-                    Beautiful & luxurious apartment at great location
+                    Nice, cozy, warm big bed apartment
                   </a>
                 </h2>
                 <p
@@ -328,6 +330,8 @@ exports[`<App /> snapshot 1`] = `
             </article>
             <article
               className="cities__place-card place-card"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -340,10 +344,10 @@ exports[`<App /> snapshot 1`] = `
                 className="cities__image-wrapper place-card__image-wrapper"
               >
                 <a
-                  href="#"
+                  href="/"
                 >
                   <img
-                    alt="Place image"
+                    alt="Nice, cozy, warm big bed apartment"
                     className="place-card__image"
                     height={200}
                     src="img/apartment-01.jpg"
@@ -415,10 +419,10 @@ exports[`<App /> snapshot 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="#"
+                    href="/"
                     onClick={[Function]}
                   >
-                    Wood and stone place
+                    Nice, cozy, warm big bed apartment
                   </a>
                 </h2>
                 <p
@@ -430,6 +434,8 @@ exports[`<App /> snapshot 1`] = `
             </article>
             <article
               className="cities__place-card place-card"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -442,10 +448,10 @@ exports[`<App /> snapshot 1`] = `
                 className="cities__image-wrapper place-card__image-wrapper"
               >
                 <a
-                  href="#"
+                  href="/"
                 >
                   <img
-                    alt="Place image"
+                    alt="Nice, cozy, warm big bed apartment"
                     className="place-card__image"
                     height={200}
                     src="img/apartment-01.jpg"
@@ -517,10 +523,10 @@ exports[`<App /> snapshot 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="#"
+                    href="/"
                     onClick={[Function]}
                   >
-                    Canal View Prinsengracht
+                    Nice, cozy, warm big bed apartment
                   </a>
                 </h2>
                 <p
@@ -532,6 +538,8 @@ exports[`<App /> snapshot 1`] = `
             </article>
             <article
               className="cities__place-card place-card"
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -544,10 +552,10 @@ exports[`<App /> snapshot 1`] = `
                 className="cities__image-wrapper place-card__image-wrapper"
               >
                 <a
-                  href="#"
+                  href="/"
                 >
                   <img
-                    alt="Place image"
+                    alt="Nice, cozy, warm big bed apartment"
                     className="place-card__image"
                     height={200}
                     src="img/apartment-01.jpg"
@@ -619,7 +627,7 @@ exports[`<App /> snapshot 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="#"
+                    href="/"
                     onClick={[Function]}
                   >
                     Nice, cozy, warm big bed apartment

@@ -1,9 +1,38 @@
 import Main from "./main";
 
 const placeCards = [
-  `Wood at great location`,
-  `Wood location place`,
-  `Nice, big location apartment`,
+  {
+    link: `/`,
+    img: `img/apartment-01.jpg`,
+    price: `€120`,
+    title: `Nice, cozy, warm big bed apartment`,
+    type: `Apartment`,
+    isPremium: true,
+  },
+  {
+    link: `/`,
+    img: `img/apartment-01.jpg`,
+    price: `€120`,
+    title: `Nice, cozy, warm big bed apartment`,
+    type: `Apartment`,
+    isPremium: true,
+  },
+  {
+    link: `/`,
+    img: `img/apartment-01.jpg`,
+    price: `€120`,
+    title: `Nice, cozy, warm big bed apartment`,
+    type: `Apartment`,
+    isPremium: true,
+  },
+  {
+    link: `/`,
+    img: `img/apartment-01.jpg`,
+    price: `€120`,
+    title: `Nice, cozy, warm big bed apartment`,
+    type: `Apartment`,
+    isPremium: true,
+  },
 ];
 
 const placesToStay = 312;
