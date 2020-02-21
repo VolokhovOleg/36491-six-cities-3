@@ -1,16 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Main from '../main/main.jsx';
+import Main from '../main/main';
 
 const placesToStay = 312;
-const placeCards = [
-  `Beautiful & luxurious apartment at great location`,
-  `Wood and stone place`,
-  `Canal View Prinsengracht`,
-  `Nice, cozy, warm big bed apartment`,
-];
 
-const App = () => {
+const App = ({placeCards}) => {
   return <>
     <Main
       placesToStay = {placesToStay}
@@ -20,7 +12,14 @@ const App = () => {
 };
 
 App.propTypes = {
-  placeCards: PropTypes.arrayOf(PropTypes.string.isRequired),
+  placeCards: PropTypes.arrayOf(PropTypes.shape({
+    link: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+  })).isRequired,
 };
 
 export default App;

@@ -17,3 +17,15 @@ plugins: ['react']
 settings:
   react:
     version: '16'
+
+rules:
+  react/react-in-jsx-scope: 0
+
+globals:
+  React: true
+  PureComponent: true
+  PropTypes: true
+  renderer: true
+  shallow: true
+  Enzyme: true
+  Adapter: true

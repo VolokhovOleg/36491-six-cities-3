@@ -1,8 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import PlaceCard from '../place-card/place-card.jsx';
-
-const titleClickHandler = () => {};
+import PlaceList from '../place-list/place-list';
 
 const Main = ({placeCards, placesToStay}) => {
   return <>
@@ -87,9 +83,9 @@ const Main = ({placeCards, placesToStay}) => {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {placeCards.map((item, index) => <PlaceCard onTitleClick={titleClickHandler} placesTitle={item} key={index + item}/>)}
-              </div>
+              <PlaceList
+                placeCards = {placeCards}
+              />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map" />
@@ -102,7 +98,14 @@ const Main = ({placeCards, placesToStay}) => {
 };
 
 Main.propTypes = {
-  placeCards: PropTypes.arrayOf(PropTypes.string.isRequired),
+  placeCards: PropTypes.arrayOf(PropTypes.shape({
+    link: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+  })).isRequired,
   placesToStay: PropTypes.number.isRequired,
 };
 

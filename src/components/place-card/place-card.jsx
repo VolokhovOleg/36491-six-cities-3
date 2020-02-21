@@ -1,21 +1,28 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
-const PlaceCard = ({onTitleClick, placesTitle}) => {
+const PlaceCard = ({placeData, onTitleClick, onHoverPlace}) => {
+  const {link, img, price, title, type, isPremium} = placeData;
   return <>
-    <article className="cities__place-card place-card">
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
+    <article
+      onMouseEnter={() => {
+        onHoverPlace(placeData);
+      }}
+      onMouseLeave={() => {
+        onHoverPlace(null);
+      }} className="cities__place-card place-card">
+      {
+        isPremium &&
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+      }
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src="img/apartment-01.jpg" width={260} height={200} alt="Place image" />
+        <a href={link}>
+          <img className="place-card__image" src={img} width={260} height={200} alt={title} />
         </a>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">€120</b>
+            <b className="place-card__price-value">{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button className="place-card__bookmark-button button" type="button">
@@ -32,17 +39,25 @@ const PlaceCard = ({onTitleClick, placesTitle}) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a onClick={onTitleClick} href="#">{placesTitle}</a>
+          <a onClick={onTitleClick} href={link}>{title}</a>
         </h2>
-        <p className="place-card__type">Apartment</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   </>;
 };
 
 PlaceCard.propTypes = {
-  placesTitle: PropTypes.string.isRequired,
+  placeData: PropTypes.shape({
+    link: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+  }).isRequired,
   onTitleClick: PropTypes.func.isRequired,
+  onHoverPlace: PropTypes.func.isRequired,
 };
 
 export default PlaceCard;
