@@ -1,5 +1,7 @@
 import {generateBoolean, getRandomInt} from '../utils';
 
+const cityCoords = [52.38333, 4.9];
+
 const host = {
   avatar: `img/avatar-angelina.jpg`,
   name: `Angelina`,
@@ -77,6 +79,7 @@ const placeCards = [
     ].slice(getRandomInt(0, 5), getRandomInt(6, 10)),
     isPremium: generateBoolean(),
     rating: getRandomInt(1, 5),
+    locations: [52.3909553943508, 4.85309666406198],
     host,
   },
   {
@@ -145,6 +148,7 @@ const placeCards = [
     ].slice(getRandomInt(0, 5), getRandomInt(6, 10)),
     isPremium: generateBoolean(),
     rating: getRandomInt(1, 5),
+    locations: [52.369553943508, 4.85309666406198],
     host,
   },
   {
@@ -213,6 +217,7 @@ const placeCards = [
     ].slice(getRandomInt(0, 5), getRandomInt(6, 10)),
     isPremium: generateBoolean(),
     rating: getRandomInt(1, 5),
+    locations: [52.3909553943508, 4.929309666406198],
     host,
   },
   {
@@ -281,8 +286,9 @@ const placeCards = [
     ].slice(getRandomInt(0, 5), getRandomInt(6, 10)),
     isPremium: generateBoolean(),
     rating: getRandomInt(1, 5),
+    locations: [52.3809553943508, 4.939309666406198],
     host,
   },
 ];
 
-export {placeCards};
+export {placeCards, cityCoords};
