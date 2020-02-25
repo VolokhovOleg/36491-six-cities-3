@@ -1,6 +1,12 @@
 import PlaceList from '../place-list/place-list';
+import Map from '../map/map';
+import {cityCoords} from '../../mocks/offers';
 
 const Main = ({placeCards, placesToStay, onTitleClick}) => {
+  let locations = [];
+
+  placeCards.forEach((item) => locations.push(item.locations));
+
   return <>
     <div className="page page--gray page--main">
       <header className="header">
@@ -89,7 +95,10 @@ const Main = ({placeCards, placesToStay, onTitleClick}) => {
               />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <Map
+                offerCords={locations}
+                city={cityCoords}
+              />
             </div>
           </div>
         </div>
