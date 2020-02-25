@@ -1,5 +1,7 @@
+import {convertRating} from '../../utils';
+
 const PlaceCard = ({placeData, onTitleClick, onHoverPlace}) => {
-  const {link, img, price, title, type, isPremium} = placeData;
+  const {link, img, price, title, type, isPremium, rating} = placeData;
   return <>
     <article
       onMouseEnter={() => {
@@ -34,12 +36,16 @@ const PlaceCard = ({placeData, onTitleClick, onHoverPlace}) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `80%`}} />
+            <span style={{width: convertRating(rating)}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a onClick={onTitleClick} href={link}>{title}</a>
+          <a onClick={(evt) => {
+            evt.preventDefault();
+            onTitleClick(placeData);
+          }
+          } href={link}>{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -51,10 +57,11 @@ PlaceCard.propTypes = {
   placeData: PropTypes.shape({
     link: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
+    price: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
   }).isRequired,
   onTitleClick: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,

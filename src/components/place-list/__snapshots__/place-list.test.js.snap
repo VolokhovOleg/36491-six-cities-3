@@ -23,7 +23,7 @@ exports[`<PlaceList /> snapshot 1`] = `
         href="/"
       >
         <img
-          alt="Nice, cozy, warm big bed apartment"
+          alt="Beautiful & luxurious apartment at great location"
           className="place-card__image"
           height={200}
           src="img/apartment-01.jpg"
@@ -98,7 +98,7 @@ exports[`<PlaceList /> snapshot 1`] = `
           href="/"
           onClick={[Function]}
         >
-          Nice, cozy, warm big bed apartment
+          Beautiful & luxurious apartment at great location
         </a>
       </h2>
       <p
@@ -127,7 +127,7 @@ exports[`<PlaceList /> snapshot 1`] = `
         href="/"
       >
         <img
-          alt="Nice, cozy, warm big bed apartment"
+          alt="Beautiful & luxurious apartment at great location"
           className="place-card__image"
           height={200}
           src="img/apartment-01.jpg"
@@ -202,7 +202,7 @@ exports[`<PlaceList /> snapshot 1`] = `
           href="/"
           onClick={[Function]}
         >
-          Nice, cozy, warm big bed apartment
+          Beautiful & luxurious apartment at great location
         </a>
       </h2>
       <p
@@ -231,7 +231,7 @@ exports[`<PlaceList /> snapshot 1`] = `
         href="/"
       >
         <img
-          alt="Nice, cozy, warm big bed apartment"
+          alt="Beautiful & luxurious apartment at great location"
           className="place-card__image"
           height={200}
           src="img/apartment-01.jpg"
@@ -306,7 +306,7 @@ exports[`<PlaceList /> snapshot 1`] = `
           href="/"
           onClick={[Function]}
         >
-          Nice, cozy, warm big bed apartment
+          Beautiful & luxurious apartment at great location
         </a>
       </h2>
       <p
@@ -335,7 +335,7 @@ exports[`<PlaceList /> snapshot 1`] = `
         href="/"
       >
         <img
-          alt="Nice, cozy, warm big bed apartment"
+          alt="Beautiful & luxurious apartment at great location"
           className="place-card__image"
           height={200}
           src="img/apartment-01.jpg"
@@ -410,7 +410,7 @@ exports[`<PlaceList /> snapshot 1`] = `
           href="/"
           onClick={[Function]}
         >
-          Nice, cozy, warm big bed apartment
+          Beautiful & luxurious apartment at great location
         </a>
       </h2>
       <p
