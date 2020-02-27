@@ -13,7 +13,8 @@ describe(`<Map/>`, () => {
   it(`should render`, () => {
     const tree = renderer
       .create(<Map
-        offerCords={mockLocations}
+        locations={mockLocations}
+        isDetailsPage={false}
         city={mockCityLocation}
       />,
       {createNodeMock: () => document.createElement(`section`)}

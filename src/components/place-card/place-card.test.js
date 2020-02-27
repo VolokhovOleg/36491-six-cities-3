@@ -64,6 +64,7 @@ const onHoverPlaceHandler = () => {};
 it(`<PlaceCard /> snapshot`, () => {
   const tree = renderer
     .create(<PlaceCard
+      isDetailsPage={true}
       onTitleClick={titleClickHandler}
       onHoverPlace={onHoverPlaceHandler}
       placeData = {placeData}

@@ -76,12 +76,14 @@ class App extends PureComponent {
               onTitleClick={()=>{}}
               onHoverPlace={() => {}}
               placeData = {placeCards[0]}
+              isDetailsPage={true}
             />
           </Route>
           <Route exact path='/dev-place-list'>
             <PlaceList
               onTitleClick={()=>{}}
               placeCards = {placeCards}
+              isDetailsPage={true}
             />
           </Route>
         </Switch>

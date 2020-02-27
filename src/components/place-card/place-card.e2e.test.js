@@ -65,6 +65,7 @@ it(`Should title be pressed`, () => {
   const main = shallow(
       <PlaceCard
         placeData = {placeData}
+        isDetailsPage={true}
         onTitleClick = {onTitleClick}
         onHoverPlace= {onHoverPlace}
       />
@@ -84,6 +85,7 @@ it(`Should card be hovered`, () => {
   const main = shallow(
       <PlaceCard
         placeData = {placeData}
+        isDetailsPage={true}
         onTitleClick = {onTitleClick}
         onHoverPlace= {onHoverPlace}
       />
@@ -101,6 +103,7 @@ it(`Should card be leaved`, () => {
 
   const main = shallow(
       <PlaceCard
+        isDetailsPage={true}
         placeData = {placeData}
         onTitleClick = {onTitleClick}
         onHoverPlace= {onHoverPlace}
