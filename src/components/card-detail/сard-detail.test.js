@@ -1,5 +1,4 @@
 import CardDetail from './card-detail';
-import Map from '../map/map';
 
 const host = {
   avatar: `img/avatar-angelina.jpg`,
