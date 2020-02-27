@@ -9,14 +9,15 @@ class PlaceList extends PureComponent {
   }
 
   render() {
-    const {placeCards, onTitleClick} = this.props;
+    const {placeCards, onTitleClick, isDetailsPage} = this.props;
 
     return (<>
-      <div className="cities__places-list places__list tabs__content">
+      <div className={`${isDetailsPage ? `near-places__list` : `cities__places-list tabs__content`} places__list`}>
         {placeCards.map((item, index) =>
           <PlaceCard
             key={index + item}
             placeData={item}
+            isDetailsPage={isDetailsPage}
             onTitleClick={onTitleClick}
             onHoverPlace={(place) => {
               this.setState({
@@ -55,6 +56,7 @@ PlaceList.propTypes = {
     }).isRequired,
   })).isRequired,
   onTitleClick: PropTypes.func.isRequired,
+  isDetailsPage: PropTypes.bool.isRequired,
 };
 
 export default PlaceList;

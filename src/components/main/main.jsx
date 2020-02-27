@@ -1,12 +1,8 @@
 import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
-import {cityCoords} from '../../mocks/offers';
+import {cityCoords, locations} from '../../mocks/offers';
 
 const Main = ({placeCards, placesToStay, onTitleClick}) => {
-  let locations = [];
-
-  placeCards.forEach((item) => locations.push(item.locations));
-
   return <>
     <div className="page page--gray page--main">
       <header className="header">
@@ -91,12 +87,14 @@ const Main = ({placeCards, placesToStay, onTitleClick}) => {
               </form>
               <PlaceList
                 placeCards = {placeCards}
+                isDetailsPage = {false}
                 onTitleClick = {onTitleClick}
               />
             </section>
             <div className="cities__right-section">
               <Map
-                offerCords={locations}
+                locations={locations}
+                isDetailsPage={false}
                 city={cityCoords}
               />
             </div>

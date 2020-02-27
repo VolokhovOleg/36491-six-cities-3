@@ -1,7 +1,6 @@
 import {generateBoolean, getRandomInt} from '../utils';
 
 const cityCoords = [52.38333, 4.9];
-
 const host = {
   avatar: `img/avatar-angelina.jpg`,
   name: `Angelina`,
@@ -11,7 +10,6 @@ const host = {
     `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`
   ],
 };
-
 const placeCards = [
   {
     link: `/`,
@@ -42,8 +40,12 @@ const placeCards = [
       {
         galleryImg: `img/studio-01.jpg`,
         galleryTitle: `Photo studio`,
-      }
-    ].slice(getRandomInt(0, 2), getRandomInt(3, 5)),
+      },
+      {
+        galleryImg: `img/studio-01.jpg`,
+        galleryTitle: `Photo studio`,
+      },
+    ].slice(getRandomInt(0, 3), getRandomInt(4, 6)),
     price: `€${[getRandomInt(120, 9999)]}`,
     title: [
       `Beautiful & luxurious apartment at great location`,
@@ -290,5 +292,8 @@ const placeCards = [
     host,
   },
 ];
+let locations = [];
 
-export {placeCards, cityCoords};
+placeCards.forEach((item) => locations.push(item.locations));
+
+export {placeCards, cityCoords, locations};

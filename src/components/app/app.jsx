@@ -2,9 +2,9 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Main from '../main/main';
 import PlaceCard from '../place-card/place-card';
 import PlaceList from '../place-list/place-list';
-import Property from '../property/property';
+import CardDetail from '../card-detail/card-detail';
 
-const placesToStay = 312;
+const PLACES_TO_STAY = 312;
 
 class App extends PureComponent {
   constructor(props) {
@@ -17,17 +17,28 @@ class App extends PureComponent {
   }
 
   _renderMainScreen() {
-    const {placeCards} = this.props;
+    const {placeCards, reviews} = this.props;
     const {propertyCard, isRenderProperty} = this.state;
+
     if (isRenderProperty) {
-      return (<Property
+      return (<CardDetail
+        reviews={reviews}
+        placeCards={placeCards}
+        onTitleClick={
+          (placeData) => {
+            this.setState({
+              propertyCard: placeData,
+              isRenderProperty: !isRenderProperty,
+            });
+          }
+        }
         placeData={propertyCard}
       />);
     }
 
     if (!isRenderProperty) {
       return (<Main
-        placesToStay={placesToStay}
+        placesToStay={PLACES_TO_STAY}
         placeCards={placeCards}
         onTitleClick={
           (placeData) => {
@@ -44,7 +55,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {placeCards} = this.props;
+    const {placeCards, reviews} = this.props;
 
     return (<>
       <BrowserRouter>
@@ -53,8 +64,11 @@ class App extends PureComponent {
             {this._renderMainScreen()}
           </Route>
           <Route exact path='/dev-property'>
-            <Property
+            <CardDetail
+              reviews={reviews}
               placeData = {placeCards[0]}
+              placeCards = {placeCards}
+              onTitleClick={()=>{}}
             />
           </Route>
           <Route exact path='/dev-place-card'>
@@ -77,6 +91,14 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    userRate: PropTypes.number.isRequired,
+    userName: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+  }).isRequired
+  ).isRequired,
   placeCards: PropTypes.arrayOf(PropTypes.shape({
     link: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
