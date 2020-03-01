@@ -2,11 +2,14 @@ import {convertRating} from '../../utils';
 import ReviewList from '../review-list/review-list';
 import Map from '../map/map';
 import PlaceList from '../place-list/place-list';
-import {cityCoords, locations} from '../../mocks/offers';
+import {cityCoords, detailLocations} from '../../mocks/offers';
 
 const CardDetail = ({placeData, reviews, placeCards, onTitleClick}) => {
-  const {gallery, price, title, type, bedrooms, maxAdults, inside, isPremium, rating, host} = placeData;
+  const {gallery, price, title, type, bedrooms, maxAdults, inside, isPremium, rating, host, locations} = placeData;
   const {avatar, name, hostTitle, hostDescription} = host;
+  detailLocations.current = locations;
+
+  const sortingReviews = reviews.sort((a, b) => b.date - a.date);
 
   return <>
     <div className="page">
@@ -113,12 +116,12 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick}) => {
                 </div>
               </div>
               <ReviewList
-                reviews={reviews}
+                reviews={sortingReviews.slice(0, 10)}
               />
             </div>
           </div>
           <Map
-            locations={locations}
+            locations={detailLocations}
             city={cityCoords}
             isDetailsPage={true}
           />
@@ -144,7 +147,7 @@ CardDetail.propTypes = {
     text: PropTypes.string.isRequired,
     userRate: PropTypes.number.isRequired,
     userName: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
+    date: PropTypes.any.isRequired,
     id: PropTypes.string.isRequired,
   }).isRequired
   ).isRequired,
@@ -152,6 +155,7 @@ CardDetail.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
+    locations: PropTypes.array.isRequired,
     inside: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     gallery: PropTypes.arrayOf(PropTypes.shape({
       galleryImg: PropTypes.string.isRequired,

@@ -1,4 +1,5 @@
 import {convertRating} from '../../utils';
+import moment from 'moment';
 
 const Review = ({text, userRate, userName, date, id})=> {
   return <>
@@ -21,8 +22,7 @@ const Review = ({text, userRate, userName, date, id})=> {
         <p className="reviews__text">
           {text}
         </p>
-        {/* Потом не забыть поменять формат в атрибуте */}
-        <time className="reviews__time" dateTime={date}>{date}</time>
+        <time className="reviews__time" dateTime={`${moment(date).format(`YYYY-MM-DD`)}`}>{`${moment(date).format(`MMMM YYYY`)}`}</time>
       </div>
     </li>
   </>;
@@ -32,7 +32,7 @@ Review.propTypes = {
   text: PropTypes.string.isRequired,
   userRate: PropTypes.number.isRequired,
   userName: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
+  date: PropTypes.any.isRequired,
   id: PropTypes.string.isRequired,
 };
 

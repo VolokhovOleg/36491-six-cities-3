@@ -78,7 +78,7 @@ ReviewList.propTypes = {
     text: PropTypes.string.isRequired,
     userRate: PropTypes.number.isRequired,
     userName: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
+    date: PropTypes.any.isRequired,
     id: PropTypes.string.isRequired,
   }).isRequired
   ).isRequired,

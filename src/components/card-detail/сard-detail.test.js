@@ -14,28 +14,28 @@ const reviews = [
     text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
     userRate: 4,
     userName: `Max`,
-    date: `December 24, 2018`,
+    date: new Date(Date.now()),
     id: `1`,
   },
   {
     text: `The building is green and from 18th century.`,
     userRate: 3,
     userName: `Max`,
-    date: `July 11, 2018`,
+    date: new Date(Date.now()),
     id: `2`,
   },
   {
     text: `The building is green and from 18th century. A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
     userRate: 2,
     userName: `Max`,
-    date: `May 14, 2018`,
+    date: new Date(Date.now()),
     id: `3`,
   },
   {
     text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
     userRate: 1,
     userName: `Max`,
-    date: `April 24, 2019`,
+    date: new Date(Date.now()),
     id: `4`,
   },
 ];
@@ -84,6 +84,7 @@ const placeData = {
   ],
   isPremium: true,
   rating: 4,
+  locations: [52.3909553943508, 4.85309666406198],
   host,
 };
 const placeCards = [
@@ -132,6 +133,7 @@ const placeCards = [
     ],
     isPremium: true,
     rating: 4,
+    locations: [52.3909553943508, 4.85309666406198],
     host,
   },
   {
@@ -179,6 +181,7 @@ const placeCards = [
     ],
     isPremium: true,
     rating: 4,
+    locations: [52.3909553943508, 4.85309666406198],
     host,
   },
   {
@@ -226,6 +229,7 @@ const placeCards = [
     ],
     isPremium: true,
     rating: 4,
+    locations: [52.3909553943508, 4.85309666406198],
     host,
   },
   {
@@ -273,11 +277,12 @@ const placeCards = [
     ],
     isPremium: true,
     rating: 4,
+    locations: [52.3909553943508, 4.85309666406198],
     host,
   },
 ];
 
-const onTitleClick = ()=>{};
+const onTitleClick = () => {};
 
 it(`<CardDetail /> snapshot`, () => {
   const tree = renderer

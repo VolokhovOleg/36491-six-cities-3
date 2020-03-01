@@ -1,6 +1,6 @@
 import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
-import {cityCoords, locations} from '../../mocks/offers';
+import {cityCoords, detailLocations} from '../../mocks/offers';
 
 const Main = ({placeCards, placesToStay, onTitleClick}) => {
   return <>
@@ -93,7 +93,7 @@ const Main = ({placeCards, placesToStay, onTitleClick}) => {
             </section>
             <div className="cities__right-section">
               <Map
-                locations={locations}
+                locations={detailLocations}
                 isDetailsPage={false}
                 city={cityCoords}
               />

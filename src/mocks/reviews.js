@@ -1,32 +1,88 @@
-import {getRandomInt} from '../utils';
+import {getRandomInt, generateRandomDate} from '../utils';
 
 export const reviews = [
   {
     text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
     userRate: getRandomInt(1, 5),
     userName: `Max`,
-    date: `December 24, 2018`,
+    date: generateRandomDate(),
     id: `1`,
   },
   {
     text: `The building is green and from 18th century.`,
     userRate: getRandomInt(1, 5),
     userName: `Max`,
-    date: `July 11, 2018`,
+    date: generateRandomDate(),
     id: `2`,
   },
   {
     text: `The building is green and from 18th century. A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
     userRate: getRandomInt(1, 5),
     userName: `Max`,
-    date: `May 14, 2018`,
+    date: generateRandomDate(),
     id: `3`,
   },
   {
     text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
     userRate: getRandomInt(1, 5),
     userName: `Max`,
-    date: `April 24, 2019`,
+    date: generateRandomDate(),
     id: `4`,
+  },
+  {
+    text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+    userRate: getRandomInt(1, 5),
+    userName: `Max`,
+    date: generateRandomDate(),
+    id: `5`,
+  },
+  {
+    text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+    userRate: getRandomInt(1, 5),
+    userName: `Max`,
+    date: generateRandomDate(),
+    id: `6`,
+  },
+  {
+    text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+    userRate: getRandomInt(1, 5),
+    userName: `Max`,
+    date: generateRandomDate(),
+    id: `11`,
+  },
+  {
+    text: `The building is green and from 18th century.`,
+    userRate: getRandomInt(1, 5),
+    userName: `Max`,
+    date: generateRandomDate(),
+    id: `21`,
+  },
+  {
+    text: `The building is green and from 18th century. A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+    userRate: getRandomInt(1, 5),
+    userName: `Max`,
+    date: generateRandomDate(),
+    id: `31`,
+  },
+  {
+    text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+    userRate: getRandomInt(1, 5),
+    userName: `Max`,
+    date: generateRandomDate(),
+    id: `41`,
+  },
+  {
+    text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+    userRate: getRandomInt(1, 5),
+    userName: `Max`,
+    date: generateRandomDate(),
+    id: `15`,
+  },
+  {
+    text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+    userRate: getRandomInt(1, 5),
+    userName: `Max`,
+    date: generateRandomDate(),
+    id: `16`,
   },
 ];

@@ -292,8 +292,16 @@ const placeCards = [
     host,
   },
 ];
+const detailLocations = {
+  near: [
+    [52.3809553943508, 4.939109666406198],
+    [52.3809553943508, 4.809309666406198],
+    [52.369553943508, 4.84309666406198],
+  ],
+  current: [],
+};
 let locations = [];
 
 placeCards.forEach((item) => locations.push(item.locations));
 
-export {placeCards, cityCoords, locations};
+export {placeCards, cityCoords, locations, detailLocations};

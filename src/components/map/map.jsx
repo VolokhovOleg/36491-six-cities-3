@@ -8,13 +8,15 @@ class Map extends PureComponent {
     this.mapRef = React.createRef();
   }
 
-  componentDidMount() {
-    const {locations, city} = this.props;
-
-    const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
+  _generatePin(type) {
+    return leaflet.icon({
+      iconUrl: `img/pin${type ? `-active` : ``}.svg`,
       iconSize: [30, 30]
     });
+  }
+
+  componentDidMount() {
+    const {locations, city, isDetailsPage} = this.props;
 
     const map = leaflet.map(this.mapRef.current, {
       center: city,
@@ -22,6 +24,7 @@ class Map extends PureComponent {
       zoomControl: false,
       marker: true
     });
+
     map.setView(city, ZOOM);
 
     leaflet
@@ -30,11 +33,17 @@ class Map extends PureComponent {
       })
       .addTo(map);
 
-    locations.forEach((item) => {
+    locations.near.forEach((item) => {
       leaflet
-        .marker(item, {icon})
+        .marker(item, {icon: this._generatePin(false)})
         .addTo(map);
     });
+
+    if (isDetailsPage) {
+      leaflet
+        .marker(locations.current, {icon: this._generatePin(true)})
+        .addTo(map);
+    }
   }
 
   render() {
@@ -47,9 +56,10 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  locations: PropTypes.arrayOf(
-      PropTypes.arrayOf(PropTypes.number.isRequired)
-  ).isRequired,
+  locations: PropTypes.shape({
+    current: PropTypes.array.isRequired,
+    near: PropTypes.array.isRequired,
+  }).isRequired,
   city: PropTypes.array.isRequired,
   isDetailsPage: PropTypes.bool.isRequired,
 };

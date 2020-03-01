@@ -1,4 +1,5 @@
 import PlaceCard from '../place-card/place-card';
+
 class PlaceList extends PureComponent {
   constructor(props) {
     super(props);
