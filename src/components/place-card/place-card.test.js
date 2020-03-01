@@ -55,6 +55,7 @@ const placeData = {
   ],
   isPremium: true,
   rating: 4,
+  locations: [52.3909553943508, 4.85309666406198],
   host,
 };
 
@@ -64,6 +65,7 @@ const onHoverPlaceHandler = () => {};
 it(`<PlaceCard /> snapshot`, () => {
   const tree = renderer
     .create(<PlaceCard
+      isDetailsPage={true}
       onTitleClick={titleClickHandler}
       onHoverPlace={onHoverPlaceHandler}
       placeData = {placeData}

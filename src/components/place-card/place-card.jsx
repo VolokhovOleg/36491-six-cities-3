@@ -1,6 +1,6 @@
 import {convertRating} from '../../utils';
 
-const PlaceCard = ({placeData, onTitleClick, onHoverPlace}) => {
+const PlaceCard = ({placeData, onTitleClick, onHoverPlace, isDetailsPage}) => {
   const {link, img, price, title, type, isPremium, rating} = placeData;
   return <>
     <article
@@ -9,7 +9,7 @@ const PlaceCard = ({placeData, onTitleClick, onHoverPlace}) => {
       }}
       onMouseLeave={() => {
         onHoverPlace(null);
-      }} className="cities__place-card place-card">
+      }} className={`${isDetailsPage ? `near-places__card` : `cities__place-card`} place-card`}>
       {
         isPremium &&
         <div className="place-card__mark">
@@ -65,6 +65,7 @@ PlaceCard.propTypes = {
   }).isRequired,
   onTitleClick: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
+  isDetailsPage: PropTypes.bool.isRequired,
 };
 
 export default PlaceCard;

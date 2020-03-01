@@ -1,10 +1,6 @@
 import leaflet from 'leaflet';
 
-const icon = leaflet.icon({
-  iconUrl: `img/pin.svg`,
-  iconSize: [30, 30]
-});
-const zoom = 12;
+const ZOOM = 12;
 
 class Map extends PureComponent {
   constructor(props) {
@@ -12,16 +8,24 @@ class Map extends PureComponent {
     this.mapRef = React.createRef();
   }
 
-  componentDidMount() {
-    const {offerCords, city} = this.props;
+  _generatePin(type) {
+    return leaflet.icon({
+      iconUrl: `img/pin${type ? `-active` : ``}.svg`,
+      iconSize: [30, 30]
+    });
+  }
 
-    const map = leaflet.map(this.mapRef.current.id, {
+  componentDidMount() {
+    const {locations, city, isDetailsPage} = this.props;
+
+    const map = leaflet.map(this.mapRef.current, {
       center: city,
-      zoom,
+      zoom: ZOOM,
       zoomControl: false,
       marker: true
     });
-    map.setView(city, zoom);
+
+    map.setView(city, ZOOM);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -29,25 +33,35 @@ class Map extends PureComponent {
       })
       .addTo(map);
 
-    offerCords.forEach((item) => {
+    locations.near.forEach((item) => {
       leaflet
-        .marker(item, {icon})
+        .marker(item, {icon: this._generatePin(false)})
         .addTo(map);
     });
+
+    if (isDetailsPage) {
+      leaflet
+        .marker(locations.current, {icon: this._generatePin(true)})
+        .addTo(map);
+    }
   }
 
   render() {
+    const {isDetailsPage} = this.props;
+
     return (<>
-      <section ref={this.mapRef} className="cities__map map" id="map" />
+      <section ref={this.mapRef} className={`${isDetailsPage ? `property` : `cities`}__map map`} id="map" />
     </>);
   }
 }
 
 Map.propTypes = {
-  offerCords: PropTypes.arrayOf(
-      PropTypes.arrayOf(PropTypes.number.isRequired)
-  ).isRequired,
+  locations: PropTypes.shape({
+    current: PropTypes.array.isRequired,
+    near: PropTypes.array.isRequired,
+  }).isRequired,
   city: PropTypes.array.isRequired,
+  isDetailsPage: PropTypes.bool.isRequired,
 };
 
 export default Map;

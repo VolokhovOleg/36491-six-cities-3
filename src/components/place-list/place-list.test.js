@@ -204,6 +204,7 @@ const placeCards = [
 it(`<PlaceList /> snapshot`, () => {
   const tree = renderer
     .create(<PlaceList
+      isDetailsPage={false}
       placeCards = {placeCards}
       onTitleClick={()=>{}}
     />)

@@ -55,6 +55,7 @@ const placeData = {
   ],
   isPremium: true,
   rating: 4,
+  locations: [52.3909553943508, 4.85309666406198],
   host,
 };
 
@@ -65,6 +66,7 @@ it(`Should title be pressed`, () => {
   const main = shallow(
       <PlaceCard
         placeData = {placeData}
+        isDetailsPage={true}
         onTitleClick = {onTitleClick}
         onHoverPlace= {onHoverPlace}
       />
@@ -84,6 +86,7 @@ it(`Should card be hovered`, () => {
   const main = shallow(
       <PlaceCard
         placeData = {placeData}
+        isDetailsPage={true}
         onTitleClick = {onTitleClick}
         onHoverPlace= {onHoverPlace}
       />
@@ -101,6 +104,7 @@ it(`Should card be leaved`, () => {
 
   const main = shallow(
       <PlaceCard
+        isDetailsPage={true}
         placeData = {placeData}
         onTitleClick = {onTitleClick}
         onHoverPlace= {onHoverPlace}

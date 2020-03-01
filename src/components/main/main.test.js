@@ -1,4 +1,4 @@
-import Main from 'main';
+import Main from './main';
 
 const host = {
   avatar: `img/avatar-angelina.jpg`,
@@ -56,6 +56,7 @@ const placeCards = [
     ],
     isPremium: true,
     rating: 4,
+    locations: [52.3909553943508, 4.85309666406198],
     host,
   },
   {
@@ -103,6 +104,7 @@ const placeCards = [
     ],
     isPremium: true,
     rating: 4,
+    locations: [51.3909553943508, 4.85309666406198],
     host,
   },
   {
@@ -150,6 +152,7 @@ const placeCards = [
     ],
     isPremium: true,
     rating: 4,
+    locations: [53.3909553943508, 4.85309666406198],
     host,
   },
   {
@@ -197,6 +200,7 @@ const placeCards = [
     ],
     isPremium: true,
     rating: 4,
+    locations: [54.3909553943508, 4.85309666406198],
     host,
   },
 ];
@@ -209,7 +213,9 @@ it(`<Main /> snapshot`, () => {
       placesToStay = {placesToStay}
       onTitleClick={()=>{}}
       placeCards = {placeCards}
-    />)
+    />,
+    {createNodeMock: () => document.createElement(`section`)}
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();
