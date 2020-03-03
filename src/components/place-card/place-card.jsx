@@ -45,7 +45,8 @@ const PlaceCard = ({placeData, onTitleClick, onHoverPlace, isDetailsPage}) => {
             evt.preventDefault();
             onTitleClick(placeData);
           }
-          } href={link}>{title}</a>
+          }
+          href={link}>{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -62,6 +63,7 @@ PlaceCard.propTypes = {
     isPremium: PropTypes.bool.isRequired,
     price: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
+city: PropTypes.string.isRequired,
   }).isRequired,
   onTitleClick: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,

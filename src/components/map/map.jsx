@@ -33,13 +33,19 @@ class Map extends PureComponent {
       })
       .addTo(map);
 
-    locations.near.forEach((item) => {
+    locations.forEach((item) => {
       leaflet
         .marker(item, {icon: this._generatePin(false)})
         .addTo(map);
     });
 
     if (isDetailsPage) {
+      locations.near.forEach((item) => {
+        leaflet
+          .marker(item, {icon: this._generatePin(false)})
+          .addTo(map);
+      });
+
       leaflet
         .marker(locations.current, {icon: this._generatePin(true)})
         .addTo(map);
@@ -56,10 +62,13 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  locations: PropTypes.shape({
-    current: PropTypes.array.isRequired,
-    near: PropTypes.array.isRequired,
-  }).isRequired,
+  locations: PropTypes.oneOfType([
+    PropTypes.shape({
+      current: PropTypes.array.isRequired,
+      near: PropTypes.array.isRequired,
+    }).isRequired,
+    PropTypes.array.isRequired,
+  ]).isRequired,
   city: PropTypes.array.isRequired,
   isDetailsPage: PropTypes.bool.isRequired,
 };

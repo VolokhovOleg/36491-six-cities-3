@@ -4,26 +4,29 @@ import PlaceCard from '../place-card/place-card';
 import PlaceList from '../place-list/place-list';
 import CardDetail from '../card-detail/card-detail';
 
-const PLACES_TO_STAY = 312;
-
 class App extends PureComponent {
   constructor(props) {
     super(props);
 
+    const {placeCards} = this.props;
+
     this.state = {
       isRenderProperty: false,
+      activeCity: placeCards[0].city,
       propertyCard: null,
     };
   }
 
   _renderMainScreen() {
     const {placeCards, reviews} = this.props;
-    const {propertyCard, isRenderProperty} = this.state;
+    const {propertyCard, isRenderProperty, activeCity} = this.state;
+    const placeToStay = placeCards.filter((item) => item.city === activeCity).length;
+    const filteredPlaceCards = placeCards.filter((item) => item.city === activeCity);
 
     if (isRenderProperty) {
       return (<CardDetail
         reviews={reviews}
-        placeCards={placeCards}
+        placeCards={filteredPlaceCards}
         onTitleClick={
           (placeData) => {
             this.setState({
@@ -38,8 +41,16 @@ class App extends PureComponent {
 
     if (!isRenderProperty) {
       return (<Main
-        placesToStay={PLACES_TO_STAY}
-        placeCards={placeCards}
+        placesToStay={placeToStay}
+        placeCards={filteredPlaceCards}
+        activeCity={activeCity}
+        onCityClick={
+          (city) => {
+            this.setState({
+              activeCity: city,
+            });
+          }
+        }
         onTitleClick={
           (placeData) => {
             this.setState({
@@ -117,6 +128,7 @@ App.propTypes = {
     bedrooms: PropTypes.number.isRequired,
     maxAdults: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
+    city: PropTypes.string.isRequired,
     host: PropTypes.shape({
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,

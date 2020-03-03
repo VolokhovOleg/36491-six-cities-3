@@ -166,6 +166,7 @@ CardDetail.propTypes = {
     bedrooms: PropTypes.number.isRequired,
     maxAdults: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
+city: PropTypes.string.isRequired,
     host: PropTypes.shape({
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
@@ -189,6 +190,7 @@ CardDetail.propTypes = {
     bedrooms: PropTypes.number.isRequired,
     maxAdults: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
+city: PropTypes.string.isRequired,
     host: PropTypes.shape({
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
