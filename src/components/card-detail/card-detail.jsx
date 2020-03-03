@@ -7,7 +7,6 @@ import {cityCoords, detailLocations} from '../../mocks/offers';
 const CardDetail = ({placeData, reviews, placeCards, onTitleClick}) => {
   const {gallery, price, title, type, bedrooms, maxAdults, inside, isPremium, rating, host, locations} = placeData;
   const {avatar, name, hostTitle, hostDescription} = host;
-  detailLocations.current = locations;
 
   const sortingReviews = reviews.sort((a, b) => b.date - a.date);
 
@@ -122,6 +121,7 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick}) => {
           </div>
           <Map
             locations={detailLocations}
+            activeLocation={[locations]}
             city={cityCoords}
             isDetailsPage={true}
           />
@@ -166,7 +166,7 @@ CardDetail.propTypes = {
     bedrooms: PropTypes.number.isRequired,
     maxAdults: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
-city: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
     host: PropTypes.shape({
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
@@ -190,7 +190,7 @@ city: PropTypes.string.isRequired,
     bedrooms: PropTypes.number.isRequired,
     maxAdults: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
-city: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
     host: PropTypes.shape({
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,

@@ -1,75 +1,96 @@
 import leaflet from 'leaflet';
 
 const ZOOM = 12;
+const tileLayer = {
+  URL: `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
+  ATTRIBUTION: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`,
+};
 
 class Map extends PureComponent {
   constructor(props) {
     super(props);
+
     this.mapRef = React.createRef();
+    this._map = null;
+    this._pins = [];
   }
 
-  _generatePin(type) {
+  _generatePin(active) {
     return leaflet.icon({
-      iconUrl: `img/pin${type ? `-active` : ``}.svg`,
+      iconUrl: `img/pin${active ? `-active` : ``}.svg`,
       iconSize: [30, 30]
     });
   }
 
-  componentDidMount() {
-    const {locations, city, isDetailsPage} = this.props;
+  _setOptions() {
+    const {city} = this.props;
 
-    const map = leaflet.map(this.mapRef.current, {
+    return {
       center: city,
       zoom: ZOOM,
       zoomControl: false,
       marker: true
-    });
+    };
+  }
 
-    map.setView(city, ZOOM);
+  componentDidMount() {
+    this._map = leaflet.map(this.mapRef.current, this._setOptions());
+    const {locations, city} = this.props;
+    this._locations = locations;
+    this._map.setView(city, ZOOM);
 
     leaflet
-      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+      .tileLayer(tileLayer.URL, {
+        attribution: tileLayer.ATTRIBUTION
       })
-      .addTo(map);
+      .addTo(this._map);
 
-    locations.forEach((item) => {
-      leaflet
-        .marker(item, {icon: this._generatePin(false)})
-        .addTo(map);
-    });
-
-    if (isDetailsPage) {
-      locations.near.forEach((item) => {
-        leaflet
-          .marker(item, {icon: this._generatePin(false)})
-          .addTo(map);
-      });
-
-      leaflet
-        .marker(locations.current, {icon: this._generatePin(true)})
-        .addTo(map);
-    }
+    this._setCoordinates(this._locations);
   }
 
   render() {
-    const {isDetailsPage} = this.props;
+    const {isDetailsPage = false} = this.props;
 
     return (<>
       <section ref={this.mapRef} className={`${isDetailsPage ? `property` : `cities`}__map map`} id="map" />
     </>);
   }
+
+  componentDidUpdate() {
+    const {locations} = this.props;
+
+    this._pins.forEach((item) => {
+      this._map.removeLayer(item);
+    });
+
+    this._setCoordinates(locations);
+  }
+
+  componentWillUnmount() {
+    this._map.remove();
+  }
+
+  _setCoordinates(locations) {
+    const {activeLocation} = this.props;
+
+    this._pins = locations.map((item) => {
+      return leaflet
+        .marker(item, {icon: this._generatePin(false)})
+        .addTo(this._map);
+    });
+
+    if (activeLocation.length > 0) {
+      leaflet
+        .marker(...activeLocation, {icon: this._generatePin(true)})
+        .addTo(this._map);
+    }
+  }
 }
 
 Map.propTypes = {
-  locations: PropTypes.oneOfType([
-    PropTypes.shape({
-      current: PropTypes.array.isRequired,
-      near: PropTypes.array.isRequired,
-    }).isRequired,
-    PropTypes.array.isRequired,
-  ]).isRequired,
+  locations: PropTypes.arrayOf(PropTypes.array.isRequired).isRequired,
   city: PropTypes.array.isRequired,
+  activeLocation: PropTypes.array.isRequired,
   isDetailsPage: PropTypes.bool.isRequired,
 };
 

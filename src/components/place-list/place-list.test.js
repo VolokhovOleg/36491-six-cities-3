@@ -56,10 +56,13 @@ const placeCards = [
     ],
     isPremium: true,
     rating: 4,
+    city: `Amsterdam`,
+    locations: [52.3909553943508, 4.85309666406198],
     host,
   },
   {
     link: `/`,
+    city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
       {
@@ -103,10 +106,12 @@ const placeCards = [
     ],
     isPremium: true,
     rating: 4,
+    locations: [51.3909553943508, 4.85309666406198],
     host,
   },
   {
     link: `/`,
+    city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
       {
@@ -150,10 +155,12 @@ const placeCards = [
     ],
     isPremium: true,
     rating: 4,
+    locations: [53.3909553943508, 4.85309666406198],
     host,
   },
   {
     link: `/`,
+    city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
       {
@@ -197,6 +204,7 @@ const placeCards = [
     ],
     isPremium: true,
     rating: 4,
+    locations: [54.3909553943508, 4.85309666406198],
     host,
   },
 ];

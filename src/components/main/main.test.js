@@ -9,7 +9,7 @@ const host = {
     `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`
   ],
 };
-
+const activeCity = `Mock City`;
 const placeCards = [
   {
     link: `/`,
@@ -56,11 +56,13 @@ const placeCards = [
     ],
     isPremium: true,
     rating: 4,
+    city: `Amsterdam`,
     locations: [52.3909553943508, 4.85309666406198],
     host,
   },
   {
     link: `/`,
+    city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
       {
@@ -109,6 +111,7 @@ const placeCards = [
   },
   {
     link: `/`,
+    city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
       {
@@ -157,6 +160,7 @@ const placeCards = [
   },
   {
     link: `/`,
+    city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
       {
@@ -212,6 +216,8 @@ it(`<Main /> snapshot`, () => {
     .create(<Main
       placesToStay = {placesToStay}
       onTitleClick={()=>{}}
+      onCityClick={()=>{}}
+      activeCity={activeCity}
       placeCards = {placeCards}
     />,
     {createNodeMock: () => document.createElement(`section`)}

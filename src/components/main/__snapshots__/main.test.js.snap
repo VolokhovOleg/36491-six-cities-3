@@ -75,22 +75,22 @@ exports[`<Main /> snapshot 1`] = `
         >
           <li
             className="locations__item"
+            onClick={[Function]}
           >
             <a
-              className="locations__item-link tabs__item"
-              href="#"
+              className="locations__item-link tabs__item  "
             >
               <span>
-                Paris
+                Dusseldorf
               </span>
             </a>
           </li>
           <li
             className="locations__item"
+            onClick={[Function]}
           >
             <a
-              className="locations__item-link tabs__item"
-              href="#"
+              className="locations__item-link tabs__item  "
             >
               <span>
                 Cologne
@@ -99,21 +99,10 @@ exports[`<Main /> snapshot 1`] = `
           </li>
           <li
             className="locations__item"
+            onClick={[Function]}
           >
             <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Brussels
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item tabs__item--active"
+              className="locations__item-link tabs__item  "
             >
               <span>
                 Amsterdam
@@ -122,25 +111,13 @@ exports[`<Main /> snapshot 1`] = `
           </li>
           <li
             className="locations__item"
+            onClick={[Function]}
           >
             <a
-              className="locations__item-link tabs__item"
-              href="#"
+              className="locations__item-link tabs__item  "
             >
               <span>
-                Hamburg
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Dusseldorf
+                Brussels
               </span>
             </a>
           </li>
@@ -165,7 +142,10 @@ exports[`<Main /> snapshot 1`] = `
             className="places__found"
           >
             312
-             places to stay in Amsterdam
+             place
+            s
+             to stay in 
+            Mock City
           </b>
           <form
             action="#"

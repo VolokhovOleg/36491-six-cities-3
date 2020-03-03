@@ -55,11 +55,13 @@ const placeCards = [
     ],
     isPremium: true,
     rating: 4,
+    city: `Amsterdam`,
     locations: [52.3909553943508, 4.85309666406198],
     host,
   },
   {
     link: `/`,
+    city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
       {
@@ -108,6 +110,7 @@ const placeCards = [
   },
   {
     link: `/`,
+    city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
       {
@@ -156,6 +159,7 @@ const placeCards = [
   },
   {
     link: `/`,
+    city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
       {

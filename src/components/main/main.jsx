@@ -71,6 +71,7 @@ const Main = ({placeCards, placesToStay, onTitleClick, activeCity, onCityClick})
               <div className="cities__right-section">
                 <Map
                   locations={locations}
+                  activeLocation={[]}
                   isDetailsPage={false}
                   city={cityCoords}
                 />

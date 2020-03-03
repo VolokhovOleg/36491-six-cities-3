@@ -63,7 +63,6 @@ PlaceCard.propTypes = {
     isPremium: PropTypes.bool.isRequired,
     price: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-city: PropTypes.string.isRequired,
   }).isRequired,
   onTitleClick: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
