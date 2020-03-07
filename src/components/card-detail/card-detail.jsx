@@ -3,8 +3,9 @@ import ReviewList from '../review-list/review-list';
 import Map from '../map/map';
 import PlaceList from '../place-list/place-list';
 import {cityCoords, detailLocations} from '../../mocks/offers';
+import {propTypes} from './prop-types';
 
-const CardDetail = ({placeData, reviews, placeCards, onTitleClick}) => {
+const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace}) => {
   const {gallery, price, title, type, bedrooms, maxAdults, inside, isPremium, rating, host, locations} = placeData;
   const {avatar, name, hostTitle, hostDescription} = host;
 
@@ -133,6 +134,7 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick}) => {
               placeCards = {placeCards.slice(0, 3)}
               isDetailsPage = {true}
               onTitleClick = {onTitleClick}
+              onHoverPlace = {onHoverPlace}
             />
           </section>
         </div>
@@ -141,63 +143,6 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick}) => {
   </>;
 };
 
-CardDetail.propTypes = {
-  onTitleClick: PropTypes.func.isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    text: PropTypes.string.isRequired,
-    userRate: PropTypes.number.isRequired,
-    userName: PropTypes.string.isRequired,
-    date: PropTypes.any.isRequired,
-    id: PropTypes.string.isRequired,
-  }).isRequired
-  ).isRequired,
-  placeData: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    locations: PropTypes.array.isRequired,
-    inside: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    gallery: PropTypes.arrayOf(PropTypes.shape({
-      galleryImg: PropTypes.string.isRequired,
-      galleryTitle: PropTypes.string.isRequired,
-    }).isRequired
-    ).isRequired,
-    price: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    city: PropTypes.string.isRequired,
-    host: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      hostTitle: PropTypes.string.isRequired,
-      hostDescription: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    }).isRequired,
-  }).isRequired,
-  placeCards: PropTypes.arrayOf(PropTypes.shape({
-    link: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    inside: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    gallery: PropTypes.arrayOf(PropTypes.shape({
-      galleryImg: PropTypes.string.isRequired,
-      galleryTitle: PropTypes.string.isRequired,
-    }).isRequired
-    ).isRequired,
-    price: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    city: PropTypes.string.isRequired,
-    host: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      hostTitle: PropTypes.string.isRequired,
-      hostDescription: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    }).isRequired,
-  })).isRequired,
-};
+CardDetail.propTypes = propTypes;
 
 export default CardDetail;

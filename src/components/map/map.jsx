@@ -1,4 +1,5 @@
 import leaflet from 'leaflet';
+import {propTypes} from './prop-types';
 
 const ZOOM = 12;
 const tileLayer = {
@@ -87,11 +88,6 @@ class Map extends PureComponent {
   }
 }
 
-Map.propTypes = {
-  locations: PropTypes.arrayOf(PropTypes.array.isRequired).isRequired,
-  city: PropTypes.array.isRequired,
-  activeLocation: PropTypes.array.isRequired,
-  isDetailsPage: PropTypes.bool.isRequired,
-};
+Map.propTypes = propTypes;
 
 export default Map;

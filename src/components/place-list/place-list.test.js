@@ -215,6 +215,7 @@ it(`<PlaceList /> snapshot`, () => {
       isDetailsPage={false}
       placeCards = {placeCards}
       onTitleClick={()=>{}}
+      onHoverPlace={()=>{}}
     />)
     .toJSON();
 

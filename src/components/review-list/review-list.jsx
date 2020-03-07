@@ -1,4 +1,5 @@
 import Review from '../review/revies';
+import {propTypes} from './prop-types';
 
 const ReviewList = ({reviews}) => {
   const reviewsAmount = reviews.length;
@@ -73,15 +74,6 @@ const ReviewList = ({reviews}) => {
   </>;
 };
 
-ReviewList.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    text: PropTypes.string.isRequired,
-    userRate: PropTypes.number.isRequired,
-    userName: PropTypes.string.isRequired,
-    date: PropTypes.any.isRequired,
-    id: PropTypes.string.isRequired,
-  }).isRequired
-  ).isRequired,
-};
+ReviewList.propTypes = propTypes;
 
 export default ReviewList;

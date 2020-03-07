@@ -81,43 +81,7 @@ exports[`<Main /> snapshot 1`] = `
               className="locations__item-link tabs__item  "
             >
               <span>
-                Dusseldorf
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-            onClick={[Function]}
-          >
-            <a
-              className="locations__item-link tabs__item  "
-            >
-              <span>
-                Cologne
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-            onClick={[Function]}
-          >
-            <a
-              className="locations__item-link tabs__item  "
-            >
-              <span>
                 Amsterdam
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-            onClick={[Function]}
-          >
-            <a
-              className="locations__item-link tabs__item  "
-            >
-              <span>
-                Brussels
               </span>
             </a>
           </li>

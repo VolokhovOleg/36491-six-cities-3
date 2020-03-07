@@ -1,3 +1,5 @@
+import {propTypes} from './prop-types';
+
 class City extends PureComponent {
   constructor(props) {
     super(props);
@@ -21,10 +23,6 @@ class City extends PureComponent {
   }
 }
 
-City.propTypes = {
-  name: PropTypes.string.isRequired,
-  state: PropTypes.bool.isRequired,
-  onCityClick: PropTypes.func.isRequired,
-};
+City.propTypes = propTypes;
 
 export default City;

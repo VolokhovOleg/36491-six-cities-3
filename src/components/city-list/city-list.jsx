@@ -1,4 +1,5 @@
 import City from '../city/city';
+import {propTypes} from './prop-types';
 
 const CityList = ({cities, activeCity, onCityClick}) => {
   return (<>
@@ -21,10 +22,6 @@ const CityList = ({cities, activeCity, onCityClick}) => {
   </>);
 };
 
-CityList.propTypes = {
-  cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  activeCity: PropTypes.string.isRequired,
-  onCityClick: PropTypes.func.isRequired,
-};
+CityList.propTypes = propTypes;
 
 export default CityList;

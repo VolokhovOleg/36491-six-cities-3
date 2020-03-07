@@ -4,7 +4,7 @@ const review = {
   text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
   userRate: 4,
   userName: `Max`,
-  date: new Date(Date.now()),
+  date: `December 24, 2018`,
   id: `1`,
 };
 

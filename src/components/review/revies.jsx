@@ -1,4 +1,5 @@
 import {convertRating} from '../../utils';
+import {propTypes} from './prop-types';
 import moment from 'moment';
 
 const Review = ({text, userRate, userName, date, id})=> {
@@ -28,12 +29,6 @@ const Review = ({text, userRate, userName, date, id})=> {
   </>;
 };
 
-Review.propTypes = {
-  text: PropTypes.string.isRequired,
-  userRate: PropTypes.number.isRequired,
-  userName: PropTypes.string.isRequired,
-  date: PropTypes.any.isRequired,
-  id: PropTypes.string.isRequired,
-};
+Review.propTypes = propTypes;
 
 export default Review;

@@ -217,6 +217,7 @@ it(`<Main /> snapshot`, () => {
       placesToStay = {placesToStay}
       onTitleClick={()=>{}}
       onCityClick={()=>{}}
+      onHoverPlace={()=>{}}
       activeCity={activeCity}
       placeCards = {placeCards}
     />,
