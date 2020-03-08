@@ -1,7 +1,7 @@
 import leaflet from 'leaflet';
 import {propTypes} from './prop-types';
 
-const ZOOM = 12;
+const ZOOM = 4;
 const tileLayer = {
   URL: `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
   ATTRIBUTION: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`,

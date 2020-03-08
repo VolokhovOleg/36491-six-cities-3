@@ -3,6 +3,7 @@ const ActionType = {
   SET_LOCATION_CITY: `SET_LOCATION_CITY`,
   SET_CARD_DETAIL: `SET_CARD_DETAIL`,
   SET_HOVER_PLACE: `SET_HOVER_PLACE`,
+  SET_SORTING_PLACES: `SET_SORTING_PLACES`,
 };
 
 const ActionCreator = {
@@ -20,6 +21,10 @@ const ActionCreator = {
   setHoverPlace: (place) => ({
     type: ActionType.SET_HOVER_PLACE,
     payload: place,
+  }),
+  setSortingPlaces: (sortingPlaces) => ({
+    type: ActionType.SET_SORTING_PLACES,
+    payload: sortingPlaces,
   }),
 };
 

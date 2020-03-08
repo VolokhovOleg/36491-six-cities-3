@@ -9,6 +9,7 @@ const initialState = {
   cardDetail: placeCards[0],
   hoverPlace: placeCards[0],
   placeCards,
+  originPlaceCards: [...placeCards],
   reviews,
 };
 
@@ -25,6 +26,9 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.SET_HOVER_PLACE:
       return extend(state, {hoverPlace: action.payload});
+
+    case ActionType.SET_SORTING_PLACES:
+      return extend(state, {placeCards: action.payload});
   }
 
   return state;
