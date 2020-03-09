@@ -6,8 +6,9 @@ import {ActionType} from './actions';
 const initialState = {
   isRenderCardDetail: false,
   activeCity: placeCards[0].city,
+  activePin: null,
   cardDetail: placeCards[0],
-  hoverPlace: placeCards[0],
+  hoverPlace: null,
   placeCards,
   originPlaceCards: [...placeCards],
   reviews,
@@ -29,6 +30,9 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.SET_SORTING_PLACES:
       return extend(state, {placeCards: action.payload});
+
+    case ActionType.SET_ACTIVE_PIN:
+      return extend(state, {activePin: action.payload});
   }
 
   return state;

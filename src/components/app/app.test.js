@@ -40,7 +40,7 @@ const placeCards = [
         galleryTitle: `Photo studio`,
       }
     ],
-    price: `€120`,
+    price: `€1201`,
     title: `Beautiful & luxurious apartment at great location`,
     description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
     type: `Apartment`,
@@ -59,9 +59,9 @@ const placeCards = [
       `Dishwasher`
     ],
     isPremium: true,
-    rating: 4,
-    city: `Amsterdam`,
-    locations: [52.3909553943508, 4.85309666406198],
+    rating: 1,
+    city: `Moscow`,
+    locations: [52.3919553943508, 4.85319666406198],
     host,
   },
   {
@@ -90,7 +90,7 @@ const placeCards = [
         galleryTitle: `Photo studio`,
       }
     ],
-    price: `€120`,
+    price: `€1202`,
     title: `Beautiful & luxurious apartment at great location`,
     description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
     type: `Apartment`,
@@ -109,8 +109,8 @@ const placeCards = [
       `Dishwasher`
     ],
     isPremium: true,
-    rating: 4,
-    locations: [51.3909553943508, 4.85309666406198],
+    rating: 2,
+    locations: [51.3929553943508, 4.85329666406198],
     host,
   },
   {
@@ -139,7 +139,7 @@ const placeCards = [
         galleryTitle: `Photo studio`,
       }
     ],
-    price: `€120`,
+    price: `€1203`,
     title: `Beautiful & luxurious apartment at great location`,
     description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
     type: `Apartment`,
@@ -158,8 +158,8 @@ const placeCards = [
       `Dishwasher`
     ],
     isPremium: true,
-    rating: 4,
-    locations: [53.3909553943508, 4.85309666406198],
+    rating: 3,
+    locations: [53.3939553943508, 4.85339666406198],
     host,
   },
   {
@@ -188,7 +188,7 @@ const placeCards = [
         galleryTitle: `Photo studio`,
       }
     ],
-    price: `€120`,
+    price: `€1204`,
     title: `Beautiful & luxurious apartment at great location`,
     description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
     type: `Apartment`,
@@ -212,7 +212,7 @@ const placeCards = [
     host,
   },
 ];
-export const reviews = [
+const reviews = [
   {
     text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
     userRate: 4,
@@ -243,6 +243,205 @@ export const reviews = [
   },
 ];
 const activeCity = `Moscow`;
+const activePin = null;
+const originPlaceCards = [
+  {
+    link: `/`,
+    img: `img/apartment-01.jpg`,
+    gallery: [
+      {
+        galleryImg: `img/apartment-01.jpg`,
+        galleryTitle: `Photo apartment`,
+      },
+      {
+        galleryImg: `img/apartment-02.jpg`,
+        galleryTitle: `Photo apartment`,
+      },
+      {
+        galleryImg: `img/apartment-03.jpg`,
+        galleryTitle: `Photo apartment`,
+      },
+      {
+        galleryImg: `img/room.jpg`,
+        galleryTitle: `Photo room`,
+      },
+      {
+        galleryImg: `img/studio-01.jpg`,
+        galleryTitle: `Photo studio`,
+      }
+    ],
+    price: `€1201`,
+    title: `Beautiful & luxurious apartment at great location`,
+    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+    type: `Apartment`,
+    bedrooms: 4,
+    maxAdults: 4,
+    inside: [
+      `Wifi`,
+      `Heating`,
+      `Kitchen`,
+      `Cable TV`,
+      `Washing machine`,
+      `Towels`,
+      `Heating`,
+      `Coffee machine`,
+      `Baby seat`,
+      `Dishwasher`
+    ],
+    isPremium: true,
+    rating: 1,
+    city: `Moscow`,
+    locations: [52.3919553943508, 4.85319666406198],
+    host,
+  },
+  {
+    link: `/`,
+    city: `Amsterdam`,
+    img: `img/apartment-01.jpg`,
+    gallery: [
+      {
+        galleryImg: `img/apartment-01.jpg`,
+        galleryTitle: `Photo apartment`,
+      },
+      {
+        galleryImg: `img/apartment-02.jpg`,
+        galleryTitle: `Photo apartment`,
+      },
+      {
+        galleryImg: `img/apartment-03.jpg`,
+        galleryTitle: `Photo apartment`,
+      },
+      {
+        galleryImg: `img/room.jpg`,
+        galleryTitle: `Photo room`,
+      },
+      {
+        galleryImg: `img/studio-01.jpg`,
+        galleryTitle: `Photo studio`,
+      }
+    ],
+    price: `€1202`,
+    title: `Beautiful & luxurious apartment at great location`,
+    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+    type: `Apartment`,
+    bedrooms: 4,
+    maxAdults: 4,
+    inside: [
+      `Wifi`,
+      `Heating`,
+      `Kitchen`,
+      `Cable TV`,
+      `Washing machine`,
+      `Towels`,
+      `Heating`,
+      `Coffee machine`,
+      `Baby seat`,
+      `Dishwasher`
+    ],
+    isPremium: true,
+    rating: 2,
+    locations: [51.3929553943508, 4.85329666406198],
+    host,
+  },
+  {
+    link: `/`,
+    city: `Amsterdam`,
+    img: `img/apartment-01.jpg`,
+    gallery: [
+      {
+        galleryImg: `img/apartment-01.jpg`,
+        galleryTitle: `Photo apartment`,
+      },
+      {
+        galleryImg: `img/apartment-02.jpg`,
+        galleryTitle: `Photo apartment`,
+      },
+      {
+        galleryImg: `img/apartment-03.jpg`,
+        galleryTitle: `Photo apartment`,
+      },
+      {
+        galleryImg: `img/room.jpg`,
+        galleryTitle: `Photo room`,
+      },
+      {
+        galleryImg: `img/studio-01.jpg`,
+        galleryTitle: `Photo studio`,
+      }
+    ],
+    price: `€1203`,
+    title: `Beautiful & luxurious apartment at great location`,
+    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+    type: `Apartment`,
+    bedrooms: 4,
+    maxAdults: 4,
+    inside: [
+      `Wifi`,
+      `Heating`,
+      `Kitchen`,
+      `Cable TV`,
+      `Washing machine`,
+      `Towels`,
+      `Heating`,
+      `Coffee machine`,
+      `Baby seat`,
+      `Dishwasher`
+    ],
+    isPremium: true,
+    rating: 3,
+    locations: [53.3939553943508, 4.85339666406198],
+    host,
+  },
+  {
+    link: `/`,
+    city: `Amsterdam`,
+    img: `img/apartment-01.jpg`,
+    gallery: [
+      {
+        galleryImg: `img/apartment-01.jpg`,
+        galleryTitle: `Photo apartment`,
+      },
+      {
+        galleryImg: `img/apartment-02.jpg`,
+        galleryTitle: `Photo apartment`,
+      },
+      {
+        galleryImg: `img/apartment-03.jpg`,
+        galleryTitle: `Photo apartment`,
+      },
+      {
+        galleryImg: `img/room.jpg`,
+        galleryTitle: `Photo room`,
+      },
+      {
+        galleryImg: `img/studio-01.jpg`,
+        galleryTitle: `Photo studio`,
+      }
+    ],
+    price: `€1204`,
+    title: `Beautiful & luxurious apartment at great location`,
+    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+    type: `Apartment`,
+    bedrooms: 4,
+    maxAdults: 4,
+    inside: [
+      `Wifi`,
+      `Heating`,
+      `Kitchen`,
+      `Cable TV`,
+      `Washing machine`,
+      `Towels`,
+      `Heating`,
+      `Coffee machine`,
+      `Baby seat`,
+      `Dishwasher`
+    ],
+    isPremium: true,
+    rating: 4,
+    locations: [54.3909553943508, 4.85309666406198],
+    host,
+  },
+];
 const cardDetail = {
   link: `/`,
   img: `img/apartment-01.jpg`,
@@ -348,7 +547,9 @@ it(`<App /> snapshot`, () => {
     activeCity,
     cardDetail,
     hoverPlace,
+    activePin,
     placeCards,
+    originPlaceCards,
     reviews,
   });
 

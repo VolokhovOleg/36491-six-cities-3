@@ -36,7 +36,7 @@ const placeCards = [
         galleryTitle: `Photo studio`,
       }
     ],
-    price: `€120`,
+    price: `€1201`,
     title: `Beautiful & luxurious apartment at great location`,
     description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
     type: `Apartment`,
@@ -55,9 +55,9 @@ const placeCards = [
       `Dishwasher`
     ],
     isPremium: true,
-    rating: 4,
-    city: `Amsterdam`,
-    locations: [52.3909553943508, 4.85309666406198],
+    rating: 1,
+    city: `Moscow`,
+    locations: [52.3919553943508, 4.85319666406198],
     host,
   },
   {
@@ -86,7 +86,7 @@ const placeCards = [
         galleryTitle: `Photo studio`,
       }
     ],
-    price: `€120`,
+    price: `€1202`,
     title: `Beautiful & luxurious apartment at great location`,
     description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
     type: `Apartment`,
@@ -105,8 +105,8 @@ const placeCards = [
       `Dishwasher`
     ],
     isPremium: true,
-    rating: 4,
-    locations: [51.3909553943508, 4.85309666406198],
+    rating: 2,
+    locations: [51.3929553943508, 4.85329666406198],
     host,
   },
   {
@@ -135,7 +135,7 @@ const placeCards = [
         galleryTitle: `Photo studio`,
       }
     ],
-    price: `€120`,
+    price: `€1203`,
     title: `Beautiful & luxurious apartment at great location`,
     description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
     type: `Apartment`,
@@ -154,8 +154,8 @@ const placeCards = [
       `Dishwasher`
     ],
     isPremium: true,
-    rating: 4,
-    locations: [53.3909553943508, 4.85309666406198],
+    rating: 3,
+    locations: [53.3939553943508, 4.85339666406198],
     host,
   },
   {
@@ -184,7 +184,7 @@ const placeCards = [
         galleryTitle: `Photo studio`,
       }
     ],
-    price: `€120`,
+    price: `€1204`,
     title: `Beautiful & luxurious apartment at great location`,
     description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
     type: `Apartment`,

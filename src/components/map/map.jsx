@@ -1,7 +1,8 @@
 import leaflet from 'leaflet';
 import {propTypes} from './prop-types';
+import {connect} from 'react-redux';
 
-const ZOOM = 4;
+const ZOOM = 10;
 const tileLayer = {
   URL: `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
   ATTRIBUTION: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`,
@@ -72,7 +73,7 @@ class Map extends PureComponent {
   }
 
   _setCoordinates(locations) {
-    const {activeLocation} = this.props;
+    const {activePin} = this.props;
 
     this._pins = locations.map((item) => {
       return leaflet
@@ -80,14 +81,19 @@ class Map extends PureComponent {
         .addTo(this._map);
     });
 
-    if (activeLocation.length > 0) {
-      leaflet
-        .marker(...activeLocation, {icon: this._generatePin(true)})
-        .addTo(this._map);
+    if (activePin !== null) {
+      this._pins.push(leaflet
+        .marker(activePin, {icon: this._generatePin(true)})
+        .addTo(this._map));
     }
   }
 }
 
 Map.propTypes = propTypes;
 
-export default Map;
+const mapInitialProps = (state) => ({
+  activePin: state.activePin,
+});
+
+export {Map};
+export default connect(mapInitialProps)(Map);

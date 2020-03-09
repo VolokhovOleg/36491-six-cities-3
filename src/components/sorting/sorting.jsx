@@ -1,5 +1,6 @@
 import {ActionCreator} from '../../reducer/actions';
 import {connect} from 'react-redux';
+import {propTypes} from './prop-types';
 
 const SORTING_PROPERTY_NAME = {
   Popular: `Popular`,
@@ -20,7 +21,7 @@ class Sorting extends PureComponent {
 
   _toSortData(sortingProperty) {
     const {resortingData, placeCards, originPlaceCards} = this.props;
-    let sortedData = placeCards;
+    let sortedData = [];
 
     switch (sortingProperty) {
       case SORTING_PROPERTY_NAME.PriceToHight:
@@ -38,6 +39,12 @@ class Sorting extends PureComponent {
       default:
         sortedData = originPlaceCards;
     }
+
+    this.setState(() => ({
+      checkedSortingProperty: sortingProperty,
+      isSelectOpen: false,
+    }));
+
     resortingData(sortedData);
   }
 
@@ -92,6 +99,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.setSortingPlaces(sortingPlaces));
   },
 });
+
+Sorting.propTypes = propTypes;
 
 export {Sorting};
 

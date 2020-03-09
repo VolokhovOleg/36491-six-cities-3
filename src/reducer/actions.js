@@ -4,6 +4,7 @@ const ActionType = {
   SET_CARD_DETAIL: `SET_CARD_DETAIL`,
   SET_HOVER_PLACE: `SET_HOVER_PLACE`,
   SET_SORTING_PLACES: `SET_SORTING_PLACES`,
+  SET_ACTIVE_PIN: `SET_ACTIVE_PIN`,
 };
 
 const ActionCreator = {
@@ -25,6 +26,10 @@ const ActionCreator = {
   setSortingPlaces: (sortingPlaces) => ({
     type: ActionType.SET_SORTING_PLACES,
     payload: sortingPlaces,
+  }),
+  setActivePin: (locations) => ({
+    type: ActionType.SET_ACTIVE_PIN,
+    payload: locations,
   }),
 };
 

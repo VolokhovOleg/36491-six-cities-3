@@ -85,12 +85,14 @@ const mapDispatchToProps = (dispatch) => ({
   onTitleClick(placeData) {
     dispatch(ActionCreator.setCardDetail(placeData));
     dispatch(ActionCreator.setDetailCard(true));
+    dispatch(ActionCreator.setActivePin(placeData.locations));
   },
   onCityClick(activeCity) {
     dispatch(ActionCreator.setLocationCity(activeCity));
   },
   onHoverPlace(place) {
     dispatch(ActionCreator.setHoverPlace(place));
+    dispatch(ActionCreator.setActivePin(place ? place.locations : null));
   },
 });
 
