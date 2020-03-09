@@ -2,7 +2,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Main from '../main/main';
 import PlaceCard from '../place-card/place-card';
-import PlaceList from '../place-list/place-list';
+import {PlaceList} from '../place-list/place-list';
 import CardDetail from '../card-detail/card-detail';
 import {ActionCreator} from '../../reducer/actions';
 import {propTypes} from './prop-types';

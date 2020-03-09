@@ -1,4 +1,4 @@
-import PlaceList from '../place-list/place-list';
+import {PlaceList} from '../place-list/place-list';
 import Map from '../map/map';
 import CityList from '../city-list/city-list';
 import {cityCoords, cities} from '../../mocks/offers';

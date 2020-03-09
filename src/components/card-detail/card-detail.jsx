@@ -1,7 +1,7 @@
 import {convertRating} from '../../utils';
 import ReviewList from '../review-list/review-list';
 import Map from '../map/map';
-import PlaceList from '../place-list/place-list';
+import {PlaceList} from '../place-list/place-list';
 import {cityCoords, detailLocations} from '../../mocks/offers';
 import {propTypes} from './prop-types';
 

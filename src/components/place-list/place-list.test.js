@@ -1,4 +1,4 @@
-import PlaceList from './place-list';
+import {PlaceList} from './place-list';
 
 const host = {
   avatar: `img/avatar-angelina.jpg`,
