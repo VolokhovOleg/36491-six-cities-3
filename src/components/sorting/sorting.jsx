@@ -8,19 +8,18 @@ const SORTING_PROPERTY_NAME = {
   PriceToLow: `Price: high to low`,
   Rate: `Top rated first`,
 };
+const DEFAULT_PROPERTY = SORTING_PROPERTY_NAME.Popular;
 
 class Sorting extends PureComponent {
   constructor(props) {
     super(props);
+    const {onChangeProperty} = this.props;
 
-    this.state = {
-      checkedSortingProperty: SORTING_PROPERTY_NAME.Popular,
-      isSelectOpen: false,
-    };
+    onChangeProperty(DEFAULT_PROPERTY);
   }
 
   _toSortData(sortingProperty) {
-    const {resortingData, placeCards, originPlaceCards} = this.props;
+    const {resortingData, placeCards, originPlaceCards, onDropdownClick, onChangeProperty} = this.props;
     let sortedData = [];
 
     switch (sortingProperty) {
@@ -40,48 +39,48 @@ class Sorting extends PureComponent {
         sortedData = originPlaceCards;
     }
 
-    this.setState(() => ({
-      checkedSortingProperty: sortingProperty,
-      isSelectOpen: false,
-    }));
+    onChangeProperty(sortingProperty);
+    onDropdownClick();
 
     resortingData(sortedData);
   }
 
   render() {
-    const {checkedSortingProperty, isSelectOpen} = this.state;
+    const {onDropdownClick, isDropdownOpen, selectProperty} = this.props;
 
     return (<>
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <span onClick={(evt) => {
           evt.stopPropagation();
-          this.setState(() => ({
-            isSelectOpen: !isSelectOpen,
-          }));
+          onDropdownClick();
         }} className="places__sorting-type" tabIndex={0}>
-          {checkedSortingProperty}
+          {selectProperty}
           <svg className="places__sorting-arrow" width={7} height={4}>
             <use xlinkHref="#icon-arrow-select"/>
           </svg>
         </span>
-        <ul className={`places__options places__options--custom ${isSelectOpen ? `places__options--opened` : ``}`}>
+        <ul className={`places__options places__options--custom ${isDropdownOpen ? `places__options--opened` : ``}`}>
           <li onClick={(evt) => {
             this._toSortData(evt.target.getAttribute(`data-sortby`));
+            onDropdownClick();
           }} className="places__option places__option--active" tabIndex="{0}" data-sortby={SORTING_PROPERTY_NAME.Popular}>Popular
           </li>
           <li onClick={(evt) => {
             this._toSortData(evt.target.getAttribute(`data-sortby`));
+            onDropdownClick();
           }} className="places__option" tabIndex="{0}" data-sortby={SORTING_PROPERTY_NAME.PriceToHight}>Price: low to
             high
           </li>
           <li onClick={(evt) => {
             this._toSortData(evt.target.getAttribute(`data-sortby`));
+            onDropdownClick();
           }} className="places__option" tabIndex="{0}" data-sortby={SORTING_PROPERTY_NAME.PriceToLow}>Price: high to
             low
           </li>
           <li onClick={(evt) => {
             this._toSortData(evt.target.getAttribute(`data-sortby`));
+            onDropdownClick();
           }} className="places__option" tabIndex="{0}" data-sortby={SORTING_PROPERTY_NAME.Rate}>Top rated first</li>
         </ul>
       </form>
