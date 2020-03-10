@@ -1,8 +1,14 @@
-import PlaceList from '../place-list/place-list';
+import {PlaceList} from '../place-list/place-list';
 import Map from '../map/map';
-import {cityCoords, detailLocations} from '../../mocks/offers';
+import CityList from '../city-list/city-list';
+import {cityCoords, cities} from '../../mocks/offers';
+import EmptyMain from '../empty-main/empty-main';
+import {propTypes} from './prop-types';
+import Sorting from '../sorting/sorting';
 
-const Main = ({placeCards, placesToStay, onTitleClick}) => {
+const Main = ({placeCards, placesToStay, onTitleClick, activeCity, onCityClick, onHoverPlace}) => {
+  let locations = [];
+  placeCards.forEach((item) => locations.push(item.locations));
   return <>
     <div className="page page--gray page--main">
       <header className="header">
@@ -29,108 +35,43 @@ const Main = ({placeCards, placesToStay, onTitleClick}) => {
       </header>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
-        </div>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placesToStay} places to stay in Amsterdam</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex={0}>
-                    Popular
-                  <svg className="places__sorting-arrow" width={7} height={4}>
-                    <use xlinkHref="#icon-arrow-select" />
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                  <li className="places__option" tabIndex={0}>Price: low to high</li>
-                  <li className="places__option" tabIndex={0}>Price: high to low</li>
-                  <li className="places__option" tabIndex={0}>Top rated first</li>
-                </ul>
-              </form>
-              <PlaceList
-                placeCards = {placeCards}
-                isDetailsPage = {false}
-                onTitleClick = {onTitleClick}
-              />
-            </section>
-            <div className="cities__right-section">
-              <Map
-                locations={detailLocations}
-                isDetailsPage={false}
-                city={cityCoords}
-              />
+        <CityList
+          cities={cities}
+          activeCity={activeCity}
+          onCityClick={onCityClick}
+        />
+        {
+          placeCards.length === 0
+          && <EmptyMain />
+          || <div className="cities">
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{placesToStay} place{placesToStay > 1 ? `s` : ``} to stay
+                  in {activeCity}</b>
+                <Sorting />
+                <PlaceList
+                  placeCards={placeCards}
+                  isDetailsPage={false}
+                  onTitleClick={onTitleClick}
+                  onHoverPlace={onHoverPlace}
+                />
+              </section>
+              <div className="cities__right-section">
+                <Map
+                  locations={locations}
+                  isDetailsPage={false}
+                  city={cityCoords}
+                />
+              </div>
             </div>
           </div>
-        </div>
+        }
       </main>
     </div>
   </>;
 };
 
-Main.propTypes = {
-  placeCards: PropTypes.arrayOf(PropTypes.shape({
-    link: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    inside: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    gallery: PropTypes.arrayOf(PropTypes.shape({
-      galleryImg: PropTypes.string.isRequired,
-      galleryTitle: PropTypes.string.isRequired,
-    }).isRequired
-    ).isRequired,
-    price: PropTypes.string.isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    maxAdults: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    host: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      hostTitle: PropTypes.string.isRequired,
-      hostDescription: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    }).isRequired,
-  })).isRequired,
-  placesToStay: PropTypes.number.isRequired,
-  onTitleClick: PropTypes.func.isRequired,
-};
+Main.propTypes = propTypes;
 
 export default Main;

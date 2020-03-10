@@ -1,4 +1,5 @@
 import {convertRating} from '../../utils';
+import {propTypes} from './prop-types';
 
 const PlaceCard = ({placeData, onTitleClick, onHoverPlace, isDetailsPage}) => {
   const {link, img, price, title, type, isPremium, rating} = placeData;
@@ -45,7 +46,8 @@ const PlaceCard = ({placeData, onTitleClick, onHoverPlace, isDetailsPage}) => {
             evt.preventDefault();
             onTitleClick(placeData);
           }
-          } href={link}>{title}</a>
+          }
+          href={link}>{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -53,19 +55,6 @@ const PlaceCard = ({placeData, onTitleClick, onHoverPlace, isDetailsPage}) => {
   </>;
 };
 
-PlaceCard.propTypes = {
-  placeData: PropTypes.shape({
-    link: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    price: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-  }).isRequired,
-  onTitleClick: PropTypes.func.isRequired,
-  onHoverPlace: PropTypes.func.isRequired,
-  isDetailsPage: PropTypes.bool.isRequired,
-};
+PlaceCard.propTypes = propTypes;
 
 export default PlaceCard;
