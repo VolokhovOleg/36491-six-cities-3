@@ -1,7 +1,8 @@
 import {propTypes} from './prop-types';
 
-const City = ({name, state, onCityClick})=> {
-  return (<>
+// eslint-disable-next-line react/display-name
+const City = memo(({name, state, onCityClick}) => {
+  return <>
     <li onClick={(evt) => {
       evt.stopPropagation();
       onCityClick(name);
@@ -12,8 +13,8 @@ const City = ({name, state, onCityClick})=> {
         <span>{name}</span>
       </a>
     </li>
-  </>);
-};
+  </>;
+});
 
 City.propTypes = propTypes;
 

@@ -1,7 +1,8 @@
 import Review from '../review/revies';
 import {propTypes} from './prop-types';
 
-const ReviewList = ({reviews}) => {
+// eslint-disable-next-line react/display-name
+const ReviewList = memo(({reviews}) => {
   const reviewsAmount = reviews.length;
 
   return <>
@@ -72,7 +73,7 @@ const ReviewList = ({reviews}) => {
       </form>
     </section>
   </>;
-};
+});
 
 ReviewList.propTypes = propTypes;
 

@@ -411,6 +411,11 @@ const originPlaceCards = [
 ];
 const resortingData = () => {};
 
+const onChangeProperty = () => {};
+const onDropdownClick = () => {};
+const isDropdownOpen = true;
+const selectProperty = `Popular`;
+
 const store = mockStore({
   placeCards,
   originPlaceCards,
@@ -421,7 +426,12 @@ it(`should render`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Sorting />
+          <Sorting
+            onChangeProperty={onChangeProperty}
+            onDropdownClick={onDropdownClick}
+            isDropdownOpen={isDropdownOpen}
+            selectProperty={selectProperty}
+          />
         </Provider>,
         {createNodeMock: () => document.createElement(`section`)}
     ).toJSON();

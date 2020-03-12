@@ -1,7 +1,8 @@
 import PlaceCard from '../place-card/place-card';
 import {propTypes} from './prop-types';
 
-const PlaceList = ({placeCards, onTitleClick, isDetailsPage, onHoverPlace}) => {
+// eslint-disable-next-line react/display-name
+const PlaceList = memo(({placeCards, onTitleClick, isDetailsPage, onHoverPlace}) => {
   return <>
     <div className={`${isDetailsPage ? `near-places__list` : `cities__places-list tabs__content`} places__list`}>
       {placeCards.map((item, index) =>
@@ -14,7 +15,7 @@ const PlaceList = ({placeCards, onTitleClick, isDetailsPage, onHoverPlace}) => {
         />)}
     </div>
   </>;
-};
+});
 
 PlaceList.propTypes = propTypes;
 
