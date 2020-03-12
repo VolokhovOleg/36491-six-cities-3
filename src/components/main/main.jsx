@@ -12,6 +12,7 @@ const SortingWrapped = withSorting(Sorting);
 const Main = ({placeCards, placesToStay, onTitleClick, activeCity, onCityClick, onHoverPlace}) => {
   let locations = [];
   placeCards.forEach((item) => locations.push(item.locations));
+
   return <>
     <div className="page page--gray page--main">
       <header className="header">
