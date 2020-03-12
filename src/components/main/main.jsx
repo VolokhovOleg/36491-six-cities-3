@@ -5,7 +5,7 @@ import {cityCoords, cities} from '../../mocks/offers';
 import EmptyMain from '../empty-main/empty-main';
 import {propTypes} from './prop-types';
 import Sorting from '../sorting/sorting';
-import withSorting from '../../hocs/width-sorting/widthSorting';
+import withSorting from '../../hocs/with-sorting/with-sorting';
 
 const SortingWrapped = withSorting(Sorting);
 

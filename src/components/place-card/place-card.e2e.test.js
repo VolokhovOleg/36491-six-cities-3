@@ -9,7 +9,6 @@ const host = {
     `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`
   ],
 };
-
 const placeData = {
   link: `/`,
   img: `img/apartment-01.jpg`,
@@ -67,7 +66,7 @@ it(`Should title be pressed`, () => {
   const main = shallow(
       <PlaceCard
         placeData = {placeData}
-        isDetailsPage={true}
+        isDetailsPage={false}
         onTitleClick = {onTitleClick}
         onHoverPlace= {onHoverPlace}
       />
@@ -87,7 +86,7 @@ it(`Should card be hovered`, () => {
   const main = shallow(
       <PlaceCard
         placeData = {placeData}
-        isDetailsPage={true}
+        isDetailsPage={false}
         onTitleClick = {onTitleClick}
         onHoverPlace= {onHoverPlace}
       />
@@ -105,7 +104,7 @@ it(`Should card be leaved`, () => {
 
   const main = shallow(
       <PlaceCard
-        isDetailsPage={true}
+        isDetailsPage={false}
         placeData = {placeData}
         onTitleClick = {onTitleClick}
         onHoverPlace= {onHoverPlace}
@@ -116,4 +115,42 @@ it(`Should card be leaved`, () => {
 
   card.simulate(`mouseleave`);
   expect(onHoverPlace).toBeCalledWith(null);
+});
+
+it(`Should card be hovered in detail`, () => {
+  const onTitleClick = jest.fn();
+  const onHoverPlace = jest.fn();
+
+  const main = shallow(
+      <PlaceCard
+        placeData = {placeData}
+        isDetailsPage={false}
+        onTitleClick = {onTitleClick}
+        onHoverPlace= {onHoverPlace}
+      />
+  );
+
+  const card = main.find(`.place-card`);
+
+  card.simulate(`mouseenter`);
+  expect(null);
+});
+
+it(`Should card be leaved in detail`, () => {
+  const onTitleClick = jest.fn();
+  const onHoverPlace = jest.fn();
+
+  const main = shallow(
+      <PlaceCard
+        isDetailsPage={true}
+        placeData = {placeData}
+        onTitleClick = {onTitleClick}
+        onHoverPlace= {onHoverPlace}
+      />
+  );
+
+  const card = main.find(`.place-card`);
+
+  card.simulate(`mouseleave`);
+  expect(null);
 });

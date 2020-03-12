@@ -1,15 +1,16 @@
 import {convertRating} from '../../utils';
 import {propTypes} from './prop-types';
 
-const PlaceCard = ({placeData, onTitleClick, onHoverPlace, isDetailsPage}) => {
+// eslint-disable-next-line react/display-name
+const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, isDetailsPage}) => {
   const {link, img, price, title, type, isPremium, rating} = placeData;
   return <>
     <article
       onMouseEnter={() => {
-        onHoverPlace(placeData);
+        return !isDetailsPage ? onHoverPlace(placeData) : null;
       }}
       onMouseLeave={() => {
-        onHoverPlace(null);
+        return !isDetailsPage ? onHoverPlace(null) : null;
       }} className={`${isDetailsPage ? `near-places__card` : `cities__place-card`} place-card`}>
       {
         isPremium &&
@@ -53,7 +54,7 @@ const PlaceCard = ({placeData, onTitleClick, onHoverPlace, isDetailsPage}) => {
       </div>
     </article>
   </>;
-};
+});
 
 PlaceCard.propTypes = propTypes;
 

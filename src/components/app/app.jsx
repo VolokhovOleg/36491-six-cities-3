@@ -1,8 +1,6 @@
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Main from '../main/main';
-import PlaceCard from '../place-card/place-card';
-import {PlaceList} from '../place-list/place-list';
 import CardDetail from '../card-detail/card-detail';
 import {ActionCreator} from '../../reducer/actions';
 import {propTypes} from './prop-types';
@@ -41,31 +39,6 @@ const App = ({placeCards, reviews, isRenderCardDetail, activeCity, propertyCard,
       <Switch>
         <Route exact path='/'>
           {_renderMainScreen()}
-        </Route>
-        <Route exact path='/dev-property'>
-          <CardDetail
-            reviews={reviews}
-            placeData = {placeCards[0]}
-            placeCards = {placeCards}
-            onTitleClick={()=>{}}
-            onHoverPlace={()=>{}}
-          />
-        </Route>
-        <Route exact path='/dev-place-card'>
-          <PlaceCard
-            onTitleClick={()=>{}}
-            onHoverPlace={() => {}}
-            placeData = {placeCards[0]}
-            isDetailsPage={true}
-          />
-        </Route>
-        <Route exact path='/dev-place-list'>
-          <PlaceList
-            onTitleClick={()=>{}}
-            onHoverPlace={()=>{}}
-            placeCards = {placeCards}
-            isDetailsPage={true}
-          />
         </Route>
       </Switch>
     </BrowserRouter>
