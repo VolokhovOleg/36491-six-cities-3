@@ -34,6 +34,7 @@ module.exports = {
       'React': `react`,
       'PropTypes': `prop-types`,
       'PureComponent': [`react`, `PureComponent`],
+      'memo': [`react`, `memo`],
     }),
     new MomentLocalesPlugin({
       localesToKeep: [`en`],

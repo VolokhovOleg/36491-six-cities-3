@@ -1,8 +1,9 @@
 import City from '../city/city';
 import {propTypes} from './prop-types';
 
-const CityList = ({cities, activeCity, onCityClick}) => {
-  return (<>
+// eslint-disable-next-line react/display-name
+const CityList = memo(({cities, activeCity, onCityClick}) => {
+  return <>
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
@@ -19,8 +20,8 @@ const CityList = ({cities, activeCity, onCityClick}) => {
         </ul>
       </section>
     </div>
-  </>);
-};
+  </>;
+});
 
 CityList.propTypes = propTypes;
 

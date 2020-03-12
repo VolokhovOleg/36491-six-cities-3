@@ -2,7 +2,8 @@ import {convertRating} from '../../utils';
 import {propTypes} from './prop-types';
 import moment from 'moment';
 
-const Review = ({text, userRate, userName, date, id})=> {
+// eslint-disable-next-line react/display-name
+const Review = memo(({text, userRate, userName, date, id})=> {
   return <>
     <li className="reviews__item" id={id}>
       <div className="reviews__user user">
@@ -27,7 +28,7 @@ const Review = ({text, userRate, userName, date, id})=> {
       </div>
     </li>
   </>;
-};
+});
 
 Review.propTypes = propTypes;
 

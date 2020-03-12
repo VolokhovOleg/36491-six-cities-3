@@ -5,6 +5,9 @@ import {cityCoords, cities} from '../../mocks/offers';
 import EmptyMain from '../empty-main/empty-main';
 import {propTypes} from './prop-types';
 import Sorting from '../sorting/sorting';
+import withSorting from '../../hocs/with-sorting/with-sorting';
+
+const SortingWrapped = withSorting(Sorting);
 
 const Main = ({placeCards, placesToStay, onTitleClick, activeCity, onCityClick, onHoverPlace}) => {
   let locations = [];
@@ -49,7 +52,9 @@ const Main = ({placeCards, placesToStay, onTitleClick, activeCity, onCityClick, 
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{placesToStay} place{placesToStay > 1 ? `s` : ``} to stay
                   in {activeCity}</b>
-                <Sorting />
+                <SortingWrapped>
+                  <Sorting />
+                </SortingWrapped>
                 <PlaceList
                   placeCards={placeCards}
                   isDetailsPage={false}

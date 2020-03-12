@@ -132,7 +132,7 @@ Array [
               <span
                 className="places__sorting-caption"
               >
-                Sort by
+                Sort by 
               </span>
               <span
                 className="places__sorting-type"
@@ -444,7 +444,7 @@ Array [
               <span
                 className="places__sorting-caption"
               >
-                Sort by
+                Sort by 
               </span>
               <span
                 className="places__sorting-type"
