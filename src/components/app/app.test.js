@@ -8,15 +8,9 @@ const mockStore = configureStore([]);
 const host = {
   avatar: `img/avatar-angelina.jpg`,
   name: `Angelina`,
-  hostTitle: `Meet the host`,
-  hostDescription: [
-    `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
-    `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`
-  ],
 };
 const placeCards = [
   {
-    link: `/`,
     img: `img/apartment-01.jpg`,
     gallery: [
       {
@@ -65,7 +59,6 @@ const placeCards = [
     host,
   },
   {
-    link: `/`,
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -114,7 +107,6 @@ const placeCards = [
     host,
   },
   {
-    link: `/`,
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -163,7 +155,6 @@ const placeCards = [
     host,
   },
   {
-    link: `/`,
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -246,7 +237,6 @@ const activeCity = `Moscow`;
 const activePin = null;
 const originPlaceCards = [
   {
-    link: `/`,
     img: `img/apartment-01.jpg`,
     gallery: [
       {
@@ -295,7 +285,6 @@ const originPlaceCards = [
     host,
   },
   {
-    link: `/`,
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -344,7 +333,6 @@ const originPlaceCards = [
     host,
   },
   {
-    link: `/`,
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -393,7 +381,6 @@ const originPlaceCards = [
     host,
   },
   {
-    link: `/`,
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -443,7 +430,6 @@ const originPlaceCards = [
   },
 ];
 const cardDetail = {
-  link: `/`,
   img: `img/apartment-01.jpg`,
   gallery: [
     {
@@ -492,7 +478,6 @@ const cardDetail = {
   host,
 };
 const hoverPlace = {
-  link: `/`,
   img: `img/apartment-01.jpg`,
   gallery: [
     {

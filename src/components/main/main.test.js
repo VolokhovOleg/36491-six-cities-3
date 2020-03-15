@@ -15,7 +15,7 @@ const host = {
   ],
 };
 const cardDetail = {
-  link: `/`,
+
   img: `img/apartment-01.jpg`,
   gallery: [
     {
@@ -64,7 +64,7 @@ const cardDetail = {
   host,
 };
 const hoverPlace = {
-  link: `/`,
+
   img: `img/apartment-01.jpg`,
   gallery: [
     {
@@ -115,7 +115,7 @@ const hoverPlace = {
 const activeCity = `Mock City`;
 const placeCards = [
   {
-    link: `/`,
+
     img: `img/apartment-01.jpg`,
     gallery: [
       {
@@ -164,7 +164,7 @@ const placeCards = [
     host,
   },
   {
-    link: `/`,
+
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -213,7 +213,7 @@ const placeCards = [
     host,
   },
   {
-    link: `/`,
+
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -262,7 +262,7 @@ const placeCards = [
     host,
   },
   {
-    link: `/`,
+
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -313,7 +313,7 @@ const placeCards = [
 ];
 const originPlaceCards = [
   {
-    link: `/`,
+
     img: `img/apartment-01.jpg`,
     gallery: [
       {
@@ -362,7 +362,7 @@ const originPlaceCards = [
     host,
   },
   {
-    link: `/`,
+
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -411,7 +411,7 @@ const originPlaceCards = [
     host,
   },
   {
-    link: `/`,
+
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -460,7 +460,7 @@ const originPlaceCards = [
     host,
   },
   {
-    link: `/`,
+
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [

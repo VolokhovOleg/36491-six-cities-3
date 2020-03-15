@@ -4,24 +4,28 @@ import Main from '../main/main';
 import CardDetail from '../card-detail/card-detail';
 import {ActionCreator} from '../../reducer/actions';
 import {propTypes} from './prop-types';
+import {Operation as DataOperation} from '../../reducer/reducer';
 
-const App = ({placeCards, reviews, isRenderCardDetail, activeCity, propertyCard, onTitleClick, onCityClick, onHoverPlace}) => {
+const App = ({placeCards, reviews, isRenderCardDetail, cities, activeCity, propertyCard, onTitleClick, onCityClick, onHoverPlace, nearLocations}) => {
   const placeToStay = placeCards.filter((item) => item.city === activeCity).length;
-  const filteredPlaceCards = placeCards.filter((item) => item.city === activeCity);
+  const filteredPlaceCards = placeCards.filter((item) => item.city === activeCity).slice(0, 3);
 
   const _renderMainScreen = () => {
     if (isRenderCardDetail) {
       return (<CardDetail
         reviews={reviews}
         placeCards={filteredPlaceCards}
+        cities={filteredPlaceCards}
         onTitleClick={onTitleClick}
         placeData={propertyCard}
         onHoverPlace={onHoverPlace}
+        nearLocations={nearLocations}
       />);
     }
 
     if (!isRenderCardDetail) {
       return (<Main
+        cities={cities}
         placesToStay={placeToStay}
         placeCards={filteredPlaceCards}
         activeCity={activeCity}
@@ -52,6 +56,8 @@ const mapInitialProps = (state) => ({
   reviews: state.reviews,
   placeCards: state.placeCards,
   hoverPlace: state.hoverPlace,
+  cities: state.cities,
+  nearLocations: state.nearLocations,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -59,6 +65,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.setCardDetail(placeData));
     dispatch(ActionCreator.setDetailCard(true));
     dispatch(ActionCreator.setActivePin(placeData.locations));
+    dispatch(DataOperation.setNearLocations(placeData.id));
   },
   onCityClick(activeCity) {
     dispatch(ActionCreator.setLocationCity(activeCity));

@@ -15,7 +15,7 @@ const host = {
 
 const placeCards = [
   {
-    link: `/`,
+
     img: `img/apartment-01.jpg`,
     gallery: [
       {
@@ -64,7 +64,7 @@ const placeCards = [
     host,
   },
   {
-    link: `/`,
+
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -113,7 +113,7 @@ const placeCards = [
     host,
   },
   {
-    link: `/`,
+
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -162,7 +162,7 @@ const placeCards = [
     host,
   },
   {
-    link: `/`,
+
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -213,7 +213,7 @@ const placeCards = [
 ];
 const originPlaceCards = [
   {
-    link: `/`,
+
     img: `img/apartment-01.jpg`,
     gallery: [
       {
@@ -262,7 +262,7 @@ const originPlaceCards = [
     host,
   },
   {
-    link: `/`,
+
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -311,7 +311,7 @@ const originPlaceCards = [
     host,
   },
   {
-    link: `/`,
+
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -360,7 +360,7 @@ const originPlaceCards = [
     host,
   },
   {
-    link: `/`,
+
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [

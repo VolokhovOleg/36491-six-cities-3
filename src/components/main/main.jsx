@@ -1,7 +1,7 @@
 import {PlaceList} from '../place-list/place-list';
 import Map from '../map/map';
 import CityList from '../city-list/city-list';
-import {cityCoords, cities} from '../../mocks/offers';
+import {cityCoords} from '../../mocks/offers';
 import EmptyMain from '../empty-main/empty-main';
 import {propTypes} from './prop-types';
 import Sorting from '../sorting/sorting';
@@ -9,9 +9,8 @@ import withSorting from '../../hocs/with-sorting/with-sorting';
 
 const SortingWrapped = withSorting(Sorting);
 
-const Main = ({placeCards, placesToStay, onTitleClick, activeCity, onCityClick, onHoverPlace}) => {
-  let locations = [];
-  placeCards.forEach((item) => locations.push(item.locations));
+const Main = ({placeCards, placesToStay, onTitleClick, activeCity, onCityClick, onHoverPlace, cities}) => {
+  const locations = placeCards.map((item) => item.locations);
 
   return <>
     <div className="page page--gray page--main">
@@ -37,17 +36,21 @@ const Main = ({placeCards, placesToStay, onTitleClick, activeCity, onCityClick, 
           </div>
         </div>
       </header>
-      <main className="page__main page__main--index">
-        <h1 className="visually-hidden">Cities</h1>
-        <CityList
-          cities={cities}
-          activeCity={activeCity}
-          onCityClick={onCityClick}
-        />
-        {
-          placeCards.length === 0
-          && <EmptyMain />
-          || <div className="cities">
+      {
+        placeCards.length === 0
+        && <EmptyMain />
+        ||
+        <main className="page__main page__main--index">
+          <h1 className="visually-hidden">Cities</h1>
+          {
+            cities !== null
+            && <CityList
+              cities={cities}
+              activeCity={activeCity}
+              onCityClick={onCityClick}
+            />
+          }
+          <div className="cities">
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
@@ -72,8 +75,8 @@ const Main = ({placeCards, placesToStay, onTitleClick, activeCity, onCityClick, 
               </div>
             </div>
           </div>
-        }
-      </main>
+        </main>
+      }
     </div>
   </>;
 };

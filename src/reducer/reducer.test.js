@@ -13,7 +13,7 @@ const host = {
 };
 const placeCards = [
   {
-    link: `/`,
+
     img: `img/apartment-01.jpg`,
     gallery: [
       {
@@ -62,7 +62,7 @@ const placeCards = [
     host,
   },
   {
-    link: `/`,
+
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -111,7 +111,7 @@ const placeCards = [
     host,
   },
   {
-    link: `/`,
+
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -160,7 +160,7 @@ const placeCards = [
     host,
   },
   {
-    link: `/`,
+
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [

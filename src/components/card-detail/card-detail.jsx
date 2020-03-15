@@ -2,13 +2,11 @@ import {convertRating} from '../../utils';
 import ReviewList from '../review-list/review-list';
 import Map from '../map/map';
 import {PlaceList} from '../place-list/place-list';
-import {cityCoords, detailLocations} from '../../mocks/offers';
 import {propTypes} from './prop-types';
 
-const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace}) => {
-  const {gallery, price, title, type, bedrooms, maxAdults, inside, isPremium, rating, host} = placeData;
-  const {avatar, name, hostTitle, hostDescription} = host;
-
+const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace, nearLocations}) => {
+  const {gallery, price, title, type, bedrooms, maxAdults, inside, isPremium, rating, host, cityMapProps} = placeData;
+  const {avatar, name, hostDescription} = host;
   const sortingReviews = reviews.sort((a, b) => b.date - a.date);
 
   return <>
@@ -39,9 +37,9 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace}
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {gallery.map(({galleryImg, galleryTitle}, index) => (
-                <div key={index + galleryTitle} className="property__image-wrapper">
-                  <img className="property__image" src={galleryImg} alt={galleryTitle} />
+              {gallery.map((item, index) => (
+                <div key={index + item} className="property__image-wrapper">
+                  <img className="property__image" src={item} alt={`Photo ${type}`} />
                 </div>
               ))}
             </div>
@@ -98,7 +96,7 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace}
                 </ul>
               </div>
               <div className="property__host">
-                <h2 className="property__host-title">{hostTitle}</h2>
+                <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
                     <img className="property__avatar user__avatar" src={avatar} width={74} height={74} alt={name} />
@@ -108,11 +106,7 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace}
                   </span>
                 </div>
                 <div className="property__description">
-                  {hostDescription.map((item, index) => (
-                    <p key={index + item} className="property__text">
-                      {item}
-                    </p>
-                  ))}
+                  <p className="property__text">{hostDescription}</p>
                 </div>
               </div>
               <ReviewList
@@ -121,8 +115,8 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace}
             </div>
           </div>
           <Map
-            locations={detailLocations}
-            city={cityCoords}
+            locations={nearLocations}
+            city={cityMapProps.location}
             isDetailsPage={true}
           />
         </section>
@@ -130,7 +124,7 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace}
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <PlaceList
-              placeCards = {placeCards.slice(0, 3)}
+              placeCards = {placeCards}
               isDetailsPage = {true}
               onTitleClick = {onTitleClick}
               onHoverPlace = {onHoverPlace}

@@ -3,7 +3,7 @@ import {propTypes} from './prop-types';
 
 // eslint-disable-next-line react/display-name
 const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, isDetailsPage}) => {
-  const {link, img, price, title, type, isPremium, rating} = placeData;
+  const {img, price, title, type, isPremium, rating} = placeData;
   return <>
     <article
       onMouseEnter={() => {
@@ -19,7 +19,7 @@ const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, isDetailsPage}) 
         </div>
       }
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href={link}>
+        <a href="#">
           <img className="place-card__image" src={img} width={260} height={200} alt={title} />
         </a>
       </div>
@@ -48,7 +48,7 @@ const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, isDetailsPage}) 
             onTitleClick(placeData);
           }
           }
-          href={link}>{title}</a>
+          href="#">{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

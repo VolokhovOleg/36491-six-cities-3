@@ -44,7 +44,7 @@ const reviews = [
   },
 ];
 const placeData = {
-  link: `/`,
+
   img: `img/apartment-01.jpg`,
   gallery: [
     {
@@ -94,7 +94,7 @@ const placeData = {
 };
 const placeCards = [
   {
-    link: `/`,
+
     img: `img/apartment-01.jpg`,
     gallery: [
       {
@@ -143,7 +143,7 @@ const placeCards = [
     host,
   },
   {
-    link: `/`,
+
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -192,7 +192,7 @@ const placeCards = [
     host,
   },
   {
-    link: `/`,
+
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [
@@ -241,7 +241,7 @@ const placeCards = [
     host,
   },
   {
-    link: `/`,
+
     city: `Amsterdam`,
     img: `img/apartment-01.jpg`,
     gallery: [

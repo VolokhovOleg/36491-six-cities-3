@@ -10,7 +10,7 @@ const host = {
   ],
 };
 const placeData = {
-  link: `/`,
+
   img: `img/apartment-01.jpg`,
   gallery: [
     {

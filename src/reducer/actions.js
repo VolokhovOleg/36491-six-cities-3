@@ -5,9 +5,24 @@ const ActionType = {
   SET_HOVER_PLACE: `SET_HOVER_PLACE`,
   SET_SORTING_PLACES: `SET_SORTING_PLACES`,
   SET_ACTIVE_PIN: `SET_ACTIVE_PIN`,
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  SET_HOTELS: `SET_HOTELS`,
+  SET_NEAR_LOCATIONS: `SET_NEAR_LOCATIONS`,
 };
 
 const ActionCreator = {
+  setNearLocations: (data) => ({
+    type: ActionType.SET_NEAR_LOCATIONS,
+    payload: data,
+  }),
+  requireAuthorization: (status) => ({
+    type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: status,
+  }),
+  setHotels: (data) => ({
+    type: ActionType.SET_HOTELS,
+    payload: data,
+  }),
   setDetailCard: () => ({
     type: ActionType.SET_TYPE_SCREEN_DETAIL
   }),
