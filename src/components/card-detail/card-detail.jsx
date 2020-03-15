@@ -5,8 +5,21 @@ import {PlaceList} from '../place-list/place-list';
 import {propTypes} from './prop-types';
 
 const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace, nearLocations}) => {
-  const {gallery, price, title, type, bedrooms, maxAdults, inside, isPremium, rating, host, cityMapProps} = placeData;
-  const {avatar, name, hostDescription} = host;
+  const {
+    gallery,
+    price,
+    title,
+    type,
+    bedrooms,
+    maxAdults,
+    inside,
+    isPremium,
+    rating,
+    host,
+    cityMapProps,
+    isFavorite
+  } = placeData;
+  const {avatar, name, hostDescription, isPro} = host;
   const sortingReviews = reviews.sort((a, b) => b.date - a.date);
 
   return <>
@@ -56,7 +69,7 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace,
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
+                <button className={`place-card__bookmark-button ${isFavorite ? `place-card__bookmark-button--active` : ``} button`} type="button">
                   <svg className="property__bookmark-icon" width={31} height={33}>
                     <use xlinkHref="#icon-bookmark" />
                   </svg>
@@ -82,7 +95,7 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace,
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">{price}</b>
+                <b className="property__price-value">€{price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
@@ -98,7 +111,7 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace,
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
+                  <div className={`property__avatar-wrapper ${isPro ? `property__avatar-wrapper--pro` : ``} user__avatar-wrapper`}>
                     <img className="property__avatar user__avatar" src={avatar} width={74} height={74} alt={name} />
                   </div>
                   <span className="property__user-name">
@@ -116,7 +129,8 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace,
           </div>
           <Map
             locations={nearLocations}
-            city={cityMapProps.location}
+            city={cityMapProps.cityMapProps.location}
+            zoom={cityMapProps.cityMapProps.zoom}
             isDetailsPage={true}
           />
         </section>

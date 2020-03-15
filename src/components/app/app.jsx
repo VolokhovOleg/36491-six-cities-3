@@ -8,13 +8,13 @@ import {Operation as DataOperation} from '../../reducer/reducer';
 
 const App = ({placeCards, reviews, isRenderCardDetail, cities, activeCity, propertyCard, onTitleClick, onCityClick, onHoverPlace, nearLocations}) => {
   const placeToStay = placeCards.filter((item) => item.city === activeCity).length;
-  const filteredPlaceCards = placeCards.filter((item) => item.city === activeCity).slice(0, 3);
+  const filteredPlaceCards = placeCards.filter((item) => item.city === activeCity);
 
   const _renderMainScreen = () => {
     if (isRenderCardDetail) {
       return (<CardDetail
         reviews={reviews}
-        placeCards={filteredPlaceCards}
+        placeCards={filteredPlaceCards.slice(0, 3)}
         cities={filteredPlaceCards}
         onTitleClick={onTitleClick}
         placeData={propertyCard}
@@ -66,6 +66,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.setDetailCard(true));
     dispatch(ActionCreator.setActivePin(placeData.locations));
     dispatch(DataOperation.setNearLocations(placeData.id));
+    dispatch(DataOperation.setComments(placeData.id));
   },
   onCityClick(activeCity) {
     dispatch(ActionCreator.setLocationCity(activeCity));

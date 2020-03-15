@@ -4,7 +4,7 @@ import {propTypes} from './prop-types';
 
 const SORTING_PROPERTY_NAME = {
   Popular: `Popular`,
-  PriceToHight: `Price: low to high`,
+  PriceToHigh: `Price: low to high`,
   PriceToLow: `Price: high to low`,
   Rate: `Top rated first`,
 };
@@ -13,30 +13,31 @@ const DEFAULT_PROPERTY = SORTING_PROPERTY_NAME.Popular;
 class Sorting extends PureComponent {
   constructor(props) {
     super(props);
-    const {onChangeProperty} = this.props;
+    const {onChangeProperty, placeCards} = this.props;
+    this._originCards = [...placeCards];
 
     onChangeProperty(DEFAULT_PROPERTY);
   }
 
   _toSortData(sortingProperty) {
-    const {resortingData, placeCards, originPlaceCards, onDropdownClick, onChangeProperty} = this.props;
+    const {resortingData, placeCards, onDropdownClick, onChangeProperty} = this.props;
     let sortedData = [];
 
     switch (sortingProperty) {
-      case SORTING_PROPERTY_NAME.PriceToHight:
-        sortedData = placeCards.sort((a, b) => parseInt(a.price.replace(`€`, ``), 10) - parseInt(b.price.replace(`€`, ``), 10));
+      case SORTING_PROPERTY_NAME.PriceToHigh:
+        sortedData = placeCards.sort((a, b) => parseInt(a.price, 10) - parseInt(b.price, 10));
         break;
       case SORTING_PROPERTY_NAME.PriceToLow:
-        sortedData = placeCards.sort((a, b) => parseInt(b.price.replace(`€`, ``), 10) - parseInt(a.price.replace(`€`, ``), 10));
+        sortedData = placeCards.sort((a, b) => parseInt(b.price, 10) - parseInt(a.price, 10));
         break;
       case SORTING_PROPERTY_NAME.Rate:
         sortedData = placeCards.sort((a, b) => b.rating - a.rating);
         break;
       case SORTING_PROPERTY_NAME.Popular:
-        sortedData = originPlaceCards;
+        sortedData = this._originCards;
         break;
       default:
-        sortedData = originPlaceCards;
+        sortedData = this._originCards;
     }
 
     onChangeProperty(sortingProperty);
@@ -69,7 +70,7 @@ class Sorting extends PureComponent {
           <li onClick={(evt) => {
             this._toSortData(evt.target.getAttribute(`data-sortby`));
             onDropdownClick();
-          }} className="places__option" tabIndex="{0}" data-sortby={SORTING_PROPERTY_NAME.PriceToHight}>Price: low to
+          }} className="places__option" tabIndex="{0}" data-sortby={SORTING_PROPERTY_NAME.PriceToHigh}>Price: low to
             high
           </li>
           <li onClick={(evt) => {
@@ -90,7 +91,6 @@ class Sorting extends PureComponent {
 
 const mapInitialProps = (state) => ({
   placeCards: state.placeCards,
-  originPlaceCards: state.originPlaceCards,
 });
 
 const mapDispatchToProps = (dispatch) => ({

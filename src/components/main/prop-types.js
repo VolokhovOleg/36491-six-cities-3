@@ -1,6 +1,5 @@
 export const propTypes = {
   placeCards: PropTypes.arrayOf(PropTypes.shape({
-
     img: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -15,8 +14,6 @@ export const propTypes = {
     host: PropTypes.shape({
       avatar: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-
-
     }).isRequired,
   })).isRequired,
   placesToStay: PropTypes.number.isRequired,

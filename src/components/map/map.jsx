@@ -2,7 +2,6 @@ import leaflet from 'leaflet';
 import {propTypes} from './prop-types';
 import {connect} from 'react-redux';
 
-const ZOOM = 10;
 const tileLayer = {
   URL: `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
   ATTRIBUTION: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`,
@@ -11,10 +10,12 @@ const tileLayer = {
 class Map extends PureComponent {
   constructor(props) {
     super(props);
+    const {zoom = 10} = this.props;
 
     this.mapRef = React.createRef();
     this._map = null;
     this._pins = [];
+    this._zoom = zoom;
   }
 
   _generatePin(active) {
@@ -29,7 +30,7 @@ class Map extends PureComponent {
 
     return {
       center: city,
-      zoom: ZOOM,
+      zoom: this._zoom,
       zoomControl: false,
       marker: true
     };
@@ -39,7 +40,7 @@ class Map extends PureComponent {
     this._map = leaflet.map(this.mapRef.current, this._setOptions());
     const {locations, city} = this.props;
     this._locations = locations;
-    this._map.setView(city, ZOOM);
+    this._map.setView(city, this._zoom);
 
     leaflet
       .tileLayer(tileLayer.URL, {

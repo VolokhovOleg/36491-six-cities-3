@@ -1,7 +1,7 @@
 import {extend} from '../utils';
-import {reviews} from '../mocks/reviews';
 import {ActionType, ActionCreator} from './actions';
-import {convertHotels} from '../adapter';
+import Adapter from '../adapter';
+import Map from '../components/map/map';
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -11,14 +11,15 @@ const AuthorizationStatus = {
 const initialState = {
   isRenderCardDetail: false,
   activeCity: ``,
+  activeCityZoom: 10,
+  activeCityLocation: [],
   cities: null,
   activePin: null,
   cardDetail: {},
   hoverPlace: null,
   placeCards: [],
-  originPlaceCards: [],
   nearLocations: [],
-  reviews,
+  reviews: [],
   authorizationStatus: AuthorizationStatus.NO_AUTH,
 };
 
@@ -27,7 +28,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_HOTELS:
       return extend(state, {
         placeCards: action.payload,
-        originPlaceCards: action.payload,
         activeCity: action.payload[0].city,
         cardDetail: action.payload[0],
         cities: [...new Set(action.payload.map((item) => item.city))],
@@ -55,6 +55,11 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         nearLocations: action.payload
       });
+
+    case ActionType.SET_COMMENTS:
+      return extend(state, {
+        reviews: action.payload
+      });
   }
 
   return state;
@@ -62,17 +67,30 @@ const reducer = (state = initialState, action) => {
 
 const Operation = {
   setHotels: () => (dispatch, getState, api) => {
+    // console.log(getState());
+    // get state даёт возможность пользоваться стейтом.
+    //   Надо сделать чтобы зум активный город и координаты активного города менялись в мидлвеа
+    // city={placeCards.find((item) => item.city === activeCity).cityMapProps.location}
+    // zoom={placeCards.find((item) => item.city === activeCity).cityMapProps.zoom}
     return api.get(`/hotels`)
       .then((response) => {
-        dispatch(ActionCreator.setHotels(convertHotels(response.data)));
+        dispatch(ActionCreator.setHotels(Adapter.convertHotels(response.data)));
       });
   },
   setNearLocations: (id) => (dispatch, getState, api) => {
     return api.get(`/hotels/${id}/nearby`)
       .then((response) => {
         dispatch(ActionCreator
-          .setNearLocations(convertHotels(response.data)
+          .setNearLocations(Adapter.convertHotels(response.data)
             .map((item) => item.locations)));
+      });
+  },
+  setComments: (id) => (dispatch, getState, api) => {
+    return api.get(`/comments/${id}`)
+      .then((response) => {
+        dispatch(ActionCreator
+          .setComments(Adapter.convertComments(response.data)
+            .map((item) => item)));
       });
   },
 };

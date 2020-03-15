@@ -3,5 +3,5 @@ export const propTypes = {
   userRate: PropTypes.number.isRequired,
   userName: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
 };

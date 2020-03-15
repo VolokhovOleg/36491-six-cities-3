@@ -10,13 +10,15 @@ const ReviewList = memo(({reviews}) => {
       <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviewsAmount}</span></h2>
       <ul className="reviews__list">
         {
-          reviews.map(({text, userRate, userName, date, id}) => {
+          reviews.map(({text, userRate, userName, date, id, avatar, userID}, index) => {
             return <Review
-              key={id}
+              key={id + index}
               text={text}
               userRate={userRate}
               userName={userName}
               date={date}
+              avatar={avatar}
+              userID={userID}
               id={id}
             />;
           })

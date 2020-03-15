@@ -8,9 +8,14 @@ const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   SET_HOTELS: `SET_HOTELS`,
   SET_NEAR_LOCATIONS: `SET_NEAR_LOCATIONS`,
+  SET_COMMENTS: `SET_COMMENTS`,
 };
 
 const ActionCreator = {
+  setComments: (data) => ({
+    type: ActionType.SET_COMMENTS,
+    payload: data,
+  }),
   setNearLocations: (data) => ({
     type: ActionType.SET_NEAR_LOCATIONS,
     payload: data,

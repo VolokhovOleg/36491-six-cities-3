@@ -1,7 +1,6 @@
 import {PlaceList} from '../place-list/place-list';
 import Map from '../map/map';
 import CityList from '../city-list/city-list';
-import {cityCoords} from '../../mocks/offers';
 import EmptyMain from '../empty-main/empty-main';
 import {propTypes} from './prop-types';
 import Sorting from '../sorting/sorting';
@@ -11,7 +10,6 @@ const SortingWrapped = withSorting(Sorting);
 
 const Main = ({placeCards, placesToStay, onTitleClick, activeCity, onCityClick, onHoverPlace, cities}) => {
   const locations = placeCards.map((item) => item.locations);
-
   return <>
     <div className="page page--gray page--main">
       <header className="header">
@@ -67,11 +65,14 @@ const Main = ({placeCards, placesToStay, onTitleClick, activeCity, onCityClick, 
                 />
               </section>
               <div className="cities__right-section">
-                <Map
-                  locations={locations}
-                  isDetailsPage={false}
-                  city={cityCoords}
-                />
+                {placeCards.length > 0
+                  &&
+                  <Map
+                    locations={locations}
+                    isDetailsPage={false}
+                    city={placeCards.find((item) => item.city === activeCity).cityMapProps.location}
+                    zoom={placeCards.find((item) => item.city === activeCity).cityMapProps.zoom}
+                  />}
               </div>
             </div>
           </div>
