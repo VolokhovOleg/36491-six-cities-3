@@ -514,7 +514,7 @@ const activePin = [52.3909553943508, 4.85309666406198];
 
 it(`<Main /> snapshot`, () => {
   const store = mockStore({
-    isRenderCardDetail: false,
+    currentScreen: false,
     activeCity,
     cardDetail,
     hoverPlace,

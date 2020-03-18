@@ -8,7 +8,7 @@ import withSorting from '../../hocs/with-sorting/with-sorting';
 
 const SortingWrapped = withSorting(Sorting);
 
-const Main = ({placeCards, placesToStay, onTitleClick, activeCity, onCityClick, onHoverPlace, cities}) => {
+const Main = ({placeCards, placesToStay, onTitleClick, activeCity, onCityClick, onHoverPlace, cities, currentScreen}) => {
   const locations = placeCards.map((item) => item.locations);
   return <>
     <div className="page page--gray page--main">
@@ -59,20 +59,15 @@ const Main = ({placeCards, placesToStay, onTitleClick, activeCity, onCityClick, 
                 </SortingWrapped>
                 <PlaceList
                   placeCards={placeCards}
-                  isDetailsPage={false}
+                  currentScreen={currentScreen}
                   onTitleClick={onTitleClick}
                   onHoverPlace={onHoverPlace}
                 />
               </section>
               <div className="cities__right-section">
-                {placeCards.length > 0
-                  &&
-                  <Map
-                    locations={locations}
-                    isDetailsPage={false}
-                    city={placeCards.find((item) => item.city === activeCity).cityMapProps.location}
-                    zoom={placeCards.find((item) => item.city === activeCity).cityMapProps.zoom}
-                  />}
+                <Map
+                  locations={locations}
+                />
               </div>
             </div>
           </div>

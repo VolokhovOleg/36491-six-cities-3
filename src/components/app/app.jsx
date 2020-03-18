@@ -4,18 +4,19 @@ import Main from '../main/main';
 import CardDetail from '../card-detail/card-detail';
 import {ActionCreator} from '../../reducer/actions';
 import {propTypes} from './prop-types';
-import {Operation as DataOperation} from '../../reducer/reducer';
+import {Operation as DataOperation, Screen} from '../../reducer/reducer';
 
-const App = ({placeCards, reviews, isRenderCardDetail, cities, activeCity, propertyCard, onTitleClick, onCityClick, onHoverPlace, nearLocations}) => {
+const App = ({placeCards, reviews, currentScreen, cities, activeCity, propertyCard, onTitleClick, onCityClick, onHoverPlace, nearLocations}) => {
   const placeToStay = placeCards.filter((item) => item.city === activeCity).length;
   const filteredPlaceCards = placeCards.filter((item) => item.city === activeCity);
 
   const _renderMainScreen = () => {
-    if (isRenderCardDetail) {
+    if (currentScreen === Screen.CARD_DETAIL) {
       return (<CardDetail
         reviews={reviews}
         placeCards={filteredPlaceCards.slice(0, 3)}
         cities={filteredPlaceCards}
+        currentScreen={currentScreen}
         onTitleClick={onTitleClick}
         placeData={propertyCard}
         onHoverPlace={onHoverPlace}
@@ -23,11 +24,12 @@ const App = ({placeCards, reviews, isRenderCardDetail, cities, activeCity, prope
       />);
     }
 
-    if (!isRenderCardDetail) {
+    if (currentScreen === Screen.MAIN) {
       return (<Main
         cities={cities}
         placesToStay={placeToStay}
         placeCards={filteredPlaceCards}
+        currentScreen={currentScreen}
         activeCity={activeCity}
         onCityClick={onCityClick}
         onTitleClick={onTitleClick}
@@ -50,7 +52,7 @@ const App = ({placeCards, reviews, isRenderCardDetail, cities, activeCity, prope
 };
 
 const mapInitialProps = (state) => ({
-  isRenderCardDetail: state.isRenderCardDetail,
+  currentScreen: state.currentScreen,
   activeCity: state.activeCity,
   propertyCard: state.cardDetail,
   reviews: state.reviews,
@@ -62,14 +64,18 @@ const mapInitialProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onTitleClick(placeData) {
+    dispatch(ActionCreator.setScreen(Screen.CARD_DETAIL));
     dispatch(ActionCreator.setCardDetail(placeData));
-    dispatch(ActionCreator.setDetailCard(true));
     dispatch(ActionCreator.setActivePin(placeData.locations));
     dispatch(DataOperation.setNearLocations(placeData.id));
     dispatch(DataOperation.setComments(placeData.id));
+    dispatch(DataOperation.setActiveCityLocation());
+    dispatch(DataOperation.setActiveCityZoom());
   },
   onCityClick(activeCity) {
     dispatch(ActionCreator.setLocationCity(activeCity));
+    dispatch(DataOperation.setActiveCityLocation());
+    dispatch(DataOperation.setActiveCityZoom());
   },
   onHoverPlace(place) {
     dispatch(ActionCreator.setHoverPlace(place));

@@ -1,6 +1,7 @@
 import leaflet from 'leaflet';
 import {propTypes} from './prop-types';
 import {connect} from 'react-redux';
+import {Screen} from '../../reducer/reducer';
 
 const tileLayer = {
   URL: `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
@@ -10,12 +11,10 @@ const tileLayer = {
 class Map extends PureComponent {
   constructor(props) {
     super(props);
-    const {zoom = 10} = this.props;
 
     this.mapRef = React.createRef();
     this._map = null;
     this._pins = [];
-    this._zoom = zoom;
   }
 
   _generatePin(active) {
@@ -26,11 +25,11 @@ class Map extends PureComponent {
   }
 
   _setOptions() {
-    const {city} = this.props;
+    const {city, zoom} = this.props;
 
     return {
       center: city,
-      zoom: this._zoom,
+      zoom,
       zoomControl: false,
       marker: true
     };
@@ -38,9 +37,9 @@ class Map extends PureComponent {
 
   componentDidMount() {
     this._map = leaflet.map(this.mapRef.current, this._setOptions());
-    const {locations, city} = this.props;
+    const {locations, city, zoom} = this.props;
     this._locations = locations;
-    this._map.setView(city, this._zoom);
+    this._map.setView(city, zoom);
 
     leaflet
       .tileLayer(tileLayer.URL, {
@@ -52,15 +51,15 @@ class Map extends PureComponent {
   }
 
   render() {
-    const {isDetailsPage = false} = this.props;
-
+    const {currentScreen} = this.props;
     return (<>
-      <section ref={this.mapRef} className={`${isDetailsPage ? `property` : `cities`}__map map`} id="map" />
+      <section ref={this.mapRef} className={`${currentScreen === Screen.CARD_DETAIL ? `property` : `cities`}__map map`} id="map" />
     </>);
   }
 
   componentDidUpdate() {
-    const {locations} = this.props;
+    const {locations, zoom, city} = this.props;
+    this._map.setView(city, zoom);
 
     this._pins.forEach((item) => {
       this._map.removeLayer(item);
@@ -94,6 +93,9 @@ Map.propTypes = propTypes;
 
 const mapInitialProps = (state) => ({
   activePin: state.activePin,
+  zoom: state.activeCityZoom,
+  city: state.activeCityLocation,
+  currentScreen: state.currentScreen,
 });
 
 export {Map};

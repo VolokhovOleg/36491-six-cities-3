@@ -23,7 +23,6 @@ describe(`<Map/>`, () => {
           <Provider store={store}>
             <Map
               locations={mockLocations}
-              isDetailsPage={false}
               city={cityCoords}
             />
           </Provider>,

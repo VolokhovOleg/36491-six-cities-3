@@ -10,5 +10,4 @@ export const propTypes = {
   }).isRequired,
   onTitleClick: PropTypes.func.isRequired,
   onHoverPlace: PropTypes.func.isRequired,
-  isDetailsPage: PropTypes.bool.isRequired,
 };

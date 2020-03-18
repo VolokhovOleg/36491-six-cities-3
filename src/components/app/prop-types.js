@@ -1,5 +1,4 @@
 export const propTypes = {
-  isRenderCardDetail: PropTypes.bool.isRequired,
   onCityClick: PropTypes.func.isRequired,
   onTitleClick: PropTypes.func.isRequired,
   activeCity: PropTypes.string.isRequired,

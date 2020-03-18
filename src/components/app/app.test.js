@@ -528,7 +528,7 @@ const hoverPlace = {
 
 it(`<App /> snapshot`, () => {
   const store = mockStore({
-    isRenderCardDetail: false,
+    currentScreen: ``,
     activeCity,
     cardDetail,
     hoverPlace,

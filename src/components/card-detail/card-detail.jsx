@@ -4,7 +4,7 @@ import Map from '../map/map';
 import {PlaceList} from '../place-list/place-list';
 import {propTypes} from './prop-types';
 
-const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace, nearLocations}) => {
+const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace, nearLocations, currentScreen}) => {
   const {
     gallery,
     price,
@@ -16,7 +16,6 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace,
     isPremium,
     rating,
     host,
-    cityMapProps,
     isFavorite
   } = placeData;
   const {avatar, name, hostDescription, isPro} = host;
@@ -129,9 +128,6 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace,
           </div>
           <Map
             locations={nearLocations}
-            city={cityMapProps.cityMapProps.location}
-            zoom={cityMapProps.cityMapProps.zoom}
-            isDetailsPage={true}
           />
         </section>
         <div className="container">
@@ -139,7 +135,7 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace,
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <PlaceList
               placeCards = {placeCards}
-              isDetailsPage = {true}
+              currentScreen = {currentScreen}
               onTitleClick = {onTitleClick}
               onHoverPlace = {onHoverPlace}
             />

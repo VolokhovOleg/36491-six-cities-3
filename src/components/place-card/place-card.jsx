@@ -1,17 +1,19 @@
 import {convertRating} from '../../utils';
 import {propTypes} from './prop-types';
+import {Screen} from '../../reducer/reducer';
+import {connect} from 'react-redux';
 
 // eslint-disable-next-line react/display-name
-const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, isDetailsPage}) => {
+const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, currentScreen}) => {
   const {img, price, title, type, isPremium, rating, isFavorite} = placeData;
   return <>
     <article
       onMouseEnter={() => {
-        return !isDetailsPage ? onHoverPlace(placeData) : null;
+        return currentScreen === Screen.MAIN ? onHoverPlace(placeData) : null;
       }}
       onMouseLeave={() => {
-        return !isDetailsPage ? onHoverPlace(null) : null;
-      }} className={`${isDetailsPage ? `near-places__card` : `cities__place-card`} place-card`}>
+        return currentScreen === Screen.MAIN ? onHoverPlace(null) : null;
+      }} className={`${currentScreen === Screen.MAIN ? `near-places__card` : `cities__place-card`} place-card`}>
       {
         isPremium &&
         <div className="place-card__mark">
@@ -58,4 +60,10 @@ const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, isDetailsPage}) 
 
 PlaceCard.propTypes = propTypes;
 
-export default PlaceCard;
+const mapInitialProps = (state) => ({
+  currentScreen: state.currentScreen,
+});
+
+export {PlaceCard};
+
+export default connect(mapInitialProps)(PlaceCard);

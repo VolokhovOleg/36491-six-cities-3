@@ -1,5 +1,5 @@
 const ActionType = {
-  SET_TYPE_SCREEN_DETAIL: `SET_TYPE_SCREEN_DETAIL`,
+  SET_SCREEN: `SET_SCREEN`,
   SET_LOCATION_CITY: `SET_LOCATION_CITY`,
   SET_CARD_DETAIL: `SET_CARD_DETAIL`,
   SET_HOVER_PLACE: `SET_HOVER_PLACE`,
@@ -9,9 +9,19 @@ const ActionType = {
   SET_HOTELS: `SET_HOTELS`,
   SET_NEAR_LOCATIONS: `SET_NEAR_LOCATIONS`,
   SET_COMMENTS: `SET_COMMENTS`,
+  SET_CITY_ACTIVE_CITY_ZOOM: `SET_CITY_ACTIVE_CITY_ZOOM`,
+  SET_CITY_ACTIVE_CITY_LOCATION: `SET_CITY_ACTIVE_CITY_LOCATION`,
 };
 
 const ActionCreator = {
+  setActiveCityLocation: (CityLocation) => ({
+    type: ActionType.SET_CITY_ACTIVE_CITY_LOCATION,
+    payload: CityLocation,
+  }),
+  setActiveCityZoom: (zoom) => ({
+    type: ActionType.SET_CITY_ACTIVE_CITY_ZOOM,
+    payload: zoom,
+  }),
   setComments: (data) => ({
     type: ActionType.SET_COMMENTS,
     payload: data,
@@ -28,8 +38,9 @@ const ActionCreator = {
     type: ActionType.SET_HOTELS,
     payload: data,
   }),
-  setDetailCard: () => ({
-    type: ActionType.SET_TYPE_SCREEN_DETAIL
+  setScreen: (screen) => ({
+    type: ActionType.SET_SCREEN,
+    payload: screen,
   }),
   setLocationCity: (city) => ({
     type: ActionType.SET_LOCATION_CITY,

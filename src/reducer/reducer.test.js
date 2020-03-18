@@ -242,13 +242,13 @@ const reviews = [
 const activeCity = placeCards[0].city;
 const activePin = null;
 const cardDetail = placeCards[0];
-const isRenderCardDetail = false;
+const currentScreen = false;
 const hoverPlace = null;
 const originPlaceCards = [...placeCards];
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
-    isRenderCardDetail,
+    currentScreen,
     activePin,
     cardDetail,
     hoverPlace,
@@ -272,12 +272,12 @@ it(`Reducer should render active pin`, () => {
 
 it(`Reducer should render card detail screen`, () => {
   expect(reducer({
-    isRenderCardDetail,
+    currentScreen,
   }, {
     type: ActionType.SET_TYPE_SCREEN_DETAIL,
-    payload: isRenderCardDetail,
+    payload: currentScreen,
   })).toEqual({
-    isRenderCardDetail: true,
+    currentScreen: true,
   });
 });
 

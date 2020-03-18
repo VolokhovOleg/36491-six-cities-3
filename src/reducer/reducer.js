@@ -1,15 +1,21 @@
 import {extend} from '../utils';
 import {ActionType, ActionCreator} from './actions';
 import Adapter from '../adapter';
-import Map from '../components/map/map';
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
 };
 
+const Screen = {
+  MAIN: `MAIN`,
+  CARD_DETAIL: `CARD_DETAIL`,
+  FAVORITE_CARDS: `FAVORITE_CARDS`,
+  LOGIN: `LOGIN`,
+};
+
 const initialState = {
-  isRenderCardDetail: false,
+  currentScreen: Screen.MAIN,
   activeCity: ``,
   activeCityZoom: 10,
   activeCityLocation: [],
@@ -30,11 +36,13 @@ const reducer = (state = initialState, action) => {
         placeCards: action.payload,
         activeCity: action.payload[0].city,
         cardDetail: action.payload[0],
+        activeCityZoom: action.payload.find((item) => item.city === action.payload[0].city).cityMapProps.zoom,
+        activeCityLocation: action.payload.find((item) => item.city === action.payload[0].city).cityMapProps.location,
         cities: [...new Set(action.payload.map((item) => item.city))],
       });
 
-    case ActionType.SET_TYPE_SCREEN_DETAIL:
-      return extend(state, {isRenderCardDetail: true});
+    case ActionType.SET_SCREEN:
+      return extend(state, {currentScreen: action.payload});
 
     case ActionType.SET_LOCATION_CITY:
       return extend(state, {activeCity: action.payload});
@@ -60,18 +68,29 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         reviews: action.payload
       });
+
+    case ActionType.SET_CITY_ACTIVE_CITY_ZOOM:
+      return extend(state, {
+        activeCityZoom: action.payload,
+      });
+
+    case ActionType.SET_CITY_ACTIVE_CITY_LOCATION:
+      return extend(state, {
+        activeCityLocation: action.payload,
+      });
   }
 
   return state;
 };
 
 const Operation = {
+  setActiveCityLocation: () => (dispatch, getState) => {
+    dispatch(ActionCreator.setActiveCityLocation(getState().placeCards.find((item) => item.city === getState().activeCity).cityMapProps.location));
+  },
+  setActiveCityZoom: () => (dispatch, getState) => {
+    dispatch(ActionCreator.setActiveCityZoom(getState().placeCards.find((item) => item.city === getState().activeCity).cityMapProps.zoom));
+  },
   setHotels: () => (dispatch, getState, api) => {
-    // console.log(getState());
-    // get state даёт возможность пользоваться стейтом.
-    //   Надо сделать чтобы зум активный город и координаты активного города менялись в мидлвеа
-    // city={placeCards.find((item) => item.city === activeCity).cityMapProps.location}
-    // zoom={placeCards.find((item) => item.city === activeCity).cityMapProps.zoom}
     return api.get(`/hotels`)
       .then((response) => {
         dispatch(ActionCreator.setHotels(Adapter.convertHotels(response.data)));
@@ -95,4 +114,4 @@ const Operation = {
   },
 };
 
-export {reducer, AuthorizationStatus, Operation};
+export {reducer, AuthorizationStatus, Operation, Screen};
