@@ -1,15 +1,18 @@
 import {convertRating} from '../../utils';
 import {propTypes} from './prop-types';
-import {Screen} from '../../reducer/reducer';
+import {Screen} from '../../reducer/screens/screens';
+import {getScreen} from '../../reducer/screens/selectors';
 import {connect} from 'react-redux';
+import {ActionCreator as DataActionCreator} from '../../reducer/hotels/actions';
+import {Operation as MapOperation} from '../../reducer/map/map';
 
 // eslint-disable-next-line react/display-name
 const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, currentScreen}) => {
-  const {img, price, title, type, isPremium, rating, isFavorite} = placeData;
+  const {img, price, title, type, isPremium, rating, isFavorite, id} = placeData;
   return <>
     <article
       onMouseEnter={() => {
-        return currentScreen === Screen.MAIN ? onHoverPlace(placeData) : null;
+        return currentScreen === Screen.MAIN ? onHoverPlace(id) : null;
       }}
       onMouseLeave={() => {
         return currentScreen === Screen.MAIN ? onHoverPlace(null) : null;
@@ -47,7 +50,7 @@ const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, currentScreen}) 
         <h2 className="place-card__name">
           <a onClick={(evt) => {
             evt.preventDefault();
-            onTitleClick(placeData);
+            onTitleClick(id);
           }
           }
           href="#">{title}</a>
@@ -61,9 +64,19 @@ const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, currentScreen}) 
 PlaceCard.propTypes = propTypes;
 
 const mapInitialProps = (state) => ({
-  currentScreen: state.currentScreen,
+  currentScreen: getScreen(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onTitleClick(id) {
+    dispatch(DataActionCreator.setCardDetail(id));
+    dispatch(MapOperation.setActivePin(id));
+    dispatch(MapOperation.setNearLocations(id));
+  },
+  onHoverPlace(id) {
+    dispatch(MapOperation.setActivePin(id));
+  },
 });
 
 export {PlaceCard};
-
-export default connect(mapInitialProps)(PlaceCard);
+export default connect(mapInitialProps, mapDispatchToProps)(PlaceCard);

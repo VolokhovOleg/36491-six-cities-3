@@ -16,6 +16,5 @@ export const propTypes = {
       name: PropTypes.string.isRequired,
     }).isRequired,
   })).isRequired,
-  onTitleClick: PropTypes.func.isRequired,
-  onHoverPlace: PropTypes.func.isRequired,
+  currentScreen: PropTypes.string.isRequired,
 };

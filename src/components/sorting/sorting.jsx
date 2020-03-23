@@ -1,6 +1,7 @@
-import {ActionCreator} from '../../reducer/actions';
 import {connect} from 'react-redux';
 import {propTypes} from './prop-types';
+import {getFilteredPlacesByCity} from '../../reducer/hotels/selectors';
+import {ActionCreator as DataActionCreator} from '../../reducer/hotels/hotels';
 
 const SORTING_PROPERTY_NAME = {
   Popular: `Popular`,
@@ -89,13 +90,13 @@ class Sorting extends PureComponent {
   }
 }
 
-const mapInitialProps = (state) => ({
-  placeCards: state.placeCards,
+const mapStateToProps = (state) => ({
+  placeCards: getFilteredPlacesByCity(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   resortingData(sortingPlaces) {
-    dispatch(ActionCreator.setSortingPlaces(sortingPlaces));
+    dispatch(DataActionCreator.setSortedPlaces(sortingPlaces));
   },
 });
 
@@ -103,4 +104,4 @@ Sorting.propTypes = propTypes;
 
 export {Sorting};
 
-export default connect(mapInitialProps, mapDispatchToProps)(Sorting);
+export default connect(mapStateToProps, mapDispatchToProps)(Sorting);

@@ -1,15 +1,16 @@
-import {PlaceList} from '../place-list/place-list';
-import Map from '../map/map';
+// import Map from '../map/map';
 import CityList from '../city-list/city-list';
+import PlaceList from '../place-list/place-list';
+import {connect} from 'react-redux';
 import EmptyMain from '../empty-main/empty-main';
-import {propTypes} from './prop-types';
 import Sorting from '../sorting/sorting';
 import withSorting from '../../hocs/with-sorting/with-sorting';
+import {getFilteredPlacesByCity, getActiveCity, getPlacesToStay, getLocations} from '../../reducer/hotels/selectors';
+import {propTypes} from './prop-types';
 
 const SortingWrapped = withSorting(Sorting);
 
-const Main = ({placeCards, placesToStay, onTitleClick, activeCity, onCityClick, onHoverPlace, cities, currentScreen}) => {
-  const locations = placeCards.map((item) => item.locations);
+const Main = ({placeCards, activeCity, cities, placesToStay, locations}) => {
   return <>
     <div className="page page--gray page--main">
       <header className="header">
@@ -42,11 +43,7 @@ const Main = ({placeCards, placesToStay, onTitleClick, activeCity, onCityClick, 
           <h1 className="visually-hidden">Cities</h1>
           {
             cities !== null
-            && <CityList
-              cities={cities}
-              activeCity={activeCity}
-              onCityClick={onCityClick}
-            />
+            && <CityList />
           }
           <div className="cities">
             <div className="cities__places-container container">
@@ -57,17 +54,10 @@ const Main = ({placeCards, placesToStay, onTitleClick, activeCity, onCityClick, 
                 <SortingWrapped>
                   <Sorting />
                 </SortingWrapped>
-                <PlaceList
-                  placeCards={placeCards}
-                  currentScreen={currentScreen}
-                  onTitleClick={onTitleClick}
-                  onHoverPlace={onHoverPlace}
-                />
+                <PlaceList />
               </section>
               <div className="cities__right-section">
-                <Map
-                  locations={locations}
-                />
+                {/*<Map locations={locations}/>*/}
               </div>
             </div>
           </div>
@@ -77,6 +67,14 @@ const Main = ({placeCards, placesToStay, onTitleClick, activeCity, onCityClick, 
   </>;
 };
 
+const mapStateToProps = (state) => ({
+  placeCards: getFilteredPlacesByCity(state),
+  activeCity: getActiveCity(state),
+  placesToStay: getPlacesToStay(state),
+  locations: getLocations(state),
+});
+
 Main.propTypes = propTypes;
 
-export default Main;
+export {Main};
+export default connect(mapStateToProps)(Main);

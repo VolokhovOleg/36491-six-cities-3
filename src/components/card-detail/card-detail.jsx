@@ -18,6 +18,9 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace,
     host,
     isFavorite
   } = placeData;
+  // reviews={reviews}
+  // placeCards={placeCards.filter((item) => item.city === activeCity).slice(0, 3)}
+  // cities={placeCards.filter((item) => item.city === activeCity)}
   const {avatar, name, hostDescription, isPro} = host;
   const sortingReviews = reviews.sort((a, b) => b.date - a.date);
 

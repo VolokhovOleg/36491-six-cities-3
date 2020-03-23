@@ -1,7 +1,7 @@
 import leaflet from 'leaflet';
 import {propTypes} from './prop-types';
 import {connect} from 'react-redux';
-import {Screen} from '../../reducer/reducer';
+import {Screen} from '../../reducer/screens/screens';
 
 const tileLayer = {
   URL: `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,

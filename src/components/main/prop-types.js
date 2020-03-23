@@ -16,9 +16,6 @@ export const propTypes = {
       name: PropTypes.string.isRequired,
     }).isRequired,
   })).isRequired,
-  placesToStay: PropTypes.number.isRequired,
   activeCity: PropTypes.string.isRequired,
-  onTitleClick: PropTypes.func.isRequired,
-  onCityClick: PropTypes.func.isRequired,
-  onHoverPlace: PropTypes.func.isRequired,
+  placesToStay: PropTypes.number.isRequired,
 };

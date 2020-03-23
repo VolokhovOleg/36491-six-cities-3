@@ -1,5 +1,5 @@
 export const propTypes = {
   name: PropTypes.string.isRequired,
-  state: PropTypes.bool.isRequired,
+  activeCity: PropTypes.string.isRequired,
   onCityClick: PropTypes.func.isRequired,
 };
