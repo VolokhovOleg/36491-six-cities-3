@@ -1,6 +1,6 @@
 import City from '../city/city';
 import {propTypes} from './prop-types';
-import {getCities} from '../../reducer/hotels/selectors';
+import {getCities} from '../../reducer/data/selectors';
 import {connect} from 'react-redux';
 
 const MAX_CITIES_TO_RENDER = 6;

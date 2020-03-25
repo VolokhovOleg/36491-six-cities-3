@@ -3,8 +3,10 @@ import ReviewList from '../review-list/review-list';
 import Map from '../map/map';
 import {PlaceList} from '../place-list/place-list';
 import {propTypes} from './prop-types';
+import {getNearLocations} from '../../reducer/map/selectors';
+import {connect} from 'react-redux';
 
-const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace, nearLocations, currentScreen}) => {
+const CardDetail = ({placeData, reviews, nearLocations}) => {
   const {
     gallery,
     price,
@@ -124,9 +126,9 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace,
                   <p className="property__text">{hostDescription}</p>
                 </div>
               </div>
-              <ReviewList
-                reviews={sortingReviews.slice(0, 10)}
-              />
+              {/*<ReviewList*/}
+              {/*  reviews={sortingReviews.slice(0, 10)}*/}
+              {/*/>*/}
             </div>
           </div>
           <Map
@@ -136,12 +138,7 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace,
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PlaceList
-              placeCards = {placeCards}
-              currentScreen = {currentScreen}
-              onTitleClick = {onTitleClick}
-              onHoverPlace = {onHoverPlace}
-            />
+            <PlaceList />
           </section>
         </div>
       </main>
@@ -149,6 +146,11 @@ const CardDetail = ({placeData, reviews, placeCards, onTitleClick, onHoverPlace,
   </>;
 };
 
+const mapInitialProps = (state) => ({
+  nearLocations: getNearLocations(state),
+});
+
 CardDetail.propTypes = propTypes;
 
-export default CardDetail;
+export {CardDetail};
+export default connect(mapInitialProps)(CardDetail);

@@ -3,12 +3,16 @@ import NameSpace from '../name-space';
 
 const NAME_SPACE = NameSpace.HOTELS;
 
-const getHotels = (state) => {
-  return state[NAME_SPACE].placeCards;
+const getCityLocation = (state) => {
+  return state[NAME_SPACE].activeCityLocation;
 };
 
-const getFilteredPlacesByCity = (state) => {
-  return state[NAME_SPACE].filteredPlacesByCity;
+const getActiveCityZoom = (state) => {
+  return state[NAME_SPACE].getActiveCityZoom;
+};
+
+const getHotels = (state) => {
+  return state[NAME_SPACE].placeCards;
 };
 
 const getCardDetails = (state) => {
@@ -24,11 +28,19 @@ const getActiveCity = (state) => {
 };
 
 const getPlacesToStay = (state) => {
-  return state[NAME_SPACE].filteredPlacesByCity.length;
+  return state[NAME_SPACE].filteredPlaceCards.length;
 };
 
+const getFiltered = createSelector(
+  getHotels,
+  getActiveCity,
+  (hotels, activeCity) => {
+    return hotels.filter((item) => item.city === activeCity);
+  }
+);
+
 const getLocations = createSelector(
-  getFilteredPlacesByCity,
+  getHotels,
   (hotels) => {
     return hotels.map((item) => item.locations);
   }
@@ -41,4 +53,4 @@ const getCities = createSelector(
   }
 );
 
-export {getHotels, getCardDetails, getHoverPlace, getActiveCity, getPlacesToStay, getLocations, getCities, getFilteredPlacesByCity};
+export {getHotels, getCardDetails, getHoverPlace, getActiveCity, getPlacesToStay, getLocations, getCities, getFiltered, getCityLocation, getActiveCityZoom};

@@ -2,6 +2,9 @@ import leaflet from 'leaflet';
 import {propTypes} from './prop-types';
 import {connect} from 'react-redux';
 import {Screen} from '../../reducer/screens/screens';
+import {getScreen} from '../../reducer/screens/selectors';
+import {getActiveCityZoom, getCityLocation} from '../../reducer/data/selectors';
+import {getActivePin} from '../../reducer/map/selectors';
 
 const tileLayer = {
   URL: `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
@@ -26,7 +29,6 @@ class Map extends PureComponent {
 
   _setOptions() {
     const {city, zoom} = this.props;
-
     return {
       center: city,
       zoom,
@@ -38,6 +40,7 @@ class Map extends PureComponent {
   componentDidMount() {
     this._map = leaflet.map(this.mapRef.current, this._setOptions());
     const {locations, city, zoom} = this.props;
+
     this._locations = locations;
     this._map.setView(city, zoom);
 
@@ -52,6 +55,7 @@ class Map extends PureComponent {
 
   render() {
     const {currentScreen} = this.props;
+
     return (<>
       <section ref={this.mapRef} className={`${currentScreen === Screen.CARD_DETAIL ? `property` : `cities`}__map map`} id="map" />
     </>);
@@ -91,12 +95,12 @@ class Map extends PureComponent {
 
 Map.propTypes = propTypes;
 
-const mapInitialProps = (state) => ({
-  activePin: state.activePin,
-  zoom: state.activeCityZoom,
-  city: state.activeCityLocation,
-  currentScreen: state.currentScreen,
+const mapStateProps = (state) => ({
+  activePin: getActivePin(state),
+  zoom: getActiveCityZoom(state),
+  city: getCityLocation(state),
+  currentScreen: getScreen(state),
 });
 
 export {Map};
-export default connect(mapInitialProps)(Map);
+export default connect(mapStateProps)(Map);

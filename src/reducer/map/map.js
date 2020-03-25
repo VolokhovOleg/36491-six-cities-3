@@ -6,9 +6,7 @@ import NameSpace from '../name-space';
 const NAME_SPACE = NameSpace.HOTELS;
 
 const initialState = {
-  activeCityZoom: 10,
-  activeCityLocation: [],
-  activePin: null,
+  activePin: [],
   nearLocations: [],
 };
 
@@ -20,16 +18,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_NEAR_LOCATIONS:
       return extend(state, {
         nearLocations: action.payload
-      });
-
-    case ActionType.SET_ACTIVE_CITY_ZOOM:
-      return extend(state, {
-        activeCityZoom: action.payload,
-      });
-
-    case ActionType.SET_ACTIVE_CITY_LOCATION:
-      return extend(state, {
-        activeCityLocation: action.payload,
       });
   }
 

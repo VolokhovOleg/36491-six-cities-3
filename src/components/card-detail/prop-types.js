@@ -1,6 +1,4 @@
 export const propTypes = {
-  onTitleClick: PropTypes.func.isRequired,
-  onHoverPlace: PropTypes.func.isRequired,
   reviews: PropTypes.arrayOf(PropTypes.shape({
     text: PropTypes.string.isRequired,
     userRate: PropTypes.number.isRequired,

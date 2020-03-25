@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {propTypes} from './prop-types';
-import {getFilteredPlacesByCity} from '../../reducer/hotels/selectors';
-import {ActionCreator as DataActionCreator} from '../../reducer/hotels/hotels';
+import {getFiltered} from '../../reducer/data/selectors';
+import {ActionCreator as DataActionCreator, Operation as DataOperation} from '../../reducer/data/data';
 
 const SORTING_PROPERTY_NAME = {
   Popular: `Popular`,
@@ -14,37 +14,32 @@ const DEFAULT_PROPERTY = SORTING_PROPERTY_NAME.Popular;
 class Sorting extends PureComponent {
   constructor(props) {
     super(props);
-    const {onChangeProperty, placeCards} = this.props;
-    this._originCards = [...placeCards];
-
+    const {onChangeProperty} = this.props;
     onChangeProperty(DEFAULT_PROPERTY);
   }
 
   _toSortData(sortingProperty) {
-    const {resortingData, placeCards, onDropdownClick, onChangeProperty} = this.props;
-    let sortedData = [];
+    const {resortingData, setOriginCards, placeCards, onDropdownClick, onChangeProperty} = this.props;
 
     switch (sortingProperty) {
       case SORTING_PROPERTY_NAME.PriceToHigh:
-        sortedData = placeCards.sort((a, b) => parseInt(a.price, 10) - parseInt(b.price, 10));
+        resortingData(placeCards.sort((a, b) => parseInt(a.price, 10) - parseInt(b.price, 10)));
         break;
       case SORTING_PROPERTY_NAME.PriceToLow:
-        sortedData = placeCards.sort((a, b) => parseInt(b.price, 10) - parseInt(a.price, 10));
+        resortingData(placeCards.sort((a, b) => parseInt(b.price, 10) - parseInt(a.price, 10)));
         break;
       case SORTING_PROPERTY_NAME.Rate:
-        sortedData = placeCards.sort((a, b) => b.rating - a.rating);
+        resortingData(placeCards.sort((a, b) => b.rating - a.rating));
         break;
       case SORTING_PROPERTY_NAME.Popular:
-        sortedData = this._originCards;
+        setOriginCards();
         break;
       default:
-        sortedData = this._originCards;
+        setOriginCards();
     }
 
     onChangeProperty(sortingProperty);
     onDropdownClick();
-
-    resortingData(sortedData);
   }
 
   render() {
@@ -91,12 +86,15 @@ class Sorting extends PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  placeCards: getFilteredPlacesByCity(state),
+  placeCards: getFiltered(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   resortingData(sortingPlaces) {
-    dispatch(DataActionCreator.setSortedPlaces(sortingPlaces));
+    dispatch(DataActionCreator.setFilteredPlaces(sortingPlaces));
+  },
+  setOriginCards() {
+    dispatch(DataOperation.setFilteredPlaces());
   },
 });
 

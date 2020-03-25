@@ -1,11 +1,11 @@
-// import Map from '../map/map';
+import Map from '../map/map';
 import CityList from '../city-list/city-list';
 import PlaceList from '../place-list/place-list';
 import {connect} from 'react-redux';
 import EmptyMain from '../empty-main/empty-main';
 import Sorting from '../sorting/sorting';
 import withSorting from '../../hocs/with-sorting/with-sorting';
-import {getFilteredPlacesByCity, getActiveCity, getPlacesToStay, getLocations} from '../../reducer/hotels/selectors';
+import {getFiltered, getActiveCity, getPlacesToStay, getLocations} from '../../reducer/data/selectors';
 import {propTypes} from './prop-types';
 
 const SortingWrapped = withSorting(Sorting);
@@ -68,7 +68,7 @@ const Main = ({placeCards, activeCity, cities, placesToStay, locations}) => {
 };
 
 const mapStateToProps = (state) => ({
-  placeCards: getFilteredPlacesByCity(state),
+  placeCards: getFiltered(state),
   activeCity: getActiveCity(state),
   placesToStay: getPlacesToStay(state),
   locations: getLocations(state),

@@ -1,9 +1,10 @@
 import {convertRating} from '../../utils';
 import {propTypes} from './prop-types';
 import {Screen} from '../../reducer/screens/screens';
+import {ActionCreator as ScreenActionCreator} from '../../reducer/screens/screens';
 import {getScreen} from '../../reducer/screens/selectors';
 import {connect} from 'react-redux';
-import {ActionCreator as DataActionCreator} from '../../reducer/hotels/actions';
+import {ActionCreator as DataActionCreator} from '../../reducer/data/actions';
 import {Operation as MapOperation} from '../../reducer/map/map';
 
 // eslint-disable-next-line react/display-name
@@ -63,7 +64,7 @@ const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, currentScreen}) 
 
 PlaceCard.propTypes = propTypes;
 
-const mapInitialProps = (state) => ({
+const mapStateToProps = (state) => ({
   currentScreen: getScreen(state),
 });
 
@@ -72,6 +73,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(DataActionCreator.setCardDetail(id));
     dispatch(MapOperation.setActivePin(id));
     dispatch(MapOperation.setNearLocations(id));
+    dispatch(ScreenActionCreator.setScreen(Screen.CARD_DETAIL));
   },
   onHoverPlace(id) {
     dispatch(MapOperation.setActivePin(id));
@@ -79,4 +81,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {PlaceCard};
-export default connect(mapInitialProps, mapDispatchToProps)(PlaceCard);
+export default connect(mapStateToProps, mapDispatchToProps)(PlaceCard);

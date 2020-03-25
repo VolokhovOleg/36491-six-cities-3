@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {reducer as hotels} from './hotels/hotels';
+import {reducer as hotels} from './data/data';
 import {reducer as map} from './map/map';
 import {reducer as reviews} from './reviews/reviews';
 import {reducer as screens} from './screens/screens';

@@ -1,7 +1,7 @@
 import PlaceCard from '../place-card/place-card';
 import {propTypes} from './prop-types';
 import {Screen} from '../../reducer/screens/screens';
-import {getFilteredPlacesByCity} from '../../reducer/hotels/selectors';
+import {getFiltered} from '../../reducer/data/selectors';
 import {getScreen} from '../../reducer/screens/selectors';
 import {connect} from 'react-redux';
 
@@ -19,7 +19,7 @@ const PlaceList = memo(({placeCards, currentScreen}) => {
 });
 
 const mapStateToProps = (state) => ({
-  placeCards: getFilteredPlacesByCity(state),
+  placeCards: getFiltered(state),
   currentScreen: getScreen(state),
 });
 
