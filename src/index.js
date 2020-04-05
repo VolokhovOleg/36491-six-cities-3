@@ -3,17 +3,12 @@ import App from './components/app/app';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from './reducer/reducer';
-import {Operation as DataOperation} from './reducer/data/data';
-import {AuthorizationStatus, ActionCreator as UserActionCreator} from './reducer/user/user';
 import {composeWithDevTools} from 'redux-devtools-extension';
-import {createAPI} from './api.js';
 import thunk from 'redux-thunk';
+import {createAPI} from './api';
+import {AuthorizationStatus} from './reducer/user/user';
 
-const onUnauthorized = () => {
-  store.dispatch(UserActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
-};
-
-const api = createAPI(onUnauthorized);
+const api = createAPI(AuthorizationStatus.NO_AUTH);
 
 const store = createStore(
     reducer,
@@ -21,8 +16,6 @@ const store = createStore(
         applyMiddleware(thunk.withExtraArgument(api))
     )
 );
-
-store.dispatch(DataOperation.setHotels());
 
 ReactDOM.render(
     <Provider store={store}>

@@ -26,7 +26,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onCityClick(name) {
     dispatch(DataActionCreator.setActiveCity(name));
-    dispatch(DataOperations.setFilteredPlaces());
+    dispatch(DataOperations.setPinsLocations());
     dispatch(DataOperations.setActiveCityZoom());
     dispatch(DataOperations.setActiveCityLocation());
   },

@@ -1,11 +1,15 @@
 const ActionType = {
-  SET_CARD_DETAIL: `SET_CARD_DETAIL`,
+  SET_CARD_DETAILS_ID: `SET_CARD_DETAILS_ID`,
   SET_HOVER_PLACE: `SET_HOVER_PLACE`,
   SET_HOTELS: `SET_HOTELS`,
   SET_ACTIVE_CITY: `SET_ACTIVE_CITY`,
-  SET_FILTERED_PLACES: `SET_FILTERED_PLACES`,
   SET_ACTIVE_CITY_ZOOM: `SET_ACTIVE_CITY_ZOOM`,
   SET_ACTIVE_CITY_LOCATION: `SET_ACTIVE_CITY_LOCATION`,
+  SET_APP_LOAD_STATE: `SET_APP_LOAD_STATE`,
+  SET_ORDER_BY_SORTING: `SET_ORDER_BY_SORTING`,
+  SET_PINS_LOCATIONS: `SET_PINS_LOCATIONS`,
+  SET_NEAR_LOCATION_SATE: `SET_NEAR_LOCATION_SATE`,
+  SET_NEAR_PLACES: `SET_NEAR_PLACES`,
 };
 
 const ActionCreator = {
@@ -13,17 +17,13 @@ const ActionCreator = {
     type: ActionType.SET_HOTELS,
     payload: data,
   }),
-  setCardDetail: (cardDetail) => ({
-    type: ActionType.SET_CARD_DETAIL,
-    payload: cardDetail,
+  setCardDetailsID: (id) => ({
+    type: ActionType.SET_CARD_DETAILS_ID,
+    payload: id,
   }),
   setActiveCity: (city) => ({
     type: ActionType.SET_ACTIVE_CITY,
     payload: city,
-  }),
-  setFilteredPlaces: (data) => ({
-    type: ActionType.SET_FILTERED_PLACES,
-    payload: data,
   }),
   setActiveCityLocation: (locations) => ({
     type: ActionType.SET_ACTIVE_CITY_LOCATION,
@@ -32,6 +32,26 @@ const ActionCreator = {
   setActiveCityZoom: (locations) => ({
     type: ActionType.SET_ACTIVE_CITY_ZOOM,
     payload: locations,
+  }),
+  setAppLoadState: () => ({
+    type: ActionType.SET_APP_LOAD_STATE,
+    payload: true,
+  }),
+  setNearLocationState: () => ({
+    type: ActionType.SET_NEAR_LOCATION_SATE,
+    payload: true,
+  }),
+  setOrderBySorting: (sortingBy) => ({
+    type: ActionType.SET_ORDER_BY_SORTING,
+    payload: sortingBy,
+  }),
+  setPinsLocations: (data) => ({
+    type: ActionType.SET_PINS_LOCATIONS,
+    payload: data,
+  }),
+  setNearPlaces: (data) => ({
+    type: ActionType.SET_NEAR_PLACES,
+    payload: data,
   }),
 };
 

@@ -8,15 +8,15 @@ const getCityLocation = (state) => {
 };
 
 const getActiveCityZoom = (state) => {
-  return state[NAME_SPACE].getActiveCityZoom;
+  return state[NAME_SPACE].activeCityZoom;
 };
 
 const getHotels = (state) => {
   return state[NAME_SPACE].placeCards;
 };
 
-const getCardDetails = (state) => {
-  return state[NAME_SPACE].cardDetail;
+const getCardDetailsID = (state) => {
+  return state[NAME_SPACE].cardDetailsID;
 };
 
 const getHoverPlace = (state) => {
@@ -27,8 +27,16 @@ const getActiveCity = (state) => {
   return state[NAME_SPACE].activeCity;
 };
 
-const getPlacesToStay = (state) => {
-  return state[NAME_SPACE].filteredPlaceCards.length;
+const getApp = (state) => {
+  return state[NAME_SPACE].isAppLoad;
+};
+
+const getSortingName = (state) => {
+  return state[NAME_SPACE].sortingName;
+};
+
+const getNearLocationsState = (state) => {
+  return state[NAME_SPACE].isNearLocationLoad;
 };
 
 const getFiltered = createSelector(
@@ -39,12 +47,28 @@ const getFiltered = createSelector(
   }
 );
 
-const getLocations = createSelector(
-  getHotels,
-  (hotels) => {
-    return hotels.map((item) => item.locations);
+const getCardDetails = createSelector(
+  getFiltered,
+  getCardDetailsID,
+  (hotels, id) => {
+    return hotels.filter((item) => item.id === id)[0];
   }
 );
+
+const getPlacesToStay = createSelector(
+  getFiltered,
+  (hotels) => {
+    return hotels.length;
+  }
+);
+
+const getNearPlaces = (state) => {
+  return state[NAME_SPACE].nearPlaces;
+};
+
+const getPinsLocation = (state) => {
+  return state[NAME_SPACE].locations;
+};
 
 const getCities = createSelector(
   getHotels,
@@ -53,4 +77,4 @@ const getCities = createSelector(
   }
 );
 
-export {getHotels, getCardDetails, getHoverPlace, getActiveCity, getPlacesToStay, getLocations, getCities, getFiltered, getCityLocation, getActiveCityZoom};
+export {getNearPlaces, getNearLocationsState, getHotels, getCardDetails, getHoverPlace, getActiveCity, getPlacesToStay, getPinsLocation, getCities, getFiltered, getCityLocation, getActiveCityZoom, getApp, getSortingName};

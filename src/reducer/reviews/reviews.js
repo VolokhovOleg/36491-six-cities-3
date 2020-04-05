@@ -4,6 +4,7 @@ import Adapter from '../../adapter';
 
 const initialState = {
   reviews: [],
+  isReviewsLoad: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -11,6 +12,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_COMMENTS:
       return extend(state, {
         reviews: action.payload
+      });
+    case ActionType.SET_COMMENTS_STATE:
+      return extend(state, {
+        isReviewsLoad: true
       });
   }
 
@@ -24,6 +29,7 @@ const Operation = {
         dispatch(ActionCreator
           .setComments(Adapter.convertComments(response.data)
             .map((item) => item)));
+        dispatch(ActionCreator.setReviewsState());
       });
   },
 };

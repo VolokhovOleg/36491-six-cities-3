@@ -1,12 +1,13 @@
 import {convertRating} from '../../utils';
 import ReviewList from '../review-list/review-list';
 import Map from '../map/map';
-import {PlaceList} from '../place-list/place-list';
+import PlaceList from '../place-list/place-list';
 import {propTypes} from './prop-types';
-import {getNearLocations} from '../../reducer/map/selectors';
+import {getCardDetails, getNearLocationsState, getNearPlaces} from '../../reducer/data/selectors';
+import {getReviewsState} from '../../reducer/reviews/selectors';
 import {connect} from 'react-redux';
 
-const CardDetail = ({placeData, reviews, nearLocations}) => {
+const CardDetail = ({placeData, isReviewsLoad, isNearLocationLoad, nearPlaces}) => {
   const {
     gallery,
     price,
@@ -20,11 +21,8 @@ const CardDetail = ({placeData, reviews, nearLocations}) => {
     host,
     isFavorite
   } = placeData;
-  // reviews={reviews}
-  // placeCards={placeCards.filter((item) => item.city === activeCity).slice(0, 3)}
-  // cities={placeCards.filter((item) => item.city === activeCity)}
+
   const {avatar, name, hostDescription, isPro} = host;
-  const sortingReviews = reviews.sort((a, b) => b.date - a.date);
 
   return <>
     <div className="page">
@@ -126,19 +124,23 @@ const CardDetail = ({placeData, reviews, nearLocations}) => {
                   <p className="property__text">{hostDescription}</p>
                 </div>
               </div>
-              {/*<ReviewList*/}
-              {/*  reviews={sortingReviews.slice(0, 10)}*/}
-              {/*/>*/}
+              {isReviewsLoad
+                && <ReviewList />}
             </div>
           </div>
-          <Map
-            locations={nearLocations}
-          />
+          {isNearLocationLoad
+          && <Map />}
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PlaceList />
+            {isNearLocationLoad
+            && <div className="near-places__list tabs__content places__list`}">
+              <PlaceList
+                placeCards={nearPlaces}
+              />
+            </div>
+            }
           </section>
         </div>
       </main>
@@ -146,11 +148,14 @@ const CardDetail = ({placeData, reviews, nearLocations}) => {
   </>;
 };
 
-const mapInitialProps = (state) => ({
-  nearLocations: getNearLocations(state),
+const mapStateToProps = (state) => ({
+  placeData: getCardDetails(state),
+  isReviewsLoad: getReviewsState(state),
+  isNearLocationLoad: getNearLocationsState(state),
+  nearPlaces: getNearPlaces(state),
 });
 
 CardDetail.propTypes = propTypes;
 
 export {CardDetail};
-export default connect(mapInitialProps)(CardDetail);
+export default connect(mapStateToProps)(CardDetail);

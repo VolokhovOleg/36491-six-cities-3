@@ -4,8 +4,9 @@ import {Screen} from '../../reducer/screens/screens';
 import {ActionCreator as ScreenActionCreator} from '../../reducer/screens/screens';
 import {getScreen} from '../../reducer/screens/selectors';
 import {connect} from 'react-redux';
-import {ActionCreator as DataActionCreator} from '../../reducer/data/actions';
+import {ActionCreator as DataActionCreator, Operation as DataOperation} from '../../reducer/data/data';
 import {Operation as MapOperation} from '../../reducer/map/map';
+import {Operation as ReviewOperation} from '../../reducer/reviews/reviews';
 
 // eslint-disable-next-line react/display-name
 const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, currentScreen}) => {
@@ -70,10 +71,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onTitleClick(id) {
-    dispatch(DataActionCreator.setCardDetail(id));
+    dispatch(DataActionCreator.setCardDetailsID(id));
     dispatch(MapOperation.setActivePin(id));
-    dispatch(MapOperation.setNearLocations(id));
     dispatch(ScreenActionCreator.setScreen(Screen.CARD_DETAIL));
+    dispatch(DataOperation.setNearPinsLocations(id));
+    dispatch(ReviewOperation.setComments(id));
   },
   onHoverPlace(id) {
     dispatch(MapOperation.setActivePin(id));

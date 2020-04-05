@@ -3,7 +3,7 @@ import {propTypes} from './prop-types';
 import {connect} from 'react-redux';
 import {Screen} from '../../reducer/screens/screens';
 import {getScreen} from '../../reducer/screens/selectors';
-import {getActiveCityZoom, getCityLocation} from '../../reducer/data/selectors';
+import {getCityLocation, getActiveCityZoom, getPinsLocation} from '../../reducer/data/selectors';
 import {getActivePin} from '../../reducer/map/selectors';
 
 const tileLayer = {
@@ -18,17 +18,24 @@ class Map extends PureComponent {
     this.mapRef = React.createRef();
     this._map = null;
     this._pins = [];
+    this._zoom = null;
+    this._city = null;
   }
 
-  _generatePin(active) {
+  _generatePin(item) {
+    const {activePin} = this.props;
+
     return leaflet.icon({
-      iconUrl: `img/pin${active ? `-active` : ``}.svg`,
+      iconUrl: `img/pin${item === activePin ? `-active` : ``}.svg`,
       iconSize: [30, 30]
     });
   }
 
   _setOptions() {
     const {city, zoom} = this.props;
+    this._zoom = zoom;
+    this._city = city;
+
     return {
       center: city,
       zoom,
@@ -38,19 +45,15 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    this._map = leaflet.map(this.mapRef.current, this._setOptions());
     const {locations, city, zoom} = this.props;
-
-    this._locations = locations;
+    this._map = leaflet.map(this.mapRef.current, this._setOptions());
     this._map.setView(city, zoom);
 
     leaflet
       .tileLayer(tileLayer.URL, {
         attribution: tileLayer.ATTRIBUTION
-      })
-      .addTo(this._map);
-
-    this._setCoordinates(this._locations);
+      }).addTo(this._map);
+    this._setCoordinates(locations);
   }
 
   render() {
@@ -63,11 +66,14 @@ class Map extends PureComponent {
 
   componentDidUpdate() {
     const {locations, zoom, city} = this.props;
-    this._map.setView(city, zoom);
 
-    this._pins.forEach((item) => {
-      this._map.removeLayer(item);
-    });
+    if (zoom !== this._zoom || city !== this._city) {
+      this._zoom = zoom;
+      this._city = city;
+      this._map.setView(city, zoom);
+    }
+
+    this._pins.forEach((item) => this._map.removeLayer(item));
 
     this._setCoordinates(locations);
   }
@@ -77,19 +83,11 @@ class Map extends PureComponent {
   }
 
   _setCoordinates(locations) {
-    const {activePin} = this.props;
-
     this._pins = locations.map((item) => {
       return leaflet
-        .marker(item, {icon: this._generatePin(false)})
+        .marker(item, {icon: this._generatePin(item)})
         .addTo(this._map);
     });
-
-    if (activePin !== null) {
-      this._pins.push(leaflet
-        .marker(activePin, {icon: this._generatePin(true)})
-        .addTo(this._map));
-    }
   }
 }
 
@@ -100,6 +98,7 @@ const mapStateProps = (state) => ({
   zoom: getActiveCityZoom(state),
   city: getCityLocation(state),
   currentScreen: getScreen(state),
+  locations: getPinsLocation(state),
 });
 
 export {Map};

@@ -4,14 +4,26 @@ import Adapter from '../../adapter';
 import NameSpace from '../name-space';
 
 const NAME_SPACE = NameSpace.HOTELS;
+const NAME_SPACE_MAP = NameSpace.MAP;
+const SORTING_PROPERTY_NAME = {
+  Popular: `Popular`,
+  PriceToHigh: `Price: low to high`,
+  PriceToLow: `Price: high to low`,
+  Rate: `Top rated first`,
+};
 
 const initialState = {
-  cardDetail: {},
+  cardDetailsID: null,
   placeCards: [],
-  filteredPlaceCards: [],
+  nearPlaces: [],
+  reviews: [],
+  locations: [],
   activeCity: ``,
   activeCityZoom: 10,
+  sortingName: SORTING_PROPERTY_NAME.Popular,
   activeCityLocation: null,
+  isAppLoad: false,
+  isNearLocationLoad: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,8 +31,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_HOTELS:
       return extend(state, {placeCards: action.payload});
 
-    case ActionType.SET_CARD_DETAIL:
-      return extend(state, {cardDetail: action.payload});
+    case ActionType.SET_NEAR_PLACES:
+      return extend(state, {nearPlaces: action.payload});
+
+    case ActionType.SET_CARD_DETAILS_ID:
+      return extend(state, {cardDetailsID: action.payload});
 
     case ActionType.SET_HOVER_PLACE:
       return extend(state, {hoverPlace: action.payload});
@@ -28,40 +43,64 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_ACTIVE_CITY:
       return extend(state, {activeCity: action.payload});
 
-    case ActionType.SET_FILTERED_PLACES:
-      return extend(state, {filteredPlaceCards: action.payload});
-
     case ActionType.SET_ACTIVE_CITY_ZOOM:
       return extend(state, {activeCityZoom: action.payload});
 
     case ActionType.SET_ACTIVE_CITY_LOCATION:
       return extend(state, {activeCityLocation: action.payload});
+
+    case ActionType.SET_APP_LOAD_STATE:
+      return extend(state, {isAppLoad: action.payload});
+
+    case ActionType.SET_NEAR_LOCATION_SATE:
+      return extend(state, {isNearLocationLoad: action.payload});
+
+    case ActionType.SET_ORDER_BY_SORTING:
+      return extend(state, {sortingName: action.payload});
+
+    case ActionType.SET_PINS_LOCATIONS:
+      return extend(state, {
+        locations: action.payload
+      });
   }
 
   return state;
 };
 
 const Operation = {
-  setHotels: () => (dispatch, getState, api) => {
+  init: () => (dispatch, getState, api) => {
     return api.get(`/hotels`)
       .then((response) => {
         dispatch(ActionCreator.setHotels(Adapter.convertHotels(response.data)));
         dispatch(ActionCreator.setActiveCity(getState()[NAME_SPACE].placeCards[0].city));
-        dispatch(ActionCreator
-          .setFilteredPlaces(getState()[NAME_SPACE].placeCards
-            .filter((item) => item.city === getState()[NAME_SPACE].activeCity)));
         dispatch(ActionCreator
           .setActiveCityZoom(getState()[NAME_SPACE].placeCards
             .filter((item) => item.city === getState()[NAME_SPACE].activeCity)[0].cityMapProps.zoom));
         dispatch(ActionCreator
           .setActiveCityLocation(getState()[NAME_SPACE].placeCards
             .filter((item) => item.city === getState()[NAME_SPACE].activeCity)[0].cityMapProps.location));
+        dispatch(ActionCreator.setAppLoadState());
+        dispatch(ActionCreator.setPinsLocations(getState()[NAME_SPACE].placeCards
+          .filter((item) => item.city === getState()[NAME_SPACE].activeCity)
+          .map((item) => item.locations)));
       });
   },
-  setFilteredPlaces: () => (dispatch, getState) => {
-    dispatch(ActionCreator
-      .setFilteredPlaces(getState()[NAME_SPACE].placeCards
-        .filter((item) => item.city === getState()[NAME_SPACE].activeCity)));
+  setPinsLocations: () => (dispatch, getState) => {
+    dispatch(ActionCreator.setPinsLocations(getState()[NAME_SPACE].placeCards
+      .filter((item) => item.city === getState()[NAME_SPACE].activeCity)
+      .map((item) => item.locations)));
+  },
+  setNearPinsLocations: (id) => (dispatch, getState, api) => {
+    return api.get(`/hotels/${id}/nearby`)
+      .then((response) => {
+        const convertData = Adapter.convertHotels(response.data);
+
+        dispatch(ActionCreator
+          .setPinsLocations([...convertData
+            .map((item) => item.locations), getState()[NAME_SPACE_MAP].activePin]));
+        dispatch(ActionCreator.setNearPlaces(convertData));
+        dispatch(ActionCreator.setNearLocationState(true));
+      });
   },
   setActiveCityLocation: () => (dispatch, getState) => {
     dispatch(ActionCreator
@@ -73,6 +112,24 @@ const Operation = {
       .setActiveCityZoom(getState()[NAME_SPACE].placeCards
         .filter((item) => item.city === getState()[NAME_SPACE].activeCity)[0].cityMapProps.zoom));
   },
+  setOrderBySorting: (sortingBy) => (dispatch, getState) => {
+    dispatch(ActionCreator.setOrderBySorting(sortingBy));
+
+    switch (getState()[NAME_SPACE].sortingName) {
+      case SORTING_PROPERTY_NAME.PriceToHigh:
+        dispatch(ActionCreator.setHotels(getState()[NAME_SPACE].placeCards.sort((a, b) => parseInt(a.price, 10) - parseInt(b.price, 10))));
+        break;
+      case SORTING_PROPERTY_NAME.PriceToLow:
+        dispatch(ActionCreator.setHotels(getState()[NAME_SPACE].placeCards.sort((a, b) => parseInt(b.price, 10) - parseInt(a.price, 10))));
+        break;
+      case SORTING_PROPERTY_NAME.Rate:
+        dispatch(ActionCreator.setHotels(getState()[NAME_SPACE].placeCards.sort((a, b) => b.rating - a.rating)));
+        break;
+      case SORTING_PROPERTY_NAME.Popular:
+        dispatch(ActionCreator.setHotels(getState()[NAME_SPACE].placeCards.sort((a, b) => a.id - b.id)));
+        break;
+    }
+  },
 };
 
-export {reducer, Operation, ActionType, ActionCreator};
+export {reducer, Operation, ActionType, ActionCreator, SORTING_PROPERTY_NAME};
