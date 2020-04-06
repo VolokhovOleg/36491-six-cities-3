@@ -66,4 +66,15 @@ export default class Adapter {
       };
     });
   }
+
+  static convertUser(data) {
+    const {id, email, name} = data;
+    return {
+      id,
+      email,
+      name,
+      avatarUrl: data[`avatar_url`],
+      isPro: data[`is_pro`],
+    };
+  }
 }

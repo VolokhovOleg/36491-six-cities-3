@@ -6,9 +6,13 @@ import {propTypes} from './prop-types';
 import {getCardDetails, getNearLocationsState, getNearPlaces} from '../../reducer/data/selectors';
 import {getReviewsState} from '../../reducer/reviews/selectors';
 import {connect} from 'react-redux';
+import User from '../user/user';
+import {Operation as DataOperation} from '../../reducer/data/data';
+import {Link} from 'react-router-dom';
 
-const CardDetail = ({placeData, isReviewsLoad, isNearLocationLoad, nearPlaces}) => {
+const CardDetail = ({placeData, isReviewsLoad, isNearLocationLoad, nearPlaces, onFavoriteButtonClick}) => {
   const {
+    id,
     gallery,
     price,
     title,
@@ -30,18 +34,14 @@ const CardDetail = ({placeData, isReviewsLoad, isNearLocationLoad, nearPlaces}) 
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link to='/' className="header__logo-link header__logo-link--active">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
-              </a>
+              </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
+                  <User />
                 </li>
               </ul>
             </nav>
@@ -71,7 +71,12 @@ const CardDetail = ({placeData, isReviewsLoad, isNearLocationLoad, nearPlaces}) 
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className={`place-card__bookmark-button ${isFavorite ? `place-card__bookmark-button--active` : ``} button`} type="button">
+                <button
+                  onClick={(evt) => {
+                    evt.preventDefault();
+                    onFavoriteButtonClick(id, !isFavorite);
+                  }}
+                  className={`place-card__bookmark-button ${isFavorite ? `place-card__bookmark-button--active` : ``} button`} type="button">
                   <svg className="property__bookmark-icon" width={31} height={33}>
                     <use xlinkHref="#icon-bookmark" />
                   </svg>
@@ -155,7 +160,13 @@ const mapStateToProps = (state) => ({
   nearPlaces: getNearPlaces(state),
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onFavoriteButtonClick(id, state) {
+    dispatch(DataOperation.postFavorite(id, state));
+  }
+});
+
 CardDetail.propTypes = propTypes;
 
 export {CardDetail};
-export default connect(mapStateToProps)(CardDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(CardDetail);

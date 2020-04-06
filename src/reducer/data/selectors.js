@@ -70,6 +70,10 @@ const getPinsLocation = (state) => {
   return state[NAME_SPACE].locations;
 };
 
+const getFavoritesCards = (state) => {
+  return state[NAME_SPACE].favoritesCards;
+};
+
 const getCities = createSelector(
   getHotels,
   (hotels) => {
@@ -77,4 +81,4 @@ const getCities = createSelector(
   }
 );
 
-export {getNearPlaces, getNearLocationsState, getHotels, getCardDetails, getHoverPlace, getActiveCity, getPlacesToStay, getPinsLocation, getCities, getFiltered, getCityLocation, getActiveCityZoom, getApp, getSortingName};
+export {getFavoritesCards, getNearPlaces, getNearLocationsState, getHotels, getCardDetails, getHoverPlace, getActiveCity, getPlacesToStay, getPinsLocation, getCities, getFiltered, getCityLocation, getActiveCityZoom, getApp, getSortingName};

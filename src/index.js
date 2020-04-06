@@ -6,9 +6,8 @@ import reducer from './reducer/reducer';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import {createAPI} from './api';
-import {AuthorizationStatus} from './reducer/user/user';
 
-const api = createAPI(AuthorizationStatus.NO_AUTH);
+const api = createAPI();
 
 const store = createStore(
     reducer,

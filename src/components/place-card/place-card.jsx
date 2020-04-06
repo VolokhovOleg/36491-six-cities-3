@@ -1,15 +1,17 @@
 import {convertRating} from '../../utils';
 import {propTypes} from './prop-types';
 import {Screen} from '../../reducer/screens/screens';
-import {ActionCreator as ScreenActionCreator} from '../../reducer/screens/screens';
 import {getScreen} from '../../reducer/screens/selectors';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {ActionCreator as DataActionCreator, Operation as DataOperation} from '../../reducer/data/data';
 import {Operation as MapOperation} from '../../reducer/map/map';
 import {Operation as ReviewOperation} from '../../reducer/reviews/reviews';
+import {getAuthorizationStatus} from '../../reducer/user/selectors';
+import {AuthorizationStatus} from '../../reducer/user/user';
 
 // eslint-disable-next-line react/display-name
-const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, currentScreen}) => {
+const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, currentScreen, onFavoriteButtonClick, authorizationStatus}) => {
   const {img, price, title, type, isPremium, rating, isFavorite, id} = placeData;
   return <>
     <article
@@ -36,12 +38,27 @@ const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, currentScreen}) 
             <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${isFavorite ? `place-card__bookmark-button--active` : ``} button`} type="button">
-            <svg className="place-card__bookmark-icon" width={18} height={19}>
-              <use xlinkHref="#icon-bookmark" />
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          {authorizationStatus === AuthorizationStatus.AUTH
+            ? <button
+              onClick={(evt) => {
+                evt.preventDefault();
+                onFavoriteButtonClick(id, !isFavorite);
+              }}
+              className={`place-card__bookmark-button ${isFavorite ? `place-card__bookmark-button--active` : ``} button`} type="button">
+              <svg className="place-card__bookmark-icon" width={18} height={19}>
+                <use xlinkHref="#icon-bookmark" />
+              </svg>
+              <span className="visually-hidden">To bookmarks</span>
+            </button>
+            : <Link to='/login'>
+              <button
+                className={`place-card__bookmark-button ${isFavorite ? `place-card__bookmark-button--active` : ``} button`} type="button">
+                <svg className="place-card__bookmark-icon" width={18} height={19}>
+                  <use xlinkHref="#icon-bookmark" />
+                </svg>
+                <span className="visually-hidden">To bookmarks</span>
+              </button>
+            </Link>}
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -67,15 +84,18 @@ PlaceCard.propTypes = propTypes;
 
 const mapStateToProps = (state) => ({
   currentScreen: getScreen(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onTitleClick(id) {
     dispatch(DataActionCreator.setCardDetailsID(id));
     dispatch(MapOperation.setActivePin(id));
-    dispatch(ScreenActionCreator.setScreen(Screen.CARD_DETAIL));
     dispatch(DataOperation.setNearPinsLocations(id));
     dispatch(ReviewOperation.setComments(id));
+  },
+  onFavoriteButtonClick(id, state) {
+    dispatch(DataOperation.postFavorite(id, state));
   },
   onHoverPlace(id) {
     dispatch(MapOperation.setActivePin(id));

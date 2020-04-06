@@ -10,6 +10,7 @@ const ActionType = {
   SET_PINS_LOCATIONS: `SET_PINS_LOCATIONS`,
   SET_NEAR_LOCATION_SATE: `SET_NEAR_LOCATION_SATE`,
   SET_NEAR_PLACES: `SET_NEAR_PLACES`,
+  SET_FAVORITES_PLACES: `SET_FAVORITES_PLACES`,
 };
 
 const ActionCreator = {
@@ -20,6 +21,10 @@ const ActionCreator = {
   setCardDetailsID: (id) => ({
     type: ActionType.SET_CARD_DETAILS_ID,
     payload: id,
+  }),
+  setFavoritesCards: (data) => ({
+    type: ActionType.SET_FAVORITES_PLACES,
+    payload: data,
   }),
   setActiveCity: (city) => ({
     type: ActionType.SET_ACTIVE_CITY,

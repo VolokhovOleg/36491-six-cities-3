@@ -15,6 +15,7 @@ const SORTING_PROPERTY_NAME = {
 const initialState = {
   cardDetailsID: null,
   placeCards: [],
+  favoritesCards: [],
   nearPlaces: [],
   reviews: [],
   locations: [],
@@ -33,6 +34,9 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.SET_NEAR_PLACES:
       return extend(state, {nearPlaces: action.payload});
+
+    case ActionType.SET_FAVORITES_PLACES:
+      return extend(state, {favoritesCards: action.payload});
 
     case ActionType.SET_CARD_DETAILS_ID:
       return extend(state, {cardDetailsID: action.payload});
@@ -69,6 +73,12 @@ const reducer = (state = initialState, action) => {
 
 const Operation = {
   init: () => (dispatch, getState, api) => {
+    api.get(`/favorite`)
+      .then((response) => dispatch(ActionCreator.setFavoritesCards(Adapter.convertHotels(response.data))))
+      .catch((error) => {
+        throw error;
+      });
+
     return api.get(`/hotels`)
       .then((response) => {
         dispatch(ActionCreator.setHotels(Adapter.convertHotels(response.data)));
@@ -83,6 +93,28 @@ const Operation = {
         dispatch(ActionCreator.setPinsLocations(getState()[NAME_SPACE].placeCards
           .filter((item) => item.city === getState()[NAME_SPACE].activeCity)
           .map((item) => item.locations)));
+      })
+      .catch((error) => {
+        throw error;
+      });
+  },
+  postFavorite: (id, state) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${id}/${state ? `1` : `0`}`)
+      .then(() => {
+        api.get(`/hotels`)
+          .then((response) => dispatch(ActionCreator.setHotels(Adapter.convertHotels(response.data))))
+          .catch((error) => {
+            throw error;
+          });
+
+        return api.get(`/favorite`)
+          .then((response) => dispatch(ActionCreator.setFavoritesCards(Adapter.convertHotels(response.data))))
+          .catch((error) => {
+            throw error;
+          });
+      })
+      .catch((error) => {
+        throw error;
       });
   },
   setPinsLocations: () => (dispatch, getState) => {
@@ -100,6 +132,9 @@ const Operation = {
             .map((item) => item.locations), getState()[NAME_SPACE_MAP].activePin]));
         dispatch(ActionCreator.setNearPlaces(convertData));
         dispatch(ActionCreator.setNearLocationState(true));
+      })
+      .catch((error) => {
+        throw error;
       });
   },
   setActiveCityLocation: () => (dispatch, getState) => {

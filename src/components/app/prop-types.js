@@ -1,3 +1,3 @@
 export const propTypes = {
-  currentScreen: PropTypes.string.isRequired,
+  init: PropTypes.func.isRequired,
 };
