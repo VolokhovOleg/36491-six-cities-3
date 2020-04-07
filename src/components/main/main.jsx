@@ -10,6 +10,7 @@ import Sorting from '../sorting/sorting';
 import withSorting from '../../hocs/with-sorting/with-sorting';
 import {getFiltered, getActiveCity, getPlacesToStay, getApp} from '../../reducer/data/selectors';
 import {propTypes} from './prop-types';
+import {Screen} from '../../reducer/screens/screens';
 
 const SortingWrapped = withSorting(Sorting);
 
@@ -58,11 +59,14 @@ const Main = ({placeCards, activeCity, cities, placesToStay, isAppLoad}) => {
                     <div className="cities__places-list tabs__content places__list">
                       <PlaceList
                         placeCards={placeCards}
+                        currentScreen={Screen.MAIN}
                       />
                     </div>
                   </section>
                   <div className="cities__right-section">
-                    <Map />
+                    <Map
+                      currentScreen={Screen.MAIN}
+                    />
                   </div>
                 </div>
               </div>

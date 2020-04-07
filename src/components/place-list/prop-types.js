@@ -16,4 +16,5 @@ export const propTypes = {
       name: PropTypes.string.isRequired,
     }).isRequired,
   })).isRequired,
+  currentScreen: PropTypes.string.isRequired,
 };

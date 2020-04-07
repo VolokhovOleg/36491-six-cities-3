@@ -81,4 +81,4 @@ const getCities = createSelector(
   }
 );
 
-export {getFavoritesCards, getNearPlaces, getNearLocationsState, getHotels, getCardDetails, getHoverPlace, getActiveCity, getPlacesToStay, getPinsLocation, getCities, getFiltered, getCityLocation, getActiveCityZoom, getApp, getSortingName};
+export {getCardDetailsID, getFavoritesCards, getNearPlaces, getNearLocationsState, getHotels, getCardDetails, getHoverPlace, getActiveCity, getPlacesToStay, getPinsLocation, getCities, getFiltered, getCityLocation, getActiveCityZoom, getApp, getSortingName};

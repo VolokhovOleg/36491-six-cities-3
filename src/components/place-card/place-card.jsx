@@ -1,7 +1,6 @@
 import {convertRating} from '../../utils';
 import {propTypes} from './prop-types';
 import {Screen} from '../../reducer/screens/screens';
-import {getScreen} from '../../reducer/screens/selectors';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {ActionCreator as DataActionCreator, Operation as DataOperation} from '../../reducer/data/data';
@@ -67,12 +66,10 @@ const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, currentScreen, o
           </div>
         </div>
         <h2 className="place-card__name">
-          <a onClick={(evt) => {
-            evt.preventDefault();
-            onTitleClick(id);
-          }
-          }
-          href="#">{title}</a>
+          <Link
+            onClick={() => onTitleClick(id)}
+            to={`/offer/${id}`}>{title}
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -83,7 +80,6 @@ const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, currentScreen, o
 PlaceCard.propTypes = propTypes;
 
 const mapStateToProps = (state) => ({
-  currentScreen: getScreen(state),
   authorizationStatus: getAuthorizationStatus(state),
 });
 

@@ -6,8 +6,10 @@ import reducer from './reducer/reducer';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import {createAPI} from './api';
+import {ActionCreator as UserActionCreator} from './reducer/user/actions';
 
-const api = createAPI();
+const onFailState = (status) => store.dispatch(UserActionCreator.requireAuthorization(status));
+const api = createAPI(onFailState);
 
 const store = createStore(
     reducer,

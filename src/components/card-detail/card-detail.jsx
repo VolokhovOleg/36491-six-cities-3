@@ -9,8 +9,11 @@ import {connect} from 'react-redux';
 import User from '../user/user';
 import {Operation as DataOperation} from '../../reducer/data/data';
 import {Link} from 'react-router-dom';
+import {Screen} from '../../reducer/screens/screens';
+import {AuthorizationStatus} from '../../reducer/user/user';
+import {getAuthorizationStatus} from '../../reducer/user/selectors';
 
-const CardDetail = ({placeData, isReviewsLoad, isNearLocationLoad, nearPlaces, onFavoriteButtonClick}) => {
+const CardDetail = ({placeData, isReviewsLoad, isNearLocationLoad, nearPlaces, onFavoriteButtonClick, authorizationStatus}) => {
   const {
     id,
     gallery,
@@ -25,7 +28,6 @@ const CardDetail = ({placeData, isReviewsLoad, isNearLocationLoad, nearPlaces, o
     host,
     isFavorite
   } = placeData;
-
   const {avatar, name, hostDescription, isPro} = host;
 
   return <>
@@ -35,7 +37,7 @@ const CardDetail = ({placeData, isReviewsLoad, isNearLocationLoad, nearPlaces, o
           <div className="header__wrapper">
             <div className="header__left">
               <Link to='/' className="header__logo-link header__logo-link--active">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
+                <img className="header__logo" src="../img/logo.svg" alt="6 cities logo" width={81} height={41} />
               </Link>
             </div>
             <nav className="header__nav">
@@ -71,17 +73,27 @@ const CardDetail = ({placeData, isReviewsLoad, isNearLocationLoad, nearPlaces, o
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button
-                  onClick={(evt) => {
-                    evt.preventDefault();
-                    onFavoriteButtonClick(id, !isFavorite);
-                  }}
-                  className={`place-card__bookmark-button ${isFavorite ? `place-card__bookmark-button--active` : ``} button`} type="button">
-                  <svg className="property__bookmark-icon" width={31} height={33}>
-                    <use xlinkHref="#icon-bookmark" />
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                {authorizationStatus === AuthorizationStatus.AUTH
+                  ? <button
+                    onClick={(evt) => {
+                      evt.preventDefault();
+                      onFavoriteButtonClick(id, !isFavorite);
+                    }}
+                    className={`place-card__bookmark-button ${isFavorite ? `place-card__bookmark-button--active` : ``} button`} type="button">
+                    <svg className="place-card__bookmark-icon" width={18} height={19}>
+                      <use xlinkHref="#icon-bookmark" />
+                    </svg>
+                    <span className="visually-hidden">To bookmarks</span>
+                  </button>
+                  : <Link to='/login'>
+                    <button
+                      className={`place-card__bookmark-button ${isFavorite ? `place-card__bookmark-button--active` : ``} button`} type="button">
+                      <svg className="place-card__bookmark-icon" width={18} height={19}>
+                        <use xlinkHref="#icon-bookmark" />
+                      </svg>
+                      <span className="visually-hidden">To bookmarks</span>
+                    </button>
+                  </Link>}
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
@@ -119,11 +131,17 @@ const CardDetail = ({placeData, isReviewsLoad, isNearLocationLoad, nearPlaces, o
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className={`property__avatar-wrapper ${isPro ? `property__avatar-wrapper--pro` : ``} user__avatar-wrapper`}>
-                    <img className="property__avatar user__avatar" src={avatar} width={74} height={74} alt={name} />
+                    <img className="property__avatar user__avatar" src={`../${avatar}`} width={74} height={74} alt={name} />
                   </div>
                   <span className="property__user-name">
                     {name}
                   </span>
+                  {
+                    isPro
+                    && <span className="property__user-status">
+                      Pro
+                    </span>
+                  }
                 </div>
                 <div className="property__description">
                   <p className="property__text">{hostDescription}</p>
@@ -134,7 +152,9 @@ const CardDetail = ({placeData, isReviewsLoad, isNearLocationLoad, nearPlaces, o
             </div>
           </div>
           {isNearLocationLoad
-          && <Map />}
+          && <Map
+            currentScreen={Screen.CARD_DETAIL}
+          />}
         </section>
         <div className="container">
           <section className="near-places places">
@@ -142,6 +162,7 @@ const CardDetail = ({placeData, isReviewsLoad, isNearLocationLoad, nearPlaces, o
             {isNearLocationLoad
             && <div className="near-places__list tabs__content places__list`}">
               <PlaceList
+                currentScreen={Screen.CARD_DETAIL}
                 placeCards={nearPlaces}
               />
             </div>
@@ -158,6 +179,7 @@ const mapStateToProps = (state) => ({
   isReviewsLoad: getReviewsState(state),
   isNearLocationLoad: getNearLocationsState(state),
   nearPlaces: getNearPlaces(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

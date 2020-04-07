@@ -2,7 +2,6 @@ import leaflet from 'leaflet';
 import {propTypes} from './prop-types';
 import {connect} from 'react-redux';
 import {Screen} from '../../reducer/screens/screens';
-import {getScreen} from '../../reducer/screens/selectors';
 import {getCityLocation, getActiveCityZoom, getPinsLocation} from '../../reducer/data/selectors';
 import {getActivePin} from '../../reducer/map/selectors';
 
@@ -26,7 +25,7 @@ class Map extends PureComponent {
     const {activePin} = this.props;
 
     return leaflet.icon({
-      iconUrl: `img/pin${item === activePin ? `-active` : ``}.svg`,
+      iconUrl: `../img/pin${item === activePin ? `-active` : ``}.svg`,
       iconSize: [30, 30]
     });
   }
@@ -97,7 +96,6 @@ const mapStateProps = (state) => ({
   activePin: getActivePin(state),
   zoom: getActiveCityZoom(state),
   city: getCityLocation(state),
-  currentScreen: getScreen(state),
   locations: getPinsLocation(state),
 });
 

@@ -2,6 +2,11 @@ import {extend} from '../../utils';
 import {ActionType, ActionCreator} from './actions';
 import Adapter from '../../adapter';
 
+const reviewLength = {
+  MIN: 50,
+  MAX: 300,
+};
+
 const initialState = {
   reviews: [],
   isReviewsLoad: false,
@@ -32,6 +37,18 @@ const Operation = {
         dispatch(ActionCreator.setReviewsState());
       });
   },
+  sendReview: (data, id) => (dispatch, getState, api) => {
+    return api.post(`/comments/${id}`, data)
+      .then(() => {
+        return api.get(`/comments/${id}`)
+          .then((response) => {
+            dispatch(ActionCreator
+              .setComments(Adapter.convertComments(response.data)
+                .map((item) => item)));
+            dispatch(ActionCreator.setReviewsState());
+          });
+      });
+  },
 };
 
-export {reducer, ActionType, ActionCreator, Operation};
+export {reducer, ActionType, ActionCreator, Operation, reviewLength};
