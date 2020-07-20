@@ -22,10 +22,8 @@ class Map extends PureComponent {
   }
 
   _generatePin(item) {
-    const {activePin} = this.props;
-
     return leaflet.icon({
-      iconUrl: `../img/pin${item === activePin ? `-active` : ``}.svg`,
+      iconUrl: `../img/pin${this._comparePinsLocations(item) ? `-active` : ``}.svg`,
       iconSize: [30, 30]
     });
   }
@@ -34,7 +32,6 @@ class Map extends PureComponent {
     const {city, zoom} = this.props;
     this._zoom = zoom;
     this._city = city;
-
     return {
       center: city,
       zoom,
@@ -43,16 +40,9 @@ class Map extends PureComponent {
     };
   }
 
-  componentDidMount() {
-    const {locations, city, zoom} = this.props;
-    this._map = leaflet.map(this.mapRef.current, this._setOptions());
-    this._map.setView(city, zoom);
-
-    leaflet
-      .tileLayer(tileLayer.URL, {
-        attribution: tileLayer.ATTRIBUTION
-      }).addTo(this._map);
-    this._setCoordinates(locations);
+  _comparePinsLocations(pin) {
+    const {activePin} = this.props;
+    return activePin && pin[0] === activePin[0] && pin[1] === activePin[1];
   }
 
   render() {
@@ -61,6 +51,18 @@ class Map extends PureComponent {
     return (<>
       <section ref={this.mapRef} className={`${currentScreen === Screen.CARD_DETAIL ? `property` : `cities`}__map map`} id="map" />
     </>);
+  }
+
+  componentDidMount() {
+    const {locations, city, zoom} = this.props;
+    this._map = leaflet.map(this.mapRef.current.id, this._setOptions());
+    this._map.setView(city, zoom);
+
+    leaflet
+      .tileLayer(tileLayer.URL, {
+        attribution: tileLayer.ATTRIBUTION
+      }).addTo(this._map);
+    this._setCoordinates(locations);
   }
 
   componentDidUpdate() {

@@ -3,23 +3,28 @@ import {propTypes} from './prop-types';
 import {Screen} from '../../reducer/screens/screens';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {ActionCreator as DataActionCreator, Operation as DataOperation} from '../../reducer/data/data';
+import {Operation as DataOperation} from '../../reducer/data/data';
 import {Operation as MapOperation} from '../../reducer/map/map';
-import {Operation as ReviewOperation} from '../../reducer/reviews/reviews';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 import {AuthorizationStatus} from '../../reducer/user/user';
 
-// eslint-disable-next-line react/display-name
-const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, currentScreen, onFavoriteButtonClick, authorizationStatus}) => {
+const PlaceCard = ({placeData, currentScreen, authorizationStatus, onHoverPlace, onFavoriteButtonClick}) => {
   const {img, price, title, type, isPremium, rating, isFavorite, id} = placeData;
+  // попробовать сделать класс компонент
+  // Забить на хоки, всё починить, дотюнить по тз, потом хоки.
+  console.log(authorizationStatus);
+
   return <>
     <article
       onMouseEnter={() => {
-        return currentScreen === Screen.MAIN ? onHoverPlace(id) : null;
+        return onHoverPlace(id);
       }}
       onMouseLeave={() => {
-        return currentScreen === Screen.MAIN ? onHoverPlace(null) : null;
-      }} className={`${currentScreen === Screen.MAIN ? `near-places__card` : `cities__place-card`} place-card`}>
+        return onHoverPlace(null);
+      }}
+      className={`${currentScreen === Screen.MAIN
+        ? `near-places__card`
+        : `cities__place-card`} place-card`}>
       {
         isPremium &&
         <div className="place-card__mark">
@@ -67,7 +72,6 @@ const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, currentScreen, o
         </div>
         <h2 className="place-card__name">
           <Link
-            onClick={() => onTitleClick(id)}
             to={`/offer/${id}`}>{title}
           </Link>
         </h2>
@@ -75,7 +79,7 @@ const PlaceCard = memo(({placeData, onTitleClick, onHoverPlace, currentScreen, o
       </div>
     </article>
   </>;
-});
+};
 
 PlaceCard.propTypes = propTypes;
 
@@ -84,12 +88,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onTitleClick(id) {
-    dispatch(DataActionCreator.setCardDetailsID(id));
-    dispatch(MapOperation.setActivePin(id));
-    dispatch(DataOperation.setNearPinsLocations(id));
-    dispatch(ReviewOperation.setComments(id));
-  },
   onFavoriteButtonClick(id, state) {
     dispatch(DataOperation.postFavorite(id, state));
   },

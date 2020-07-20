@@ -24,6 +24,7 @@ rules:
 globals:
   React: true
   PureComponent: true
+  Component: true
   memo: true
   PropTypes: true
   renderer: true

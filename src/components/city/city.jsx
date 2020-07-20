@@ -1,10 +1,9 @@
 import {propTypes} from './prop-types';
 import {getActiveCity} from '../../reducer/data/selectors';
 import {connect} from 'react-redux';
-import {Operation as DataOperations, ActionCreator as DataActionCreator} from '../../reducer/data/data';
+import {Operation as DataOperation, ActionCreator as DataActionCreator} from '../../reducer/data/data';
 
-// eslint-disable-next-line react/display-name
-const City = memo(({name, activeCity, onCityClick}) => {
+const City = ({name, activeCity, onCityClick}) => {
   return <>
     <li onClick={(evt) => {
       evt.stopPropagation();
@@ -17,7 +16,7 @@ const City = memo(({name, activeCity, onCityClick}) => {
       </a>
     </li>
   </>;
-});
+};
 
 const mapStateToProps = (state) => ({
   activeCity: getActiveCity(state),
@@ -26,9 +25,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onCityClick(name) {
     dispatch(DataActionCreator.setActiveCity(name));
-    dispatch(DataOperations.setPinsLocations());
-    dispatch(DataOperations.setActiveCityZoom());
-    dispatch(DataOperations.setActiveCityLocation());
+    dispatch(DataOperation.setPinsLocations());
+    dispatch(DataOperation.setActiveCityZoom());
+    dispatch(DataOperation.setActiveCityLocation());
   },
 });
 

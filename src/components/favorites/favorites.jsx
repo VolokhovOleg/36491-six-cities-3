@@ -4,8 +4,8 @@ import {getApp, getFavoritesCards} from '../../reducer/data/selectors';
 import {propTypes} from './prop-types';
 import {connect} from 'react-redux';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
-import User from '../user/user';
-import {Link} from 'react-router-dom';
+import {Header} from '../header/header';
+import {Footer} from '../footer/footer';
 
 const Favorites = ({isAppLoad, favoritesCards}) => {
   return <>
@@ -15,24 +15,7 @@ const Favorites = ({isAppLoad, favoritesCards}) => {
         : !favoritesCards.length
         && <FavoritesEmpty />
         || <div className="page">
-          <header className="header">
-            <div className="container">
-              <div className="header__wrapper">
-                <div className="header__left">
-                  <Link to='/' className="header__logo-link header__logo-link--active">
-                    <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
-                  </Link>
-                </div>
-                <nav className="header__nav">
-                  <ul className="header__nav-list">
-                    <li className="header__nav-item user">
-                      <User />
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
-          </header>
+          <Header/>
           <main className="page__main page__main--favorites">
             <div className="page__favorites-container container">
               <section className="favorites">
@@ -43,11 +26,7 @@ const Favorites = ({isAppLoad, favoritesCards}) => {
               </section>
             </div>
           </main>
-          <footer className="footer container">
-            <Link to='/' className="header__logo-link header__logo-link--active">
-              <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
-            </Link>
-          </footer>
+          <Footer/>
         </div>
     }
   </>;

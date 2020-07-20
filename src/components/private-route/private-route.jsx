@@ -3,6 +3,7 @@ import {propTypes} from './prop-types';
 
 const PrivateRoute = (props) => {
   const {render, path, require, to, exact} = props;
+
   return (
     <Route
       path={path}

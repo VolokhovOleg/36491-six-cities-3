@@ -17,4 +17,5 @@ export const propTypes = {
     }).isRequired,
   })).isRequired,
   currentScreen: PropTypes.string.isRequired,
+  sortingName: PropTypes.string.isRequired,
 };

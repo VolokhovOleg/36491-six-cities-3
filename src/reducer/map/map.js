@@ -19,7 +19,9 @@ const reducer = (state = initialState, action) => {
 
 const Operation = {
   setActivePin: (id) => (dispatch, getState) => {
-    dispatch(ActionCreator.setActivePin(id === null ? null : getState()[NAME_SPACE].placeCards.find((item) => item.id === id).locations));
+    dispatch(ActionCreator.setActivePin(id === null
+      ? null
+      : getState()[NAME_SPACE].placeCards.find((item) => item.id === parseInt(id, 10)).locations));
   },
 };
 

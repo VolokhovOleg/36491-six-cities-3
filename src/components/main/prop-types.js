@@ -18,5 +18,4 @@ export const propTypes = {
   })).isRequired,
   activeCity: PropTypes.string.isRequired,
   placesToStay: PropTypes.number.isRequired,
-  isAppLoad: PropTypes.bool.isRequired,
 };
