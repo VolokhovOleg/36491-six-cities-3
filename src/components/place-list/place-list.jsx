@@ -1,4 +1,4 @@
-import {PlaceCard} from '../place-card/place-card';
+import PlaceCard from '../place-card/place-card';
 import {propTypes} from './prop-types';
 import {SORTING_PROPERTY_NAME} from '../../reducer/data/data';
 import {getSortingName} from '../../reducer/data/selectors';

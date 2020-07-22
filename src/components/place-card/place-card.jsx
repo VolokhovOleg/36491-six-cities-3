@@ -10,9 +10,6 @@ import {AuthorizationStatus} from '../../reducer/user/user';
 
 const PlaceCard = ({placeData, currentScreen, authorizationStatus, onHoverPlace, onFavoriteButtonClick}) => {
   const {img, price, title, type, isPremium, rating, isFavorite, id} = placeData;
-  // попробовать сделать класс компонент
-  // Забить на хоки, всё починить, дотюнить по тз, потом хоки.
-  console.log(authorizationStatus);
 
   return <>
     <article

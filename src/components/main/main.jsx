@@ -4,13 +4,13 @@ import PlaceList from '../place-list/place-list';
 import {connect} from 'react-redux';
 import EmptyMain from '../empty-main/empty-main';
 import Sorting from '../sorting/sorting';
-import withSorting from '../../hocs/with-sorting/with-sorting';
+import withDropdown from '../../hocs/with-dropdown/with-dropdown';
 import {getFiltered, getActiveCity, getPlacesToStay} from '../../reducer/data/selectors';
 import {propTypes} from './prop-types';
 import {Screen} from '../../reducer/screens/screens';
 import {Header} from '../header/header';
 
-const SortingWrapped = withSorting(Sorting);
+const SortingWrapped = withDropdown(Sorting);
 
 const Main = ({placeCards, activeCity, cities, placesToStay}) => {
   return <>

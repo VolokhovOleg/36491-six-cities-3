@@ -1,4 +1,4 @@
-const withSorting = (Component) => {
+const withDropdown = (Component) => {
   class Dropdown extends PureComponent {
     constructor(props) {
       super(props);
@@ -31,4 +31,4 @@ const withSorting = (Component) => {
   return Dropdown;
 };
 
-export default withSorting;
+export default withDropdown;
